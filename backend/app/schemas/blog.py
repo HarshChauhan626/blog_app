@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional, Sequence
+from typing import Optional, Sequence, List
 
 from pydantic import BaseModel
 
@@ -7,13 +7,14 @@ from pydantic import BaseModel
 class BlogBase(BaseModel):
     title: str
     content: str
-    slug: str
+    meta_title: str
     summary: str
     published: int
+    author_id: int
 
 
 class BlogCreate(BlogBase):
-    ...
+    tags: List[str]
 
 
 class BlogUpdate(BlogBase):
@@ -25,7 +26,6 @@ class BlogUpdate(BlogBase):
 # Properties shared by models stored in DB
 class BlogInDBBase(BlogBase):
     id: int
-    author_id: int
     created_at: datetime
     updated_at: datetime
 

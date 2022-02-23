@@ -1,24 +1,22 @@
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import UserFollower
-from app.schemas.user_follower import UserFollowerCreate, UserFollowerDelete
+from app.crud.crud_tag import tag
+from app.models import UserFollower, Tag, PostTag
+from app.schemas.tag import PostTagCreate, PostTagDelete, TagCreate
 
 
-class CRUDUserFollower(CRUDBase[UserFollower, UserFollowerCreate, UserFollowerDelete]):
-    def create(self, db: Session, *, obj_in: UserFollowerCreate) -> UserFollower:
-        create_obj = obj_in.dict()
-        db_obj = UserFollower(**create_obj)
+class CRUDPostTag(CRUDBase[PostTag, PostTagCreate, PostTagDelete]):
+    def create(self, db: Session, *, title: str, blog_id: int) -> PostTag:
+        tag_res = tag.create(db=db, obj_in=TagCreate(title=title))
+        obj = PostTagCreate(tag_id=tag_res.id, blog_id=blog_id)
+        db_obj = PostTag(**obj.dict())
         db.add(db_obj)
         db.commit()
         return db_obj
 
-    def remove(self, db: Session, *, obj_in: UserFollowerDelete) -> UserFollower:
-        db_obj = db.query(UserFollower).filter(
-            UserFollower.target_id == obj_in.target_id and UserFollower.source_id == obj_in.source_id)
-        db.delete(db_obj)
-        db.commit()
-        return db_obj
+    def get(self, db: Session, *, title: str) -> bool:
+        result = db.query(PostTag).join(Tag).filter(Tag.title == title).first()
 
 
-user_follower = CRUDUserFollower(UserFollower)
+post_tag = CRUDPostTag(PostTag)

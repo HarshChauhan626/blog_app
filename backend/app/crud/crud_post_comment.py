@@ -1,24 +1,17 @@
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import UserFollower
-from app.schemas.user_follower import UserFollowerCreate, UserFollowerDelete
+from app.models import Comment
+from app.schemas.comment import PostCommentCreate, PostComment
 
 
-class CRUDUserFollower(CRUDBase[UserFollower, UserFollowerCreate, UserFollowerDelete]):
-    def create(self, db: Session, *, obj_in: UserFollowerCreate) -> UserFollower:
+class CRUDPostComment(CRUDBase[Comment, PostCommentCreate, PostComment]):
+    def create(self, db: Session, *, obj_in: PostCommentCreate) -> PostComment:
         create_obj = obj_in.dict()
-        db_obj = UserFollower(**create_obj)
+        db_obj = PostComment(**create_obj)
         db.add(db_obj)
         db.commit()
         return db_obj
 
-    def remove(self, db: Session, *, obj_in: UserFollowerDelete) -> UserFollower:
-        db_obj = db.query(UserFollower).filter(
-            UserFollower.target_id == obj_in.target_id and UserFollower.source_id == obj_in.source_id)
-        db.delete(db_obj)
-        db.commit()
-        return db_obj
 
-
-user_follower = CRUDUserFollower(UserFollower)
+post_comment = CRUDPostComment(Comment)

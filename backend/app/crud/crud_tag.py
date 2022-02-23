@@ -1,24 +1,26 @@
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import UserFollower
-from app.schemas.user_follower import UserFollowerCreate, UserFollowerDelete
+from app.models import Tag
+from app.schemas.tag import TagCreate, TagBase
 
 
-class CRUDUserFollower(CRUDBase[UserFollower, UserFollowerCreate, UserFollowerDelete]):
-    def create(self, db: Session, *, obj_in: UserFollowerCreate) -> UserFollower:
-        create_obj = obj_in.dict()
-        db_obj = UserFollower(**create_obj)
-        db.add(db_obj)
-        db.commit()
-        return db_obj
+class CRUDTag(CRUDBase[Tag, TagCreate, TagBase]):
+    def create(self, db: Session, *, obj_in: TagCreate) -> Tag:
+        if(self.get(db=db,tag=obj_in.title)):
+            print("Self get running")
+            return self.get(db=db,tag=obj_in.title)
+        else:
+            create_obj = obj_in.dict()
+            db_obj = Tag(**create_obj)
+            db.add(db_obj)
+            db.commit()
+            print("Returning db_obj")
+            return db_obj
 
-    def remove(self, db: Session, *, obj_in: UserFollowerDelete) -> UserFollower:
-        db_obj = db.query(UserFollower).filter(
-            UserFollower.target_id == obj_in.target_id and UserFollower.source_id == obj_in.source_id)
-        db.delete(db_obj)
-        db.commit()
-        return db_obj
+    def get(self, db: Session, *, tag: str) -> Tag:
+        obj = db.query(Tag).where(Tag.title == tag).first()
+        return obj
 
 
-user_follower = CRUDUserFollower(UserFollower)
+tag = CRUDTag(Tag)

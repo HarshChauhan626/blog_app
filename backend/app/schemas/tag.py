@@ -12,7 +12,7 @@ class TagCreate(TagBase):
 
 
 class TagInDBBase(TagBase):
-    id: Optional[int] = None
+    id: int
 
     class Config:
         orm_mode = True
@@ -26,15 +26,24 @@ class PostTagBase(BaseModel):
     tag_id: int
     blog_id: int
 
+class PostTagCreate(PostTagBase):
+    ...
+
+
+class PostTagDelete(PostTagBase):
+    ...
+
+
+
 
 class PostTagInDBBase(PostTagBase):
-    id: Optional[int] = None
+    id: int
 
     class Config:
         orm_mode = True
 
 
-class PostTag(PostTagBase):
+class PostTag(PostTagInDBBase):
     ...
 
 

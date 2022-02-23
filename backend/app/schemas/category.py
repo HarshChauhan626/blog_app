@@ -8,7 +8,7 @@ class CategoryBase(BaseModel):
 
 
 class CategoryInDB(BaseModel):
-    id: Optional[int] = None
+    id: int
 
     class Config:
         orm_mode = True
@@ -22,6 +22,8 @@ class PostCategoryBase(BaseModel):
     category_id: int
     blog_id: int
 
+class PostCategoryCreate(PostCategoryBase):
+    ...
 
 class PostCategoryInDBBase(PostCategoryBase):
     id: int

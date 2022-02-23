@@ -21,6 +21,14 @@ class PostLikeBase(BaseModel):
     user_id: int
 
 
+class PostLikeCreate(PostLikeBase):
+    ...
+
+
+class PostLikeDelete(PostLikeBase):
+    ...
+
+
 class PostLikeInDBBase(PostLikeBase):
     id: int
 

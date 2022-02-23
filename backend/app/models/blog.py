@@ -15,5 +15,5 @@ class Blog(Base):
     source = Column(String(256), nullable=True)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
-    author_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+    author_id = Column(Integer, ForeignKey("user.id"))
     author = relationship("User", back_populates="blogs")
