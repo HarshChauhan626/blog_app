@@ -5,3 +5,4 @@ from .comment import Comment
 from .post_tag import PostTag
 from .tag import Tag
 from .user_follower import UserFollower
+from .collection import Collection
