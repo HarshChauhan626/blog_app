@@ -1,3 +1,5 @@
+import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
+import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
 import 'package:blog_app/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 

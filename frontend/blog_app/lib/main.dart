@@ -1,3 +1,4 @@
+import 'package:blog_app/presentation/features/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 import 'config/custom_router.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: CustomRouter.onGenerateRoute,
+      initialRoute: SplashScreen.routeName,
     );
   }
 }

@@ -21,6 +21,12 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body:Column(
+        children: [
+
+      ],
+      )
+    );
   }
 }
