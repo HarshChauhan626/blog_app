@@ -5,7 +5,7 @@ class LocalStorageService {
     initData();
   }
 
-  String boxName = "weatherCities";
+  String boxName = "blogApp";
 
   Box? box;
 
