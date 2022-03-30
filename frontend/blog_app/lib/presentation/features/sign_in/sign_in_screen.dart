@@ -6,6 +6,7 @@ import 'package:blog_app/presentation/features/sign_in/sign_in_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
 import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
+import 'package:blog_app/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -63,43 +64,16 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                      ),
-                      hintText: 'Email',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 14.0, horizontal: 4.0),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.primaryColor)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey))
-                  ),
+                child: CustomTextField(
+                  iconData: Icons.mail,
+                  hintText: "Email/Username",
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextField(
-                  obscureText: _passwordVisibility,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: InkWell(
-                          child: _passwordVisibility?Icon(Icons.visibility):Icon(Icons.visibility_off),
-                        onTap: (){
-                            setState(() {
-                              _passwordVisibility=!_passwordVisibility;
-                            });
-                        },
-                      ),
-                      hintText: 'Password',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 14.0, horizontal: 4.0),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.primaryColor)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.primaryColor))
-                  ),
+                child: CustomTextField(
+                  iconData: Icons.lock,
+                  hintText: "Password",
                 ),
               ),
               Container(
@@ -112,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical:10.0),
+                padding: const EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0),
                 child: ElevatedButton(
                     style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                         fixedSize:

@@ -21,7 +21,7 @@ class SignupScreen extends StatefulWidget {
           userRepository: RepositoryProvider.of<UserRepository>(context),
           authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
         ),
-        child: SignInScreen(),
+        child: SignupScreen(),
       ),
     );
   }
@@ -58,19 +58,28 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   CustomTextField(
-                    hintText: "Email id"
+                    hintText: "Email id",
+                    iconData: Icons.mail,
                   ),
                   CustomTextField(
                     hintText: "First Name",
+                    iconData: Icons.person,
                   ),
                   CustomTextField(
                     hintText: "Middle Name(Optional)",
+                    iconData: Icons.person,
                   ),
                   CustomTextField(
-                    hintText: "Last Name",
+                    hintText: "Last Name(Optional)",
+                    iconData: Icons.person,
+                  ),
+                  CustomTextField(
+                    hintText: "Username",
+                    iconData: Icons.person,
                   ),
                   CustomTextField(
                     hintText: "Mobile number",
+                    iconData: Icons.call,
                   ),
                   SizedBox(
                     height: 10.0,

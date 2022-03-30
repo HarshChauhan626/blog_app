@@ -1,5 +1,5 @@
 class Globals {
-  static const kBaseUrl = "http://127.0.0.1:8001/";
+  static const kBaseUrl = "http://127.0.0.1:8001/api/v1";
   static const S_FORGOT_PASSWORD_MESSAGE_1='''
   Don't worry!It happens. Please enter the address
   ''';
