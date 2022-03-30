@@ -36,6 +36,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             Container(
               width: 300.0,
               child: TextField(
+                obscureText: !_passwordVisibility,
                 decoration: InputDecoration(
                     hintText: widget.hintText,
                     suffixIcon: widget.isPassword == true

@@ -74,6 +74,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: CustomTextField(
                   iconData: Icons.lock,
                   hintText: "Password",
+                  isPassword: true,
                 ),
               ),
               Container(
