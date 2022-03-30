@@ -1,14 +1,16 @@
-import 'package:blog_app/config/app_theme.dart';
+import 'package:blog_app/domain/repositories/blog_repository.dart';
+import 'package:blog_app/presentation/resources/app_theme.dart';
 import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:blog_app/presentation/features/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'config/di.dart';
 import 'presentation/features/authentication/authentication.dart';
 import 'presentation/features/sign_in/sign_in.dart';
 
-import 'config/custom_router.dart';
+import 'presentation/resources/custom_router.dart';
 
 import 'config/di.dart' as service_locator;
 
@@ -40,7 +42,17 @@ Future<void> main() async {
   ]);
 
   BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
+    () => runApp(
+      BlocProvider(create: (context)=>AuthenticationBloc()..add(AppStarted()),
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<BlogRepository>(create: (context)=>instance()),
+          RepositoryProvider<UserRepository>(create: (context)=>instance())
+        ],
+        child: const MyApp(),
+      ),
+      )
+    ),
     blocObserver: SimpleBlocDelegate(),
   );
 }

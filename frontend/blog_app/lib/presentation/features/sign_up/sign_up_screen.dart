@@ -1,7 +1,11 @@
-import 'package:blog_app/config/utils/app_colors.dart';
+import 'package:blog_app/domain/repositories/user_repository.dart';
+import 'package:blog_app/presentation/features/authentication/authentication_bloc.dart';
+import 'package:blog_app/presentation/features/sign_up/sign_up_bloc.dart';
+import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:blog_app/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -12,7 +16,13 @@ class SignupScreen extends StatefulWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => SignupScreen(),
+      builder: (_) => BlocProvider<SignUpBloc>(
+        create: (context) => SignUpBloc(
+          userRepository: RepositoryProvider.of<UserRepository>(context),
+          authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+        ),
+        child: SignInScreen(),
+      ),
     );
   }
 

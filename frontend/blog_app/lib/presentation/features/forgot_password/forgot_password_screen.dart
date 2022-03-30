@@ -1,4 +1,4 @@
-import 'package:blog_app/config/utils/app_colors.dart';
+import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/config/utils/constants.dart';
 import 'package:blog_app/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';

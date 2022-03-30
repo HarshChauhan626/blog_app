@@ -1,4 +1,4 @@
-import 'package:blog_app/config/utils/app_colors.dart';
+import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {

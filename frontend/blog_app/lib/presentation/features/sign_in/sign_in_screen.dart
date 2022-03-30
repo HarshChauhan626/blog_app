@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:blog_app/config/utils/app_colors.dart';
+import 'package:blog_app/domain/repositories/user_repository.dart';
+import 'package:blog_app/presentation/features/authentication/authentication_bloc.dart';
+import 'package:blog_app/presentation/features/sign_in/sign_in_bloc.dart';
+import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
 import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,7 +19,13 @@ class SignInScreen extends StatefulWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => SignInScreen(),
+      builder: (_) => BlocProvider<SignInBloc>(
+        create: (context) => SignInBloc(
+          userRepository: RepositoryProvider.of<UserRepository>(context),
+          authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+        ),
+        child: SignInScreen(),
+      ),
     );
   }
 
