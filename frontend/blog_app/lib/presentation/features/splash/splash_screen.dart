@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/splash';
+  static const String routeName = '/';
 
   static Route route() {
     return MaterialPageRoute(
@@ -20,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void navigateToHome() async {
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushNamed(context, SignInScreen.routeName);
+      Navigator.pushReplacementNamed(context, SignInScreen.routeName);
     });
   }
 

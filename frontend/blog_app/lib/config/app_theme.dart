@@ -40,13 +40,20 @@ class AppTheme {
           ),
         ),
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.black,
+        primaryColor: AppColors.primaryColor,
         // accentColor: Colors.black,
         splashColor: Colors.transparent,
+        // Used this for changing active prefix icon color in textfield
+        colorScheme: ThemeData().colorScheme.copyWith(
+          primary: AppColors.primaryColor
+        ),
         fontFamily: 'IBM',
-        inputDecorationTheme: InputDecorationTheme(),
+        inputDecorationTheme: const InputDecorationTheme(),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))
+              ),
                 primary: AppColors.darkBlue,
                 minimumSize: const Size(50.0, 30.0),
                 )));

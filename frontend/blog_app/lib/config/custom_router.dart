@@ -1,3 +1,4 @@
+import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
 import 'package:blog_app/presentation/features/splash/splash_screen.dart';
@@ -7,9 +8,9 @@ class CustomRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     print('Route: ${settings.name}');
     switch (settings.name) {
-      case '/':
+      case '/default':
         return MaterialPageRoute(
-          settings: const RouteSettings(name: '/'),
+          settings: const RouteSettings(name: '/default'),
           builder: (_) => const Scaffold(),
         );
       case SplashScreen.routeName:
@@ -18,6 +19,8 @@ class CustomRouter {
         return SignInScreen.route();
       case SignupScreen.routeName:
         return SignupScreen.route();
+      case ForgotPasswordScreen.routeName:
+        return ForgotPasswordScreen.route();
       default:
         return _errorRoute();
     }

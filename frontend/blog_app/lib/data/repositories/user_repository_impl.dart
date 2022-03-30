@@ -5,6 +5,7 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<String> authenticateUser() {
     // TODO: implement authenticateUser
+
     throw UnimplementedError();
   }
 

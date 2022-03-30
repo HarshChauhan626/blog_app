@@ -1,9 +1,11 @@
 import 'package:blog_app/config/app_theme.dart';
+import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:blog_app/presentation/features/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'presentation/features/authentication/authentication.dart';
 import 'presentation/features/sign_in/sign_in.dart';
 
 import 'config/custom_router.dart';
