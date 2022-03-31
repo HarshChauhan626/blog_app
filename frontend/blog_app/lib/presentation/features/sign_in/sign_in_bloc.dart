@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:blog_app/data/network/failure.dart';
+import 'package:blog_app/data/request/request.dart';
 import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:blog_app/presentation/features/authentication/authentication.dart';
 import 'package:equatable/equatable.dart';
@@ -17,7 +19,15 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       if (event is SignInPressed) {
         emit(SignInProcessingState());
         try {
-          
+          var result = await userRepository.authenticateUser(
+            LoginRequest(email: event.email, password: event.password)
+          );
+          result.when(success: (token){
+            emit(SignInFinishedState());
+            authenticationBloc.add(LoggedIn(token));
+          }, failure: (ApiFailure apifailure){
+            emit(SignInErrorState(apifailure.message.toString()));
+          });
         } catch (e) {
           emit(SignInErrorState(e.toString()));
         }
