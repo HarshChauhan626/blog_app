@@ -1,13 +1,13 @@
 
 import 'error_handler.dart';
 
-class Failure {
+class ApiFailure {
   int code; // 200 or 400
   String message; // error or success
 
-  Failure(this.code, this.message);
+  ApiFailure(this.code, this.message);
 }
 
-class DefaultFailure extends Failure {
+class DefaultFailure extends ApiFailure {
   DefaultFailure() : super(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
 }

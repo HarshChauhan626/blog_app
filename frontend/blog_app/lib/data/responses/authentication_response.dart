@@ -1,11 +1,13 @@
-class AuthenticationResponse{
+import 'package:http/http.dart';
+
+class AuthenticationResponse extends BaseResponse {
   String? bearerToken;
   String? refreshToken;
 
   AuthenticationResponse({
     this.bearerToken,
     this.refreshToken
-});
+}) : super(0);
 
   factory AuthenticationResponse.fromJson(Map<String,dynamic> json){
     return AuthenticationResponse(

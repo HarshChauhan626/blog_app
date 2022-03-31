@@ -28,12 +28,12 @@ Future<void> initModule() async {
           () => RemoteDataSourceImplementer(instance()));
 
   // local data source
-  instance.registerLazySingleton<LocalStorageService>(
-          () => LocalStorageService());
+  instance.registerLazySingleton<LocalDataSource>(
+          () => LocalDataSourceImpl());
 
   instance.registerLazySingleton<BlogRepository>(() => BlogRepositoryImpl());
 
-  instance.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
+  instance.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(instance(),instance()));
 
 
 }

@@ -1,19 +1,10 @@
 import 'package:hive/hive.dart';
 
-class LocalStorageService {
-  LocalStorageService() {
-    initData();
-  }
+abstract class LocalDataSource{
 
-  String boxName = "blogApp";
+}
 
-  Box? box;
 
-  void initData() async {
-    box = await Hive.openBox(boxName);
-  }
+class LocalDataSourceImpl extends LocalDataSource {
 
-  void saveCity(String city) async {
-    box?.add(city);
-  }
 }

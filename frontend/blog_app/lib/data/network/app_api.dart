@@ -1,5 +1,5 @@
 import 'package:blog_app/config/utils/constants.dart';
-import 'package:blog_app/data/responses/authentication.dart';
+import 'package:blog_app/data/responses/authentication_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 

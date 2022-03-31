@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class BlogResponse {
+import 'package:http/http.dart';
+
+class BlogResponse extends BaseResponse{
   final int id;
   final String title;
   final String metaTitle;
@@ -24,7 +26,7 @@ class BlogResponse {
     required this.createdAt,
     required this.collectionId,
     required this.authorId,
-  });
+  }) : super(0);
 
   BlogResponse copyWith({
     int? id,

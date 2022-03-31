@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-class UserResponse {
-  const UserResponse({
+class UserResponse extends BaseResponse{
+  UserResponse({
     required this.username,
     required this.firstName,
     required this.middleName,
@@ -13,7 +14,7 @@ class UserResponse {
     required this.intro,
     required this.registeredAt,
     required this.lastLoginAt,
-  });
+  }) : super(0);
   final String username;
   final String firstName;
   final String middleName;

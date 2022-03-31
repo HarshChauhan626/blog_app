@@ -44,17 +44,17 @@ async def unfollow_other(*, target_id: int, db: Session = Depends(deps.get_db),
     return result
 
 
-@router.post("/collection",status_code=200,response_model=Collection)
-async def create_collection(*,db:Session=Depends(deps.get_db),obj_in:CollectionCreate)->Any:
+@router.post("/collection", status_code=200, response_model=Collection)
+async def create_collection(*, db: Session = Depends(deps.get_db), obj_in: CollectionCreate) -> Any:
     """
     Create collection.
     """
-    result=crud.crud_collection.collection.create(db=db,obj_in=obj_in)
+    result = crud.crud_collection.collection.create(db=db, obj_in=obj_in)
     return result
 
 
-
-@router.get("/collection",status_code=200,response_model=Collection)
-async def fetch_collections(*,db:Session=Depends(deps.get_db),current_user: User = Depends(get_current_user))->Any:
-    result=crud.crud_collection.collection.get(db=db,id=current_user.id)
+@router.get("/collection", status_code=200, response_model=Collection)
+async def fetch_collections(*, db: Session = Depends(deps.get_db),
+                            current_user: User = Depends(get_current_user)) -> Any:
+    result = crud.crud_collection.collection.get(db=db, id=current_user.id)
     return result
