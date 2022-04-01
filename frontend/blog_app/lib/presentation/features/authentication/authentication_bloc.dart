@@ -5,34 +5,30 @@ import 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc() : super(Uninitialized());
-
-  @override
-  Stream<AuthenticationState> mapEventToState(
-    AuthenticationEvent event,
-  ) async* {
-    // app start
-    if (event is AppStarted) {
-      var token = await _getToken();
-      if (token != '') {
-        SecureStorage().token = token;
-        yield Authenticated();
-      } else {
-        yield Unauthenticated();
+  AuthenticationBloc() : super(Uninitialized()) {
+    on<AuthenticationEvent>((event, emit) async {
+      if (event is AppStarted) {
+        var token = await _getToken();
+        if (token != '') {
+          SecureStorage().token = token;
+          emit(Authenticated());
+        } else {
+          emit(Unauthenticated());
+        }
       }
-    }
 
-    if (event is LoggedIn) {
-      SecureStorage().token = event.token;
-      await _saveToken(event.token);
-      yield Authenticated();
-    }
+      if (event is LoggedIn) {
+        SecureStorage().token = event.token;
+        await _saveToken(event.token);
+        emit(Authenticated());
+      }
 
-    if (event is LoggedOut) {
-      SecureStorage().token = '';
-      await _deleteToken();
-      yield Unauthenticated();
-    }
+      if (event is LoggedOut) {
+        SecureStorage().token = '';
+        await _deleteToken();
+        emit(Unauthenticated());
+      }
+    });
   }
 
   /// delete from keystore/keychain

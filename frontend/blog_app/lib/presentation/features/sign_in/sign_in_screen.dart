@@ -93,13 +93,16 @@ class _SignInScreenState extends State<SignInScreen> {
                           isPassword: true,
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          child: Text("Forgot Password?",style: Theme.of(context).textTheme.subtitle2,),
-                          onPressed: (){
-                            Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
-                          },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            child: Text("Forgot Password?",style: Theme.of(context).textTheme.subtitle2,),
+                            onPressed: (){
+                              Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+                            },
+                          ),
                         ),
                       ),
                       Padding(
@@ -189,7 +192,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             Text("Don't have an account?",style: Theme.of(context).textTheme.bodyText2,),
                             TextButton(onPressed: (){
                               Navigator.pushReplacementNamed(context, SignupScreen.routeName);
-                            }, child: Text("Register now"))
+                            },
+                                child: Text("Register now")
+                            )
                           ],
                         ),
                       )

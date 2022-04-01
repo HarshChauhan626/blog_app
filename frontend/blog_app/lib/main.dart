@@ -41,6 +41,8 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  await initModule();
+
   BlocOverrides.runZoned(
     () => runApp(
       BlocProvider(create: (context)=>AuthenticationBloc()..add(AppStarted()),
@@ -68,16 +70,6 @@ class MyApp extends StatelessWidget {
       title: "Blog App",
       onGenerateRoute: CustomRouter.onGenerateRoute,
       initialRoute: SplashScreen.routeName,
-    );
-  }
-
-  BlocProvider<SignInBloc> _buildSignInBloc() {
-    return BlocProvider<SignInBloc>(
-      create: (context) => SignInBloc(
-        userRepository: RepositoryProvider.of<UserRepository>(context),
-        authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
-      ),
-      child: SignInScreen(),
     );
   }
 }

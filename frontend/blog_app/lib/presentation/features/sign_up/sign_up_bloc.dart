@@ -16,19 +16,59 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     required this.authenticationBloc,
   })  : assert(userRepository != null),
         assert(authenticationBloc != null),
-        super(SignUpInitialState());
+        super(SignUpInitialState()) {
+    on<SignUpEvent>((event, emit) async {
+      // normal sign up
+      if (event is SignUpPressed) {
+        emit(SignUpProcessingState());
+        try {
+          final token = await userRepository.signUpUser();
+          authenticationBloc.add(LoggedIn(token));
+          emit(SignUpFinishedState());
+        } catch (error) {
+          emit(SignUpErrorState(error.toString()));
+        }
+      }
+
+      // sign up with facebook
+      if (event is SignUpPressedFacebook) {
+        emit(SignUpProcessingState());
+        try {
+          await Future.delayed(
+            Duration(milliseconds: 300),
+          ); //TODO use real auth service
+
+          emit(SignUpFinishedState());
+        } catch (error) {
+          emit(SignUpErrorState(error.toString()));
+        }
+      }
+
+      //sign up with google
+      if (event is SignUpPressedGoogle) {
+        emit(SignUpProcessingState());
+        try {
+          await Future.delayed(
+            Duration(milliseconds: 100),
+          ); //TODO use real auth service
+
+          emit(SignUpFinishedState());
+        } catch (error) {
+          emit(SignUpErrorState(error.toString()));
+        }
+      }
+    });
+  }
 
   @override
   Stream<SignUpState> mapEventToState(
-      SignUpEvent event,
-      ) async* {
+    SignUpEvent event,
+  ) async* {
     // normal sign up
     if (event is SignUpPressed) {
       yield SignUpProcessingState();
       try {
-        final token = await userRepository.signUpUser(
-
-        );
+        final token = await userRepository.signUpUser();
         authenticationBloc.add(LoggedIn(token));
         yield SignUpFinishedState();
       } catch (error) {

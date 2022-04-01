@@ -35,7 +35,6 @@ Future<void> initModule() async {
 
   instance.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(instance(),instance()));
 
-
 }
 
 void resetModule() {
