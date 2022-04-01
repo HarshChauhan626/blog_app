@@ -81,6 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: CustomTextField(
+                          textEditingController:emailEditingController!,
                           iconData: Icons.mail,
                           hintText: "Email/Username",
                         ),
@@ -88,6 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: CustomTextField(
+                          textEditingController:passwordEditingController!,
                           iconData: Icons.lock,
                           hintText: "Password",
                           isPassword: true,

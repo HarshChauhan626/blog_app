@@ -34,6 +34,27 @@ class _SignupScreenState extends State<SignupScreen> {
 
   bool _passwordVisibility=false;
 
+
+  TextEditingController? emailEditingController;
+  TextEditingController? firstNameEditingController;
+  TextEditingController? middleNameEditingController;
+  TextEditingController? lastNameEditingController;
+  TextEditingController? userNameEditingController;
+  TextEditingController? mobileNumberEditingController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailEditingController=TextEditingController();
+    firstNameEditingController=TextEditingController();
+    middleNameEditingController=TextEditingController();
+    lastNameEditingController=TextEditingController();
+    userNameEditingController=TextEditingController();
+    mobileNumberEditingController=TextEditingController();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,27 +80,32 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   CustomTextField(
                     hintText: "Email id",
-                    iconData: Icons.mail,
+                    iconData: Icons.mail, textEditingController: emailEditingController!,
                   ),
                   CustomTextField(
                     hintText: "First Name",
                     iconData: Icons.person,
+                    textEditingController: firstNameEditingController!,
                   ),
                   CustomTextField(
                     hintText: "Middle Name(Optional)",
                     iconData: Icons.person,
+                    textEditingController: middleNameEditingController!,
                   ),
                   CustomTextField(
                     hintText: "Last Name(Optional)",
                     iconData: Icons.person,
+                    textEditingController: lastNameEditingController!,
                   ),
                   CustomTextField(
                     hintText: "Username",
                     iconData: Icons.person,
+                    textEditingController: userNameEditingController!,
                   ),
                   CustomTextField(
                     hintText: "Mobile number",
                     iconData: Icons.call,
+                    textEditingController: mobileNumberEditingController!,
                   ),
                   SizedBox(
                     height: 10.0,

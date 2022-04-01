@@ -72,7 +72,7 @@ class DioClient {
       //   throw Exception("Unauthorized");
       // } else if (response.statusCode == 500) {
       //   throw Exception("Server Error");
-      // } else {
+      // } else
       //   throw Exception("Something does wen't wrong");
       // }
     } on FormatException catch (_) {

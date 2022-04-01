@@ -30,6 +30,30 @@ class DioFactory {
         receiveTimeout: _timeOut,
         headers: headers);
 
+    dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (requestOptions, handler) {
+            // logger.i(
+            //     "REQUEST[${requestOptions.method}] => PATH: ${requestOptions.path}"
+            //     "=> REQUEST VALUES: ${requestOptions.queryParameters} => HEADERS: ${requestOptions.headers}");
+            print("Request going is ${requestOptions.baseUrl}----${requestOptions.uri}--${requestOptions.path}");
+            print("Request params going are ${requestOptions.data.toString()}");
+            return handler.next(requestOptions);
+          },
+          onResponse: (response, handler) {
+            // logger
+            //     .i("RESPONSE[${response.statusCode}] => DATA: ${response.data}");
+            print("Response coming is ${response.data.toString()}");
+            return handler.next(response);
+          },
+          onError: (err, handler) {
+            // logger.i("Error[${err.response?.statusCode}]");
+            print("Error coming is ${err.message.toString()}");
+            return handler.next(err);
+          },
+        ),
+      );
+
     // if (kReleaseMode) {
     //   print("release mode no logs");
     // } else {

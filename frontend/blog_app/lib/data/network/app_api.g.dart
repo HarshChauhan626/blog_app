@@ -8,7 +8,7 @@ part of 'app_api.dart';
 
 class _AppServiceClient implements AppServiceClient {
   _AppServiceClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://minafarid123.mocklab.io';
+    baseUrl ??= Globals.kBaseUrl;
   }
 
   final Dio _dio;
@@ -20,14 +20,14 @@ class _AppServiceClient implements AppServiceClient {
       email, password) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = {
-      'email': email,
-      'password': password
-    };
+    final _data = 'grant_type=&username=harsh%40example.com&password=vaibhav&scope=&client_id=&client_secret=';
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AuthenticationResponse>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/customers/login',
+            Options(method: 'POST', headers: <String, dynamic>{
+              "accept": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded"
+            }, extra: _extra)
+                .compose(_dio.options, '/auth/login',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AuthenticationResponse.fromJson(_result.data!);

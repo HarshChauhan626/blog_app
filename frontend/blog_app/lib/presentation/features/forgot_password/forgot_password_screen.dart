@@ -21,6 +21,16 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+
+  TextEditingController? emailEditingController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailEditingController=TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,6 +82,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                 ),
                 CustomTextField(
+                  textEditingController: emailEditingController!,
                   hintText: Globals.S_FORGOT_PASSWORD_HINT,
                 ),
                 Padding(

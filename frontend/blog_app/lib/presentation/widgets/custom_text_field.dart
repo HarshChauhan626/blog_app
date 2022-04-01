@@ -6,9 +6,10 @@ class CustomTextField extends StatefulWidget {
   final String? hintText;
   final bool? isPassword;
   final IconData? iconData;
+  final TextEditingController textEditingController;
 
   const CustomTextField(
-      {Key? key, this.hintText, this.isPassword, this.iconData})
+      {Key? key, this.hintText, this.isPassword, this.iconData,required this.textEditingController})
       : super(key: key);
 
   @override
@@ -36,6 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             Container(
               width: 300.0,
               child: TextField(
+                controller: widget.textEditingController,
                 obscureText: widget.isPassword==true?!_passwordVisibility:false,
                 decoration: InputDecoration(
                     hintText: widget.hintText,
