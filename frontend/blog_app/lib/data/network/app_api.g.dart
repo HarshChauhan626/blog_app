@@ -16,7 +16,7 @@ class _AppServiceClient implements AppServiceClient {
   String? baseUrl;
 
   @override
-  Future<AuthenticationResponse> login(
+  Future<Response> login(
       email, password) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -30,8 +30,8 @@ class _AppServiceClient implements AppServiceClient {
                 .compose(_dio.options, '/auth/login',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthenticationResponse.fromJson(_result.data!);
-    return value;
+    // final value = AuthenticationResponse.fromJson(_result.data!);
+    return _result;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

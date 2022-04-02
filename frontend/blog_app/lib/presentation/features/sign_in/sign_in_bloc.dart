@@ -22,9 +22,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           var result = await userRepository.authenticateUser(
             LoginRequest(email: event.email, password: event.password)
           );
-          result.when(success: (token){
+          result.when(success: (auth){
             emit(SignInFinishedState());
-            authenticationBloc.add(LoggedIn(token));
+            authenticationBloc.add(LoggedIn(auth.bearerToken));
           }, failure: (ApiFailure apifailure){
             emit(SignInErrorState(apifailure.message.toString()));
           });

@@ -11,4 +11,8 @@ class Globals {
   static const S_FORGOT_PASSWORD_HINT="Email id";
 
   static const S_SUBMIT="Submit";
+
+  static const String EMPTY = "";
+  static const int ZERO = 0;
+
 }

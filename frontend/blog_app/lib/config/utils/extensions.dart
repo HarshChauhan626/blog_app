@@ -1,12 +1,12 @@
 // extension on String
 
-const String EMPTY = "";
-const int ZERO = 0;
+
+import 'constants.dart';
 
 extension NonNullString on String? {
   String orEmpty() {
     if (this == null) {
-      return EMPTY;
+      return Globals.EMPTY;
     } else {
       return this!;
     }
@@ -18,7 +18,7 @@ extension NonNullString on String? {
 extension NonNullInteger on int? {
   int orZero() {
     if (this == null) {
-      return ZERO;
+      return Globals.ZERO;
     } else {
       return this!;
     }

@@ -59,11 +59,14 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Scaffold(
           body: BlocConsumer<SignInBloc,SignInState>(
             listener: (context,state){
-              if(state is LoggedIn){
+              if(state is SignInFinishedState){
                 Navigator.pushNamed(context,HomeScreen.routeName);
               }
+              else if(state is SignInErrorState){
+                debugPrint('Something went wrong');
+              }
               else{
-
+                debugPrint('Something went wrong else');
               }
             },
             builder: (context,state){

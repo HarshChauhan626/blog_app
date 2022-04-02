@@ -1,13 +1,15 @@
 import 'package:http/http.dart';
+import 'package:blog_app/domain/entities/entities.dart';
+import 'package:blog_app/config/utils/extensions.dart';
 
-class AuthenticationResponse extends BaseResponse {
+class AuthenticationResponse{
   String? bearerToken;
   String? refreshToken;
 
   AuthenticationResponse({
     this.bearerToken,
     this.refreshToken
-}) : super(0);
+}) : super();
 
   factory AuthenticationResponse.fromJson(Map<String,dynamic> json){
     return AuthenticationResponse(
@@ -21,6 +23,12 @@ class AuthenticationResponse extends BaseResponse {
       'bearerToken':response.bearerToken??"",
       'refreshToken':response.refreshToken??""
     };
+  }
+
+  Authentication toDomain(){
+    return Authentication(
+      bearerToken:this.bearerToken.orEmpty(),refreshToken:this.refreshToken.orEmpty()
+    );
   }
 
 }
