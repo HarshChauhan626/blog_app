@@ -1,3 +1,4 @@
+import 'package:blog_app/config/utils/exceptions.dart';
 import 'package:blog_app/data/network/api_result.dart';
 import 'package:blog_app/data/datasources/local/local_storage_service.dart';
 import 'package:blog_app/data/datasources/remote/remote_data_source.dart';
@@ -8,6 +9,7 @@ import 'package:blog_app/data/responses/user_response.dart';
 import 'package:blog_app/domain/entities/authentication.dart';
 import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:blog_app/config/utils/extensions.dart';
 
 class UserRepositoryImpl extends UserRepository {
 
@@ -21,6 +23,9 @@ class UserRepositoryImpl extends UserRepository {
     try{
       final response = await _remoteDataSource.login(loginRequest);
       return ApiResult.success(data: response.toDomain());
+    }
+    on ServerException catch(e){
+      return ApiResult.failure(error: ApiFailure(e.code.orZero(),e.message.orEmpty()));
     }
     catch(e,s){
       debugPrint(e.toString());

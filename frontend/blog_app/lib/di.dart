@@ -1,4 +1,3 @@
-import 'package:blog_app/config/dio_client.dart';
 import 'package:blog_app/data/datasources/local/local_storage_service.dart';
 import 'package:blog_app/data/datasources/remote/remote_data_source.dart';
 import 'package:blog_app/data/network/app_api.dart';
@@ -13,7 +12,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 final instance = GetIt.instance;
 
 Future<void> initModule() async {
-  instance.registerLazySingleton<DioClient>(() => DioClient());
   instance.registerLazySingleton<NetworkInfoImpl>(
       () => NetworkInfoImpl(InternetConnectionChecker()));
 
