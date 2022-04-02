@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:blog_app/domain/repositories/user_repository.dart';
+import 'package:blog_app/presentation/features/authentication/authentication.dart';
 import 'package:blog_app/presentation/features/authentication/authentication_bloc.dart';
+import 'package:blog_app/presentation/features/home/home_screen.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:blog_app/presentation/features/home/home.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -56,7 +59,12 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Scaffold(
           body: BlocConsumer<SignInBloc,SignInState>(
             listener: (context,state){
+              if(state is LoggedIn){
+                Navigator.pushNamed(context,HomeScreen.routeName);
+              }
+              else{
 
+              }
             },
             builder: (context,state){
               return Padding(
