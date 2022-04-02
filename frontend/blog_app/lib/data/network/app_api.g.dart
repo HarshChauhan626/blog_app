@@ -20,7 +20,7 @@ class _AppServiceClient implements AppServiceClient {
       email, password) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = 'grant_type=&username=harsh%40example.com&password=vaibhav&scope=&client_id=&client_secret=';
+    final _data = 'grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=';
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AuthenticationResponse>(
             Options(method: 'POST', headers: <String, dynamic>{
