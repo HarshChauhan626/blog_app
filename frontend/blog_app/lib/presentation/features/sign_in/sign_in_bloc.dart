@@ -29,6 +29,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             emit(SignInErrorState(apifailure.message.toString()));
           });
         } catch (e) {
+          print(e.toString());
           emit(SignInErrorState(e.toString()));
         }
       }

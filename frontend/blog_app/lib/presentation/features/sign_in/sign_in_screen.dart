@@ -62,6 +62,9 @@ class _SignInScreenState extends State<SignInScreen> {
               if(state is SignInFinishedState){
                 Navigator.pushNamed(context,HomeScreen.routeName);
               }
+              else if(state is SignInProcessingState){
+                debugPrint("Processing request");
+              }
               else if(state is SignInErrorState){
                 debugPrint('Something went wrong');
               }
