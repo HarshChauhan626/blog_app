@@ -5,11 +5,8 @@ import 'package:blog_app/presentation/features/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'di.dart';
 import 'presentation/features/authentication/authentication.dart';
-import 'presentation/features/sign_in/sign_in.dart';
-
 import 'presentation/resources/custom_router.dart';
 
 import 'di.dart' as service_locator;

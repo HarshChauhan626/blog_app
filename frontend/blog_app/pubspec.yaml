@@ -43,6 +43,7 @@ dependencies:
   internet_connection_checker: ^0.0.1+3
   json_annotation:
   sizer: ^2.0.15
+  bottom_navy_bar: ^6.0.0
 
 
 dev_dependencies:

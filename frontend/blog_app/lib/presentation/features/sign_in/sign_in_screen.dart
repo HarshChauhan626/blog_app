@@ -39,7 +39,6 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
 
-  bool _passwordVisibility=false;
 
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;

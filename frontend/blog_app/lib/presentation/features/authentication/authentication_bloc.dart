@@ -10,7 +10,7 @@ class AuthenticationBloc
       if (event is AppStarted) {
         var token = await _getToken();
         if (token != '') {
-          SecureStorage().token = token;
+          // SecureStorage().token = token;
           emit(Authenticated());
         } else {
           emit(Unauthenticated());
