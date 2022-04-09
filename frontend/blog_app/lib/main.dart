@@ -1,4 +1,5 @@
 import 'package:blog_app/domain/repositories/blog_repository.dart';
+import 'package:blog_app/presentation/features/onboarding/onboarding.dart';
 import 'package:blog_app/presentation/resources/app_theme.dart';
 import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:blog_app/presentation/features/splash/splash.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light,
       title: "Blog App",
       onGenerateRoute: CustomRouter.onGenerateRoute,
-      initialRoute: SplashScreen.routeName,
+      initialRoute: OnboardingScreen.routeName,
     );
   }
 }

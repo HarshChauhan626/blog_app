@@ -1,5 +1,6 @@
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
 import 'package:blog_app/presentation/features/home/home_screen.dart';
+import 'package:blog_app/presentation/features/onboarding/onboarding.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
 import 'package:blog_app/presentation/features/splash/splash_screen.dart';
@@ -16,6 +17,8 @@ class CustomRouter {
         );
       case SplashScreen.routeName:
         return SplashScreen.route();
+      case OnboardingScreen.routeName:
+        return OnboardingScreen.route();
       case SignInScreen.routeName:
         return SignInScreen.route();
       case SignupScreen.routeName:

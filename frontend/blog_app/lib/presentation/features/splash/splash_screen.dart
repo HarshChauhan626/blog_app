@@ -8,7 +8,7 @@ import 'package:blog_app/presentation/features/authentication/authentication.dar
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/';
+  static const String routeName = '/splash';
 
   static Route route() {
     return MaterialPageRoute(

@@ -44,6 +44,8 @@ dependencies:
   json_annotation:
   sizer: ^2.0.15
   bottom_navy_bar: ^6.0.0
+  smooth_page_indicator: ^1.0.0+2
+  animated_text_kit: ^4.2.1
 
 
 dev_dependencies:
