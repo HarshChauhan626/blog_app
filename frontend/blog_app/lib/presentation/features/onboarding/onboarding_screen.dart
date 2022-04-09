@@ -55,10 +55,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         // nextPage = 0;
         print(nextPage);
 
-        _textController
-            .animateToPage(nextPage,
-            duration: Duration(seconds: 1), curve: Curves.linear);
-
         _imageController
             .animateToPage(nextPage,
             duration: Duration(seconds: 1), curve: Curves.linear)
@@ -138,18 +134,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 22.0, vertical: 20.0),
+                          horizontal: 25.0, vertical: 20.0),
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: SmoothPageIndicator(
-                          controller: _textController,
+                          controller: _imageController,
                           count: 3,
                           axisDirection: Axis.horizontal,
                           effect: SlideEffect(
                               spacing: 8.0,
-                              radius: 15.0,
-                              dotWidth: 15.0,
-                              dotHeight: 15.0,
+                              radius: 10.0,
+                              dotWidth: 10.0,
+                              dotHeight: 10.0,
                               paintStyle: PaintingStyle.stroke,
                               strokeWidth: 1.5,
                               dotColor: Colors.grey,
@@ -159,40 +155,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal:12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            child: Text("Skip",style: Theme.of(context).textTheme.button?.copyWith(
-                              color: AppColors.greyColor,
-                              fontSize: 18.0
-                            ),
-                            ),
-                            onPressed: (){
-
-                            },
-                          ),
-                          InkWell(
-                            onTap: (){
-                              _animateSlider();
-                            },
-                            child: Container(
-                              height:60.0,
-                              width: 60.0,
-                              decoration: BoxDecoration(
-                                color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.all(Radius.circular(30.0))
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.white,
-                                  size: 35.0,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                      child: OnboardingButton(
+                        function: _animateSlider,
                       ),
                     )
                   ],
@@ -213,3 +177,94 @@ class SliderBox extends StatelessWidget {
     return Container(padding: EdgeInsets.all(10), child: child);
   }
 }
+
+
+
+class OnboardingButton extends StatefulWidget {
+  Function function;
+  OnboardingButton({Key? key,required this.function}) : super(key: key);
+
+  @override
+  _OnboardingButtonState createState() => _OnboardingButtonState();
+}
+
+class _OnboardingButtonState extends State<OnboardingButton> with SingleTickerProviderStateMixin{
+
+  late final AnimationController _controller;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    )..addListener(() {
+      setState(() {
+
+      });
+    });
+    // <-- Set your duration here.
+  }
+
+  bool end=true;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        !end?Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton(
+            child: Text("Skip",style: Theme.of(context).textTheme.button?.copyWith(
+                color: AppColors.greyColor,
+                fontSize: 18.0
+            ),
+            ),
+            onPressed: (){
+
+            },
+          ),
+        ):SizedBox(),
+        AnimatedAlign(
+          duration: Duration(milliseconds: 300),
+          alignment: end?Alignment.centerLeft:Alignment.centerRight,
+          child: InkWell(
+            onTap: (){
+              widget.function();
+              end=!end;
+              setState(() {
+
+              });
+            },
+            child: AnimatedContainer(
+              height:end?40.0:60.0,
+              width: end?100:60.0,
+              decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(30.0))
+              ),
+              duration: Duration(
+                milliseconds: 200
+              ),
+              child: Center(
+                child: end?Text("Get Started",style: Theme.of(context).textTheme.button?.copyWith(
+                  color: Colors.white
+                ),):Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 35.0,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+
