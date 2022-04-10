@@ -23,7 +23,6 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _imageController = PageController();
-  final PageController _textController=PageController();
 
   int nextPage=0;
 
