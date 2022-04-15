@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app import crud
 from app.api import deps
 from app.api.deps import get_current_user
+from app.schemas.tag import Tag
 from app.models import User
 from app.schemas.blog import Blog, BlogCreate, BlogSearchResults
 from app.schemas.comment import PostCommentCreate, PostComment
@@ -63,6 +64,12 @@ def search_blogs(
     results = filter(lambda blog: keyword.lower() in blog.label.lower(), blogs)
 
     return {"results": list(results)}
+
+
+@router.get("/tags", status_code=200, response_model=Tag)
+def get_category(db: Session = Depends(deps.get_db)) -> Any:
+    category_list = crud.tag.get(db=db)
+    return category_list
 
 
 @router.post("/", status_code=201, response_model=Blog)

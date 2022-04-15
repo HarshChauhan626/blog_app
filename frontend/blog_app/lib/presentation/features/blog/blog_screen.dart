@@ -149,10 +149,7 @@ I hope this blog will provide you with sufficient information on Trying up the D
 In the article, I have explained the basic structure of the Dialog Using GetX in a flutter; you can modify this code according to your choice. This was a small introduction to Dialog Using GetX On User Interaction from my side, and it’s working using Flutter.
 I hope this blog will provide you with sufficient information on Trying up the Dialog Using GetX in your flutter projects. We will show you what the Introduction is?. Make a demo program for working Dialog Using GetX plugins. In this blog, we have examined the Dialog Using GetX of the flutter app. I hope this blog will help you in the comprehension of the Dialog in a better way. So please try it.
 In the article, I have explained the basic structure of the Dialog Using GetX in a flutter; you can modify this code according to your choice. This was a small introduction to Dialog Using GetX On User Interaction from my side, and it’s working using Flutter.
-I hope this blog will provide you with sufficient information on Trying up the Dialog Using GetX in your flutter projects. We will show you what the Introduction is?. Make a demo program for working Dialog Using GetX plugins. In this blog, we have examined the Dialog Using GetX of the flutter app. I hope this blog will help you in the comprehension of the Dialog in a better way. So please try it.
-                    
-                    
-                    
+I hope this blog will provide you with sufficient information on Trying up the Dialog Using GetX in your flutter projects. We will show you what the Introduction is?. Make a demo program for working Dialog Using GetX plugins. In this blog, we have examined the Dialog Using GetX of the flutter app. I hope this blog will help you in the comprehension of the Dialog in a better way. So please try it.                    
                     '''),
                 )
               ],

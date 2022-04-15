@@ -8,4 +8,4 @@ class PostCategory(Base):
     id = Column(Integer, primary_key=True, index=True)
     category_id = Column(Integer, nullable=False)
     blog_id = Column(Integer, ForeignKey('blog.id'), nullable=False)
-    post=relationship("Blog",foreign_keys=[blog_id])
+    post = relationship("Blog", foreign_keys=[blog_id])

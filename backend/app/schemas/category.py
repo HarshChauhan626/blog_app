@@ -30,3 +30,6 @@ class PostCategoryInDBBase(PostCategoryBase):
 
     class Config:
         orm_mode = True
+
+
+

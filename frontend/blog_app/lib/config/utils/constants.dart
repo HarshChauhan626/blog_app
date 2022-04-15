@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Globals {
   static const kBaseUrl = "http://10.0.2.2:8001/api/v1";
   static const S_FORGOT_PASSWORD_MESSAGE_1='''
@@ -18,6 +20,28 @@ class Globals {
 
   static const String EMPTY = "";
   static const int ZERO = 0;
+
+
+  static const categoryList=[
+    "Anime",
+    "Polity",
+    "History",
+    "Geography",
+    "Flutter",
+    "Java",
+    "Development",
+    "Business",
+    "Startup",
+    "Comics",
+    "Movies",
+    "TV",
+    "Data Science",
+    "Machine Learning",
+    "Game development",
+    "Gaming",
+    "Animation",
+    "Blender",
+  ];
 
 
 }

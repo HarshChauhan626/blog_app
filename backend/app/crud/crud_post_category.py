@@ -1,10 +1,8 @@
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import UserFollower
 from app.models.post_category import PostCategory
 from app.schemas.category import PostCategoryCreate, PostCategoryBase
-from app.schemas.user_follower import UserFollowerCreate, UserFollowerDelete
 
 
 class CRUDPostCategory(CRUDBase[PostCategory, PostCategoryCreate, PostCategoryBase]):

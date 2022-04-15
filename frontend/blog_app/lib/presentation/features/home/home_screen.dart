@@ -53,15 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        appBar: AppBar(
-          leading: IconButton(
-            icon:Icon(Icons.menu,color: Colors.black,),
-            onPressed: (){
-              _scaffoldKey.currentState?.openDrawer();
-            },
-          ),
-          title: Text('Home'),
-        ),
+        appBar: getAppBar(),
         body: SingleChildScrollView(
           child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,6 +124,22 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex=index;
     });
   }
+
+
+
+  AppBar getAppBar(){
+    return AppBar(
+      leading: IconButton(
+        icon:Icon(Icons.menu,color: Colors.black,),
+        onPressed: (){
+          _scaffoldKey.currentState?.openDrawer();
+        },
+      ),
+      title: Text('Home'),
+    );
+  }
+
+
 }
 
 
