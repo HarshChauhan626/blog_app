@@ -32,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _selectedIndex=0;
 
+  double borderRadius=100.0;
+
+  PageController? _pageController;
+
+  int activePageIndex=0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         key: _scaffoldKey,
         drawer: Drawer(
           child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 InkWell(
@@ -55,58 +62,42 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         appBar: getAppBar(),
         body: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
           child:Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(Globals.S_GOOD_MORNING),
+                padding: const EdgeInsets.symmetric(horizontal:10.0),
+                child: Text(Globals.S_GOOD_MORNING,style: TextStyle(
+                  color: Colors.black
+                ),),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 40.0,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 15,
-                      itemBuilder: (context,index){
-                    return Padding(
-                      padding: const EdgeInsets.only(right:8.0),
-                      child: Container(
-                        height: 40.0,
-                        decoration: BoxDecoration(
-                          color: index==0?AppColors.primaryColor:Colors.blueGrey[200],
-                          borderRadius: BorderRadius.all(Radius.circular(20.0))
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Center(
-                            child: Text(
-                              "Category",
-                              style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
+                child: Center(child: getTabBar())
               ),
               Container(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 100,
-                  itemBuilder: (context,index){
-                    return BlogListItem();
+                height: 560.0,
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (int index){
+                    setState(() {
+                      activePageIndex=index;
+                    });
                   },
+                  children: [
+                    getListView(),
+                    getListView(),
+                    getListView()
+                  ],
                 ),
               )
             ],
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
           currentIndex: _selectedIndex, //New
           onTap: _onItemTapped,
           items: const [
@@ -140,7 +131,114 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
+  Widget getTabBar(){
+    return Container(
+      width: 350.0,
+      height: 50.0,
+      decoration: BoxDecoration(
+        color: AppColors.appGreyColor,
+        borderRadius: BorderRadius.all(Radius.circular(100)),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: InkWell(
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              onTap:(){
+                setState(() {
+                  activePageIndex=0;
+                  _pageController?.animateToPage(0,
+                      duration: const Duration(milliseconds: 400), curve: Curves.decelerate);
+                });
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 400),
+                padding: EdgeInsets.symmetric(vertical: 15),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: (activePageIndex == 0) ?AppColors.primaryColor:AppColors.appGreyColor,
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                ),
+                child: Text(
+                  "For You",
+                  style: (activePageIndex == 0) ? TextStyle(color: Colors.white,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              onTap: (){
+                setState(() {
+                  activePageIndex=1;
+                  _pageController?.animateToPage(1,
+                      duration: const Duration(milliseconds: 400), curve: Curves.decelerate);
+                });
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 400),
+                padding: EdgeInsets.symmetric(vertical: 15),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: (activePageIndex == 1) ?AppColors.primaryColor:AppColors.appGreyColor,
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                ),
+                child: Text(
+                  "Latest",
+                  style: (activePageIndex == 1) ? TextStyle(color: Colors.white, fontWeight: FontWeight.bold) : TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              onTap: (){
+                setState(() {
+                  activePageIndex=2;
+                  _pageController?.animateToPage(2,
+                      duration: const Duration(milliseconds: 400), curve: Curves.decelerate);
+                });
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 400),
+                padding: EdgeInsets.symmetric(vertical: 15),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: (activePageIndex == 2) ?AppColors.primaryColor:AppColors.appGreyColor,
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                ),
+                child: Text(
+                  "Following",
+                  style: (activePageIndex == 2) ? TextStyle(color: Colors.white, fontWeight: FontWeight.bold) : TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Widget getListView(){
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: AlwaysScrollableScrollPhysics(),
+      itemCount: 100,
+      itemBuilder: (context,index){
+        return BlogListItem();
+      },
+    );
+  }
+
+
+
 }
+
+
+
 
 
 
