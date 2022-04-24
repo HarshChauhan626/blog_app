@@ -34,20 +34,29 @@ def fetch_blog(
 
 
 @router.delete("/{blog_id}")
-def delete_blog() -> Any:
+def delete_blog(blog_id: int, db: Session = Depends(deps.get_db),
+                current_user: User = Depends(get_current_user)) -> Any:
     """Implement delete blog"""
 
 
 @router.post("/{blog_id}/like", status_code=200, response_model=PostLike)
-def post_like(*, obj_in: PostLikeCreate, db: Session = Depends(deps.get_db),
+def post_like(*, blog_id: int, db: Session = Depends(deps.get_db),
               current_user: User = Depends(get_current_user)) -> Any:
-    result = crud.crud_post_like.create(db=db, post_like=obj_in)
+    post_like_create = PostLikeCreate()
+    post_like_create.blog_id = blog_id
+    post_like_create.user_id = current_user.id
+    result = crud.post_like.create(db=db, obj_in=post_like_create)
+    return result
 
 
 @router.delete("/{blog_id}/like", status_code=200, response_model=PostLike)
-def post_unlike(*, obj_in: PostLikeDelete, db: Session = Depends(deps.get_db),
+def post_unlike(*, blog_id: int, db: Session = Depends(deps.get_db),
                 current_user: User = Depends(get_current_user)) -> Any:
-    result = crud.crud_post_like.remove(db=db, post_unlike=obj_in)
+    post_like_delete = PostLikeDelete()
+    post_like_delete.blog_id = blog_id
+    post_like_delete.user_id = current_user.id
+    result = crud.post_like.remove(db=db, obj_in=post_like_delete)
+    return result
 
 
 @router.get("/{blog_id}/comment", status_code=200, response_model=PostComments)
@@ -68,12 +77,14 @@ def post_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db
 
 
 @router.delete("/{blog_id}/comment", status_code=200)
-def delete_comment():
+def delete_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+                   current_user: User = Depends(get_current_user)):
     """Implement delete comment"""
 
 
 @router.post("/{blog_id}/report", status_code=200, response_model=Blog)
-def report_blog() -> Any:
+def report_blog(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+                current_user: User = Depends(get_current_user)) -> Any:
     """Implement report blog"""
 
 
@@ -100,19 +111,38 @@ def get_tags(db: Session = Depends(deps.get_db), current_user: User = Depends(ge
 
 
 @router.get("/feed", status_code=201, response_model=Blogs)
-def get_feed() -> Any:
+def get_feed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+             current_user: User = Depends(get_current_user)) -> Any:
     """
     Implement user specific feed
     """
 
 
 @router.get("/following")
-def get_feed_by_followed() -> Any:
+def get_feed_by_followed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+                         current_user: User = Depends(get_current_user)) -> Any:
     """
     Get blogs from followed people
     """
 
 
 @router.get("/recent")
-def get_recently_viewed() -> Any:
+def get_recently_viewed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+                        current_user: User = Depends(get_current_user)) -> Any:
     """Implement get recently viewed blogs"""
+
+
+@router.post("/", status_code=201, response_model=Blog)
+def create_blog(
+        *, blog_in: BlogCreate, db: Session = Depends(deps.get_db), current_user: User = Depends(get_current_user)
+) -> dict:
+    """
+    Create a new recipe in the database.
+    """
+    print(current_user)
+    blog = crud.blog.create(db=db, obj_in=blog_in)
+    blog_id = blog.id
+    for tag in blog_in.tags:
+        crud.post_tag.create(db=db, title=tag, blog_id=blog_id)
+
+    return blog

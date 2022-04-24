@@ -27,7 +27,6 @@ async def follow_other(
     user_follower.source_id = current_user.id
     user_follower.target_id = target_id
     result = crud.user_follower.create(db=db, obj_in=user_follower)
-
     return result
 
 
@@ -66,6 +65,7 @@ async def delete_collections(*, db: Session = Depends(deps.get_db),
                              current_user: User = Depends(get_current_user)) -> Any:
     result = crud.crud_collection.collection.get(db=db, id=current_user.id)
     return result
+
 
 @router.patch("/collection", status_code=200, response_model=Collection)
 async def update_collections(*, db: Session = Depends(deps.get_db),

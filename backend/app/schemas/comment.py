@@ -30,5 +30,6 @@ class PostCommentInDBBase(PostCommentBase):
 class PostComment(PostCommentInDBBase):
     ...
 
+
 class PostComments(BaseModel):
-    comments:Sequence[PostComment]
+    comments: Sequence[PostComment]

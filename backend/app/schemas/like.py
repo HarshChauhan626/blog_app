@@ -17,8 +17,8 @@ from pydantic import BaseModel
 # https://stackoverflow.com/questions/3844477/social-web-application-database-design-how-can-i-improve-this-schema
 
 class PostLikeBase(BaseModel):
-    blog_id: int
-    user_id: int
+    blog_id: Optional[int]
+    user_id: Optional[int]
 
 
 class PostLikeCreate(PostLikeBase):

@@ -6,8 +6,8 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserFollowerBase(BaseModel):
-    source_id: int
-    target_id: int
+    source_id: Optional[int]
+    target_id: Optional[int]
 
 
 class UserFollowerCreate(UserFollowerBase):
