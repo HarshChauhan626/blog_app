@@ -13,7 +13,7 @@ from app.schemas.user_follower import UserFollowerCreate, UserFollower, UserFoll
 router = APIRouter()
 
 
-@router.post("/follow", status_code=200, response_model=UserFollower)
+@router.post("/follow", status_code=200, response_model=UserFollower, )
 async def follow_other(
         *,
         target_id: int,
@@ -45,7 +45,8 @@ async def unfollow_other(*, target_id: int, db: Session = Depends(deps.get_db),
 
 
 @router.post("/collection", status_code=200, response_model=Collection)
-async def create_collection(*, db: Session = Depends(deps.get_db), obj_in: CollectionCreate) -> Any:
+async def create_collection(*, db: Session = Depends(deps.get_db), obj_in: CollectionCreate,
+                            current_user: User = Depends(get_current_user)) -> Any:
     """
     Create collection.
     """
@@ -56,5 +57,25 @@ async def create_collection(*, db: Session = Depends(deps.get_db), obj_in: Colle
 @router.get("/collection", status_code=200, response_model=Collection)
 async def fetch_collections(*, db: Session = Depends(deps.get_db),
                             current_user: User = Depends(get_current_user)) -> Any:
+    result = crud.crud_collection.collection.get(db=db, id=current_user.id)
+    return result
+
+
+@router.delete("/collection", status_code=200, response_model=Collection)
+async def delete_collections(*, db: Session = Depends(deps.get_db),
+                             current_user: User = Depends(get_current_user)) -> Any:
+    result = crud.crud_collection.collection.get(db=db, id=current_user.id)
+    return result
+
+@router.patch("/collection", status_code=200, response_model=Collection)
+async def update_collections(*, db: Session = Depends(deps.get_db),
+                             current_user: User = Depends(get_current_user)) -> Any:
+    result = crud.crud_collection.collection.get(db=db, id=current_user.id)
+    return result
+
+
+@router.post("/", status_code=200, response_model=Collection)
+async def update_user_info(*, db: Session = Depends(deps.get_db),
+                           current_user: User = Depends(get_current_user)) -> Any:
     result = crud.crud_collection.collection.get(db=db, id=current_user.id)
     return result

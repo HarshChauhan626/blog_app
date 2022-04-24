@@ -14,10 +14,14 @@ class PostCommentCreate(PostCommentBase):
     ...
 
 
+class PostCommentCreateUtil(PostCommentCreate):
+    commenter_id: Optional[int]
+
+
 class PostCommentInDBBase(PostCommentBase):
     id: int
     commenter_id: int
-    create_time: datetime
+    created_at: datetime
 
     class Config:
         orm_mode = True
@@ -25,3 +29,6 @@ class PostCommentInDBBase(PostCommentBase):
 
 class PostComment(PostCommentInDBBase):
     ...
+
+class PostComments(BaseModel):
+    comments:Sequence[PostComment]

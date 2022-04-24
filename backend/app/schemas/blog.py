@@ -10,11 +10,14 @@ class BlogBase(BaseModel):
     meta_title: str
     summary: str
     published: int
-    author_id: int
 
 
 class BlogCreate(BlogBase):
     tags: List[str]
+
+
+class BlogCreateUtil(BlogCreate):
+    author_id: Optional[int]
 
 
 class BlogUpdate(BlogBase):
@@ -43,5 +46,5 @@ class BlogInDB(BlogInDBBase):
     pass
 
 
-class BlogSearchResults(BaseModel):
+class Blogs(BaseModel):
     results: Sequence[Blog]

@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class CollectionBase(BaseModel):
-    user_id: int
     title: str
 
 

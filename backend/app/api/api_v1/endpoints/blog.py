@@ -1,15 +1,13 @@
 from typing import Any, Optional
-
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-
 from app import crud
 from app.api import deps
 from app.api.deps import get_current_user
 from app.schemas.tag import Tag
 from app.models import User
-from app.schemas.blog import Blog, BlogCreate, BlogSearchResults
-from app.schemas.comment import PostCommentCreate, PostComment
+from app.schemas.blog import Blog, BlogCreate, BlogBase, BlogCreateUtil, Blogs
+from app.schemas.comment import PostCommentCreate, PostComment, PostCommentCreateUtil, PostComments
 from app.schemas.like import PostLike, PostLikeCreate, PostLikeDelete
 
 router = APIRouter()
@@ -20,6 +18,7 @@ def fetch_blog(
         *,
         blog_id: int,
         db: Session = Depends(deps.get_db),
+        current_user: User = Depends(get_current_user)
 ) -> Any:
     """
     Fetch a single recipe by ID
@@ -31,26 +30,54 @@ def fetch_blog(
         raise HTTPException(
             status_code=404, detail=f"Recipe with ID {blog_id} not found"
         )
-
     return result
 
 
-@router.post("/like", status_code=200, response_model=PostLike)
-def post_like(*, obj_in: PostLikeCreate, db: Session = Depends(deps.get_db)) -> Any:
+@router.delete("/{blog_id}")
+def delete_blog() -> Any:
+    """Implement delete blog"""
+
+
+@router.post("/{blog_id}/like", status_code=200, response_model=PostLike)
+def post_like(*, obj_in: PostLikeCreate, db: Session = Depends(deps.get_db),
+              current_user: User = Depends(get_current_user)) -> Any:
     result = crud.crud_post_like.create(db=db, post_like=obj_in)
 
 
-@router.post("/unlike", status_code=200, response_model=PostLike)
-def post_unlike(*, obj_in: PostLikeDelete, db: Session = Depends(deps.get_db)) -> Any:
+@router.delete("/{blog_id}/like", status_code=200, response_model=PostLike)
+def post_unlike(*, obj_in: PostLikeDelete, db: Session = Depends(deps.get_db),
+                current_user: User = Depends(get_current_user)) -> Any:
     result = crud.crud_post_like.remove(db=db, post_unlike=obj_in)
 
 
-@router.post("/comment", status_code=200, response_model=PostComment)
-def post_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db)) -> Any:
-    result = crud.crud_post_comment.create(db=db, post_comment=obj_in)
+@router.get("/{blog_id}/comment", status_code=200, response_model=PostComments)
+def get_post_comments(*, db: Session = Depends(deps.get_db),
+                      current_user: User = Depends(get_current_user)):
+    """
+    Get comments for specific blog post
+    """
 
 
-@router.get("/search/", status_code=200, response_model=BlogSearchResults)
+@router.post("/{blog_id}/comment", status_code=200, response_model=PostComment)
+def post_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+                 current_user: User = Depends(get_current_user)) -> Any:
+    post_comment_create = PostCommentCreateUtil(**obj_in.dict())
+    post_comment_create.commenter_id = current_user.id
+    result = crud.post_comment.create(db=db, obj_in=post_comment_create)
+    return result
+
+
+@router.delete("/{blog_id}/comment", status_code=200)
+def delete_comment():
+    """Implement delete comment"""
+
+
+@router.post("/{blog_id}/report", status_code=200, response_model=Blog)
+def report_blog() -> Any:
+    """Implement report blog"""
+
+
+@router.get("/search/", status_code=200, response_model=Blogs)
 def search_blogs(
         *,
         keyword: str = Query(None, min_length=3, example="Something"),
@@ -67,22 +94,25 @@ def search_blogs(
 
 
 @router.get("/tags", status_code=200, response_model=Tag)
-def get_category(db: Session = Depends(deps.get_db)) -> Any:
+def get_tags(db: Session = Depends(deps.get_db), current_user: User = Depends(get_current_user)) -> Any:
     category_list = crud.tag.get(db=db)
     return category_list
 
 
-@router.post("/", status_code=201, response_model=Blog)
-def create_blog(
-        *, blog_in: BlogCreate, db: Session = Depends(deps.get_db), current_user: User = Depends(get_current_user)
-) -> dict:
+@router.get("/feed", status_code=201, response_model=Blogs)
+def get_feed() -> Any:
     """
-    Create a new recipe in the database.
+    Implement user specific feed
     """
-    print(current_user)
-    blog = crud.blog.create(db=db, obj_in=blog_in)
-    blog_id = blog.id
-    for tag in blog_in.tags:
-        crud.post_tag.create(db=db, title=tag, blog_id=blog_id)
 
-    return blog
+
+@router.get("/following")
+def get_feed_by_followed() -> Any:
+    """
+    Get blogs from followed people
+    """
+
+
+@router.get("/recent")
+def get_recently_viewed() -> Any:
+    """Implement get recently viewed blogs"""

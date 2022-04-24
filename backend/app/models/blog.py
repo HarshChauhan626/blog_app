@@ -15,7 +15,5 @@ class Blog(Base):
     source = Column(String(256), nullable=True)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
-    collection_id = Column(Integer, ForeignKey("collection.id"), default="None", nullable=True)
-    collection = relationship("Collection", foreign_keys=[collection_id])
     author_id = Column(Integer, ForeignKey("user.id"))
     author = relationship("User", back_populates="blogs")

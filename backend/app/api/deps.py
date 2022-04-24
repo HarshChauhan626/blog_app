@@ -10,6 +10,7 @@ from app.core.config import settings
 from app.db.session import SessionLocal
 from app.models.user import User
 
+
 class TokenData(BaseModel):
     username: Optional[str] = None
 
@@ -24,7 +25,7 @@ def get_db() -> Generator:
 
 
 async def get_current_user(
-    db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)
+        db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)
 ) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -44,7 +45,6 @@ async def get_current_user(
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-
     user = db.query(User).filter(User.id == token_data.username).first()
     if user is None:
         raise credentials_exception

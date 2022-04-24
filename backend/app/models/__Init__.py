@@ -6,3 +6,5 @@ from .post_tag import PostTag
 from .tag import Tag
 from .user_follower import UserFollower
 from .collection import Collection
+from .post_collection import PostCollection
+from .user_view import UserView

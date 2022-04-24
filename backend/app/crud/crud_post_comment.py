@@ -6,9 +6,9 @@ from app.schemas.comment import PostCommentCreate, PostComment
 
 
 class CRUDPostComment(CRUDBase[Comment, PostCommentCreate, PostComment]):
-    def create(self, db: Session, *, obj_in: PostCommentCreate) -> PostComment:
+    def create(self, db: Session, *, obj_in: PostCommentCreate) -> Comment:
         create_obj = obj_in.dict()
-        db_obj = PostComment(**create_obj)
+        db_obj = Comment(**create_obj)
         db.add(db_obj)
         db.commit()
         return db_obj
