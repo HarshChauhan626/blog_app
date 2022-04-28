@@ -7,8 +7,8 @@ from app.db.base_class import Base
 
 class UserView(Base):
     id = Column(Integer, primary_key=True)
-    blog_id = Column(Integer, ForeignKey('blog.id'), nullable=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    blog_id = Column(Integer, ForeignKey('blog.id',ondelete="Cascade"), nullable=True)
+    user_id = Column(Integer, ForeignKey('user.id',ondelete="Cascade"))
     created_at = Column(DateTime, default=datetime.datetime.utcnow())
     blog = relationship("Blog", foreign_keys=[blog_id])
     user = relationship("User", foreign_keys=[user_id])

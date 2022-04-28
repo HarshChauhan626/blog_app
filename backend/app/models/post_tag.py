@@ -9,7 +9,7 @@ from app.db.base_class import Base
 
 class PostTag(Base):
     id = Column(Integer, primary_key=True, index=True)
-    blog_id = Column(Integer, ForeignKey('blog.id'), nullable=False)
-    tag_id = Column(Integer, ForeignKey('tag.id'), nullable=False)
+    blog_id = Column(Integer, ForeignKey('blog.id',ondelete="Cascade"), nullable=False)
+    tag_id = Column(Integer, ForeignKey('tag.id',ondelete="Cascade"), nullable=False)
     tag_rel = relationship("Tag", foreign_keys=[tag_id])
     post = relationship("Blog", foreign_keys=[blog_id])

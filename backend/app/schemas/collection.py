@@ -2,15 +2,20 @@ from pydantic import BaseModel
 
 
 class CollectionBase(BaseModel):
-    title: str
+    collection_name: str
 
 
 class CollectionCreate(CollectionBase):
     ...
 
 
+class CollectionCreateUtil(BaseModel):
+    collection_name: str
+    author_id: int
+
+
 class CollectionUpdate(BaseModel):
-    title: str
+    collection_name: str
     collection_id: str
 
 

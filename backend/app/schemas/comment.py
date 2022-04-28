@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional, Sequence
+from typing import Optional, Sequence, List
 
 from pydantic import BaseModel
 
@@ -32,4 +32,4 @@ class PostComment(PostCommentInDBBase):
 
 
 class PostComments(BaseModel):
-    comments: Sequence[PostComment]
+    comments: List[PostComment]
