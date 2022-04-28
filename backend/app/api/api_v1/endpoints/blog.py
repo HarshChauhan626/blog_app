@@ -13,8 +13,6 @@ from app.schemas.like import PostLike, PostLikeCreate, PostLikeDelete
 router = APIRouter()
 
 
-
-
 @router.get("/search/", status_code=200, response_model=Blogs)
 def search_blogs(
         *,
@@ -59,7 +57,6 @@ def get_recently_viewed(*, obj_in: PostCommentCreate, db: Session = Depends(deps
     """Implement get recently viewed blogs"""
 
 
-
 @router.get("/{blog_id}", status_code=200, response_model=Blog)
 def fetch_blog(
         *,
@@ -84,7 +81,7 @@ def fetch_blog(
 def delete_blog(blog_id: int, db: Session = Depends(deps.get_db),
                 current_user: User = Depends(get_current_user)) -> Any:
     """Implement delete blog"""
-    result = crud.blog.remove(db=db, blog_id=blog_id,user_id=current_user.id)
+    result = crud.blog.remove(db=db, blog_id=blog_id, user_id=current_user.id)
 
 
 @router.post("/{blog_id}/like", status_code=200, response_model=PostLike)
@@ -108,12 +105,12 @@ def post_unlike(*, blog_id: int, db: Session = Depends(deps.get_db),
 
 
 @router.get("/{blog_id}/comment", status_code=200, response_model=PostComments)
-def get_post_comments(blog_id:int, db: Session = Depends(deps.get_db),
+def get_post_comments(blog_id: int, db: Session = Depends(deps.get_db),
                       current_user: User = Depends(get_current_user)):
     """
     Get comments for specific blog post
     """
-    post_comments=crud.post_comment.get_comments(db,blog_id=blog_id)
+    post_comments = crud.post_comment.get_comments(db, blog_id=blog_id)
     return PostComments(comments=post_comments)
 
 
@@ -126,16 +123,12 @@ def post_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db
     return result
 
 
-@router.delete("/{blog_id}/comment", status_code=200)
-def delete_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+@router.delete("/{blog_id}/comment/{comment_id}", status_code=200)
+def delete_comment(*, comment_id:int, db: Session = Depends(deps.get_db),
                    current_user: User = Depends(get_current_user)):
     """Implement delete comment"""
+    result=crud.post_comment.remove(db=db,id=comment_id)
 
-
-@router.post("/{blog_id}/collection", status_code=200)
-def add_blog_to_collection(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
-                   current_user: User = Depends(get_current_user)):
-    """Implement add blog to collection"""
 
 
 @router.post("/{blog_id}/report", status_code=200, response_model=Blog)
@@ -152,8 +145,8 @@ def create_blog(
     Create a new recipe in the database.
     """
     print(current_user)
-    blog_create_util=BlogCreateUtil(**blog_in.dict())
-    blog_create_util.author_id=current_user.id
+    blog_create_util = BlogCreateUtil(**blog_in.dict())
+    blog_create_util.author_id = current_user.id
     blog = crud.blog.create(db=db, obj_in=blog_create_util)
     blog_id = blog.id
     for tag in blog_in.tags:

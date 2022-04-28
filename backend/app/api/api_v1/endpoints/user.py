@@ -53,7 +53,6 @@ async def create_collection(collection_name: str, db: Session = Depends(deps.get
     result = crud.collection.create(db=db, obj_in=collection_create_obj)
     return result
 
-
 @router.get("/collection", status_code=200, response_model=Collection)
 async def fetch_user_collection(collection_id: int, db: Session = Depends(deps.get_db),
                                 current_user: User = Depends(get_current_user)) -> Any:
@@ -80,6 +79,19 @@ async def fetch_collection(collection_id: int, db: Session = Depends(deps.get_db
                            current_user: User = Depends(get_current_user)) -> Any:
     result = crud.collection.get_collection(db=db, collection_id=collection_id)
     return result
+
+@router.post("/collection/{collection_id}/{blog_id}", status_code=200)
+def add_blog_to_collection(*,blog_id:int, collection_id:int,db: Session = Depends(deps.get_db),
+                           current_user: User = Depends(get_current_user)):
+    """Implement add blog to collection"""
+    result=crud.post_collection.add_post(db=db,blog_id=blog_id,collection_id=collection_id)
+
+@router.delete("/collection/{collection_id}/{blog_id}", status_code=200)
+def add_blog_to_collection(*,blog_id:int, collection_id:int,db: Session = Depends(deps.get_db),
+                           current_user: User = Depends(get_current_user)):
+    """Implement add blog to collection"""
+    result=crud.post_collection.remove_post(db=db,blog_id=blog_id,collection_id=collection_id)
+
 
 
 @router.post("/", status_code=200, response_model=Collection)
