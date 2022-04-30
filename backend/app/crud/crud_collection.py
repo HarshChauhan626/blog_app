@@ -15,8 +15,8 @@ class CRUDCollection(CRUDBase[Collection, CollectionCreate, CollectionDelete]):
         return db_obj
 
     def get_user_collections(self, db: Session, *, user_id: int) -> List[Collection]:
-        result = db.query(Collection).where(Collection.user_id == user_id)
-        return result
+        result = db.query(Collection).where(Collection.author_id == user_id)
+        return result.all()
 
     def get_collection(self, db: Session, *, collection_id: int) -> Collection:
         result = db.query(Collection).where(Collection.id == collection_id)

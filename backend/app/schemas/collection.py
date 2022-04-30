@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel
 
 
@@ -25,6 +27,8 @@ class CollectionDelete:
 
 class CollectionInDBBase(CollectionBase):
     id: int
+    author_id: int
+
 
     class Config:
         orm_mode = True
@@ -32,3 +36,7 @@ class CollectionInDBBase(CollectionBase):
 
 class Collection(CollectionInDBBase):
     ...
+
+
+class CollectionList(BaseModel):
+    collection_list:List[Collection]

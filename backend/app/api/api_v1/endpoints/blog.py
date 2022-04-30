@@ -13,28 +13,6 @@ from app.schemas.like import PostLike, PostLikeCreate, PostLikeDelete
 router = APIRouter()
 
 
-@router.get("/search/", status_code=200, response_model=Blogs)
-def search_blogs(
-        *,
-        keyword: str = Query(None, min_length=3, example="Something"),
-        max_results: Optional[int] = 10,
-        db: Session = Depends(deps.get_db),
-) -> dict:
-    """
-    Search for recipes based on label keyword
-    """
-    blogs = crud.blog.get_multi(db=db, limit=max_results)
-    results = filter(lambda blog: keyword.lower() in blog.label.lower(), blogs)
-
-    return {"results": list(results)}
-
-
-@router.get("/tags", status_code=200, response_model=Tag)
-def get_tags(db: Session = Depends(deps.get_db), current_user: User = Depends(get_current_user)) -> Any:
-    category_list = crud.tag.get(db=db)
-    return category_list
-
-
 @router.get("/feed", status_code=201, response_model=Blogs)
 def get_feed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
              current_user: User = Depends(get_current_user)) -> Any:
@@ -124,11 +102,10 @@ def post_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db
 
 
 @router.delete("/{blog_id}/comment/{comment_id}", status_code=200)
-def delete_comment(*, comment_id:int, db: Session = Depends(deps.get_db),
+def delete_comment(*, comment_id: int, db: Session = Depends(deps.get_db),
                    current_user: User = Depends(get_current_user)):
     """Implement delete comment"""
-    result=crud.post_comment.remove(db=db,id=comment_id)
-
+    result = crud.post_comment.remove(db=db, id=comment_id)
 
 
 @router.post("/{blog_id}/report", status_code=200, response_model=Blog)
