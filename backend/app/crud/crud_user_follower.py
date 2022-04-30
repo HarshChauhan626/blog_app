@@ -20,5 +20,9 @@ class CRUDUserFollower(CRUDBase[UserFollower, UserFollowerCreate, UserFollowerDe
         db.commit()
         return db_obj
 
+    def get_followed(self,db:Session,*,user_id:int)->UserFollower:
+        result=db.query(UserFollower).filter(UserFollower.source_id==user_id)
+        return result.all()
+
 
 user_follower = CRUDUserFollower(UserFollower)

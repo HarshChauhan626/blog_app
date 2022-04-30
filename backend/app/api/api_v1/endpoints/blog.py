@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app import crud
 from app.api import deps
 from app.api.deps import get_current_user
+from app.schemas.responses import CollectionResponse
 from app.schemas.tag import Tag
 from app.models import User
 from app.schemas.blog import Blog, BlogCreate, BlogBase, BlogCreateUtil, Blogs
@@ -19,20 +20,23 @@ def get_feed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
     """
     Implement user specific feed
     """
+    return CollectionResponse(result=[])
 
 
 @router.get("/following")
-def get_feed_by_followed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
+def get_feed_by_followed(*, db: Session = Depends(deps.get_db),
                          current_user: User = Depends(get_current_user)) -> Any:
     """
     Get blogs from followed people
     """
-
+    result=crud.blog.get_blogs_from_followed(db=db,user_id=current_user.id)
+    return result
 
 @router.get("/recent")
 def get_recently_viewed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
                         current_user: User = Depends(get_current_user)) -> Any:
     """Implement get recently viewed blogs"""
+
 
 
 @router.get("/{blog_id}", status_code=200, response_model=Blog)

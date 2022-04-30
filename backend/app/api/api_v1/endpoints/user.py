@@ -8,6 +8,7 @@ from app.api import deps
 from app.api.deps import get_current_user
 from app.models import User
 from app.schemas.collection import CollectionCreate, Collection, CollectionCreateUtil, CollectionList
+from app.schemas.responses import CollectionResponse
 from app.schemas.user_follower import UserFollowerCreate, UserFollower, UserFollowerDelete
 
 router = APIRouter()
@@ -54,11 +55,11 @@ async def create_collection(collection_name: str, db: Session = Depends(deps.get
     return result
 
 
-@router.get("/collection", status_code=200, response_model=CollectionList)
+@router.get("/collection", status_code=200, response_model=CollectionResponse)
 async def fetch_user_collection(db: Session = Depends(deps.get_db),
                                 current_user: User = Depends(get_current_user)) -> Any:
     result = crud.collection.get_user_collections(db=db, user_id=current_user.id)
-    return CollectionList(collection_list=result)
+    return CollectionResponse(result=result)
 
 
 @router.delete("/collection/{collection_id}", status_code=200, response_model=Collection)
@@ -75,11 +76,11 @@ async def update_collection_name(collection_id: int, db: Session = Depends(deps.
     return result
 
 
-@router.get("/collection/{collection_id}", status_code=200, response_model=Collection)
+@router.get("/collection/{collection_id}", status_code=200, response_model=CollectionResponse)
 async def fetch_collection(collection_id: int, db: Session = Depends(deps.get_db),
                            current_user: User = Depends(get_current_user)) -> Any:
-    result = crud.collection.get_collection(db=db, collection_id=collection_id)
-    return result
+    result = crud.collection.get_collection(db=db, collection_id=collection_id, user_id=current_user.id)
+    return CollectionResponse(result=result)
 
 
 @router.post("/collection/{collection_id}/{blog_id}", status_code=200)
@@ -87,6 +88,7 @@ def add_blog_to_collection(*, blog_id: int, collection_id: int, db: Session = De
                            current_user: User = Depends(get_current_user)):
     """Implement add blog to collection"""
     result = crud.post_collection.add_post(db=db, blog_id=blog_id, collection_id=collection_id, user_id=current_user.id)
+    return result
 
 
 @router.delete("/collection/{collection_id}/{blog_id}", status_code=200)

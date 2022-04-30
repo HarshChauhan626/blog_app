@@ -20,21 +20,22 @@ class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
         db_obj = db.query(Blog).where(Blog.id == blog_id and Blog.author_id == user_id)
         db.delete(db_obj)
 
-    def get_blogs_from_followed(self,db:Session,*,blog_id:int,user_id:int):
-        lis=[x for x in crud.user_follower.get_followed()]
-        blog_list=[]
-        for i in range(lis.length):
-            result = db.query(Blog).filter(Blog.author_id == id)
-            if(result.length != 0):
-                blog_list+=result
+    def get_blogs_from_followed(self, db: Session, *, user_id: int):
+        lis = [x for x in crud.user_follower.get_followed(db=db, user_id=user_id)]
+        blog_list = []
+        for i in range(len(lis)):
+            result = db.query(Blog).filter(Blog.author_id == lis[i].target_id)
+            if (len(result.all()) != 0):
+                blog_list += result
             else:
                 print("No blogs from this author")
         return blog_list
 
-    def get_feed(self,db:Session,*,user_id:int):
+    def get_feed(self, db: Session, *, user_id: int):
         pass
 
-    def get_recent_search(self,db:Session,user_id:int):
+    def get_recent_search(self, db: Session, user_id: int):
         pass
+
 
 blog = CRUDBlog(Blog)

@@ -14,9 +14,11 @@ class CRUDPostCollection(CRUDBase[PostCollection, PostCollection, PostCollection
     #     db.commit()
     #     return db_obj
 
-    def add_post(self,db:Session,*,blog_id:int,collection_id:int,user_id:int):
-        db.add(PostCollection(blog_id=blog_id,collection_id=collection_id,user_id=user_id))
-
+    def add_post(self, db: Session, *, blog_id: int, collection_id: int, user_id: int):
+        db_obj=PostCollection(blog_id=blog_id, collection_id=collection_id, user_id=user_id)
+        db.add(db_obj)
+        db.commit()
+        return db_obj
 
     def remove_post(self, db: Session, *, blog_id: int):
         result = db.query(Comment).filter(Comment.blog_id == blog_id)
@@ -24,4 +26,4 @@ class CRUDPostCollection(CRUDBase[PostCollection, PostCollection, PostCollection
         return result.all()
 
 
-post_comment = CRUDPostCollection(PostCollection)
+post_collection = CRUDPostCollection(PostCollection)

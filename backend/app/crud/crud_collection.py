@@ -1,9 +1,11 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
+from app.models import Blog, PostCollection
 from app.models.collection import Collection
 from app.schemas.collection import CollectionCreate, CollectionDelete
-from typing import List
+from typing import List, Any
 
 
 class CRUDCollection(CRUDBase[Collection, CollectionCreate, CollectionDelete]):
@@ -18,9 +20,11 @@ class CRUDCollection(CRUDBase[Collection, CollectionCreate, CollectionDelete]):
         result = db.query(Collection).where(Collection.author_id == user_id)
         return result.all()
 
-    def get_collection(self, db: Session, *, collection_id: int) -> Collection:
-        result = db.query(Collection).where(Collection.id == collection_id)
-        return result
+
+    def get_collection(self, db: Session, *,collection_id:int,user_id:int) -> Any:
+        join_query = db.query(Blog).join(PostCollection).filter(PostCollection.blog_id==Blog.id)
+        print(join_query)
+        return join_query.all()
 
 
 collection = CRUDCollection(Collection)

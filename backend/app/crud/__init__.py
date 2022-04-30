@@ -7,3 +7,4 @@ from .crud_post_comment import post_comment
 from .crud_post_tag import post_tag
 from .crud_post_like import post_like
 from .crud_collection import collection
+from .crud_post_collection import post_collection
