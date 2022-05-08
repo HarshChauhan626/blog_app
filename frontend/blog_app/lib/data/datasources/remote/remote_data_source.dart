@@ -8,6 +8,7 @@ import 'package:blog_app/data/responses/authentication_response.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
+  // Future<>
 
 }
 
@@ -33,5 +34,8 @@ class RemoteDataSourceImplementer implements RemoteDataSource {
       rethrow;
     }
   }
+
+
+
 
 }

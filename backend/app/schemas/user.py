@@ -3,6 +3,7 @@ from typing import Optional
 from xml.dom.domreg import registered
 
 from pydantic import BaseModel, EmailStr
+from pydantic.typing import Sequence
 
 
 class UserBase(BaseModel):
@@ -44,3 +45,6 @@ class UserInDB(UserInDBBase):
 # Additional properties to return via API
 class User(UserInDBBase):
     ...
+
+class Users(BaseModel):
+    results:Sequence[User]

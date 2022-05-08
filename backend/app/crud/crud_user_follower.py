@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.elements import and_
 
 from app.crud.base import CRUDBase
 from app.models import UserFollower
@@ -15,13 +16,13 @@ class CRUDUserFollower(CRUDBase[UserFollower, UserFollowerCreate, UserFollowerDe
 
     def remove(self, db: Session, *, obj_in: UserFollowerDelete) -> UserFollower:
         db_obj = db.query(UserFollower).filter(
-            UserFollower.target_id == obj_in.target_id and UserFollower.source_id == obj_in.source_id)
+            and_(UserFollower.target_id == obj_in.target_id,UserFollower.source_id == obj_in.source_id))
         db.delete(db_obj)
         db.commit()
         return db_obj
 
-    def get_followed(self,db:Session,*,user_id:int)->UserFollower:
-        result=db.query(UserFollower).filter(UserFollower.source_id==user_id)
+    def get_followed(self, db: Session, *, user_id: int) -> UserFollower:
+        result = db.query(UserFollower).filter(UserFollower.source_id == user_id)
         return result.all()
 
 

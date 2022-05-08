@@ -1,3 +1,5 @@
+from typing import Any
+
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
@@ -18,5 +20,13 @@ class CRUDPostTag(CRUDBase[PostTag, PostTagCreate, PostTagDelete]):
     def get(self, db: Session, *, title: str) -> bool:
         result = db.query(PostTag).join(Tag).filter(Tag.title == title).first()
 
+    def get_post_tag(self,db:Session,blog_id:int)->Any:
+        result=db.query(PostTag.tag_id,Tag.title).filter(PostTag.blog_id==blog_id).join(Tag).filter(Tag.id==PostTag.tag_id)
+        print(result.all())
+        tag_list=[]
+        if(len(result.all())!=0):
+            for i in range(len(result.all())):
+                tag_list.append(result[i].title)
+        return tag_list
 
 post_tag = CRUDPostTag(PostTag)

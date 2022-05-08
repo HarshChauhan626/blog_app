@@ -1,4 +1,4 @@
-from .blog import Blog, BlogCreate
+from .blog import BlogResponse, BlogCreate
 from .user import User, UserCreate
 from .user_follower import UserFollower, UserFollowerCreate, UserFollowerDelete
 from .comment import PostCommentCreate, PostComment

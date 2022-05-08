@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.elements import and_
 
 from app.crud.base import CRUDBase
 from app.models import Like
@@ -14,7 +15,7 @@ class CRUDPostLike(CRUDBase[Like, PostLikeCreate, PostLikeDelete]):
         return db_obj
 
     def remove(self, db: Session, *, obj_in: PostLikeDelete) -> Like:
-        db_obj = db.query(Like).filter(Like.blog_id == obj_in.blog_id and Like.user_id == obj_in.user_id).first()
+        db_obj = db.query(Like).filter(and_(Like.blog_id == obj_in.blog_id,Like.user_id == obj_in.user_id)).first()
         db.delete(db_obj)
         db.commit()
         return db_obj

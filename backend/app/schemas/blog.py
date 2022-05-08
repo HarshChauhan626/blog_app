@@ -36,15 +36,35 @@ class BlogInDBBase(BlogBase):
         orm_mode = True
 
 
+class AuthorDetails(BaseModel):
+    id:int
+    name:str
+
+
 # Properties to return to client
-class Blog(BlogInDBBase):
-    pass
+class BlogResponse(BlogInDBBase):
+    tag: Optional[List[str]]
+    author_details:AuthorDetails
+
+    @staticmethod
+    def from_orm_obj(blog,tag_list,author_details):
+        return BlogResponse(
+            id=blog.id,
+            tag=tag_list,
+            title=blog.title,
+            created_at=blog.created_at,
+            meta_title=blog.meta_title,
+            content=blog.content,
+            published=blog.published,
+            summary=blog.summary,
+            updated_at=blog.updated_at,
+            author_details=author_details
+        )
 
 
 # Properties stored in DB
 class BlogInDB(BlogInDBBase):
     pass
 
-
 class Blogs(BaseModel):
-    results: Sequence[Blog]
+    results: Sequence[BlogResponse]

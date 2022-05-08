@@ -11,7 +11,53 @@ abstract class AppServiceClient {
 
   @POST("/auth/login")
   Future<Response> login(
-    @Field("email") String email,
-    @Field("password") String password,
-  );
+      @Field("email") String email,
+      @Field("password") String password,
+      );
+
+  @POST("/blogs/{blog_id}/like")
+  Future<Response> likePost(
+      @Path("blog_id") int blogId
+      );
+
+  @DELETE("/blogs/{blog_id}/like")
+  Future<Response> unlikePost(
+      @Path("blog_id") int blogId
+      );
+
+  @GET("/blogs/{blog_id}/comments")
+  Future<Response> getPostComments(
+      @Path("blog_id") int blogId
+      );
+
+  @POST("/blogs/{blog_id}/comments")
+  Future<Response> addPostComment(
+      @Path("blog_id") int blogId
+      );
+
+  @DELETE("/blogs/{blog_id}/comments/{comment_id}")
+  Future<Response> deletePostComments(
+      @Path("blog_id") int blogId,
+      @Path("comment_id") int commentId
+      );
+
+  @GET("/blogs/{blog_id}")
+  Future<Response> fetchBlog(
+      @Path("blog_id") int blogId
+      );
+
+  @DELETE("/blogs/{blog_id}")
+  Future<Response> deleteBlog(
+      @Path("blog_id") int blogId
+      );
+
+  @GET("/blogs/feed")
+  Future<Response> getFeed();
+
+  @GET("/blogs/recent")
+  Future<Response> getRecentlyViewed();
+
+  @GET("/blogs/followed")
+  Future<Response> getBlogsFromFollowed();
+
 }

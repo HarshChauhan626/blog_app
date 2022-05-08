@@ -1,10 +1,11 @@
 from typing import Any, Dict, Optional, Union
 
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.elements import or_
 
 from app.crud.base import CRUDBase
 from app.models.user import User
-from app.schemas.user import UserCreate, UserUpdate
+from app.schemas.user import UserCreate, UserUpdate, Users
 from app.core.security import get_password_hash
 
 
@@ -35,5 +36,20 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def is_superuser(self, user: User) -> bool:
         return user.is_superuser
 
+    def search_user(self,db:Session,keyword:str)->Users:
+        user_list=[]
+        first_name_query=db.query(User).filter(User.first_name.contains(keyword)).all()
+        middle_name_query=db.query(User).filter(User.middle_name.contains(keyword)).all()
+        last_name_query=db.query(User).filter(User.last_name.contains(keyword)).all()
+        user_name_query=db.query(User).filter(User.username.contains(keyword)).all()
+        for i in range(len(first_name_query)):
+            user_list.append(first_name_query[i])
+        for j in range(len(middle_name_query)):
+            user_list.append(middle_name_query[j])
+        for k in range(len(last_name_query)):
+            user_list.append(last_name_query[k])
+        for l in range(len(user_name_query)):
+            user_list.append(user_name_query[l])
+        return user_list
 
 user = CRUDUser(User)

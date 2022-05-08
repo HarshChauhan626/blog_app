@@ -7,9 +7,10 @@ from app.api.deps import get_current_user
 from app.schemas.responses import CollectionResponse
 from app.schemas.tag import Tag
 from app.models import User
-from app.schemas.blog import Blog, BlogCreate, BlogBase, BlogCreateUtil, Blogs
+from app.schemas.blog import BlogResponse, BlogCreate, BlogBase, BlogCreateUtil, Blogs
 from app.schemas.comment import PostCommentCreate, PostComment, PostCommentCreateUtil, PostComments
 from app.schemas.like import PostLike, PostLikeCreate, PostLikeDelete
+from app.schemas.user_view import UserViewCreate
 
 router = APIRouter()
 
@@ -23,23 +24,29 @@ def get_feed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
     return CollectionResponse(result=[])
 
 
-@router.get("/following")
+@router.get("/following", response_model=Blogs)
 def get_feed_by_followed(*, db: Session = Depends(deps.get_db),
                          current_user: User = Depends(get_current_user)) -> Any:
     """
     Get blogs from followed people
     """
-    result=crud.blog.get_blogs_from_followed(db=db,user_id=current_user.id)
+    result = crud.blog.get_blogs_from_followed(db=db, user_id=current_user.id)
     return result
 
+
 @router.get("/recent")
-def get_recently_viewed(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
-                        current_user: User = Depends(get_current_user)) -> Any:
-    """Implement get recently viewed blogs"""
+def get_recently_viewed(*, db: Session = Depends(deps.get_db),
+                        current_user: User = Depends(get_current_user)) -> Blogs:
+    """
+    Implement get recently viewed blogs
+    """
+    recently_view_blogs=crud.blog.get_recent_search(db=db,user_id=current_user.id)
+    return Blogs(results=recently_view_blogs)
 
 
 
-@router.get("/{blog_id}", status_code=200, response_model=Blog)
+
+@router.get("/{blog_id}", status_code=200, response_model=BlogResponse)
 def fetch_blog(
         *,
         blog_id: int,
@@ -49,7 +56,8 @@ def fetch_blog(
     """
     Fetch a single recipe by ID
     """
-    result = crud.blog.get(db=db, id=blog_id)
+    result = crud.blog.get_blog(db=db, blog_id=blog_id)
+    crud.user_view.create(db=db, obj_in=UserViewCreate(blog_id=blog_id, user_id=current_user.id))
     if not result:
         # the exception is raised, not returned - you will get a validation
         # error otherwise.
@@ -108,17 +116,21 @@ def post_comment(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db
 @router.delete("/{blog_id}/comment/{comment_id}", status_code=200)
 def delete_comment(*, comment_id: int, db: Session = Depends(deps.get_db),
                    current_user: User = Depends(get_current_user)):
-    """Implement delete comment"""
+    """
+    Implement delete comment
+    """
     result = crud.post_comment.remove(db=db, id=comment_id)
 
 
-@router.post("/{blog_id}/report", status_code=200, response_model=Blog)
+@router.post("/{blog_id}/report", status_code=200, response_model=BlogResponse)
 def report_blog(*, obj_in: PostCommentCreate, db: Session = Depends(deps.get_db),
                 current_user: User = Depends(get_current_user)) -> Any:
-    """Implement report blog"""
+    """
+    Implement report blog
+    """
 
 
-@router.post("/", status_code=201, response_model=Blog)
+@router.post("/", status_code=201, response_model=BlogResponse)
 def create_blog(
         *, blog_in: BlogCreate, db: Session = Depends(deps.get_db), current_user: User = Depends(get_current_user)
 ) -> dict:
