@@ -50,6 +50,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             user_list.append(last_name_query[k])
         for l in range(len(user_name_query)):
             user_list.append(user_name_query[l])
-        return user_list
+        # print(user_list[0].first_name)
+        return Users(results=user_list)
 
 user = CRUDUser(User)

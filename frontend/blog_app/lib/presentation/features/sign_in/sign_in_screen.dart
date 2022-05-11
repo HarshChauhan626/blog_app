@@ -59,7 +59,7 @@ class _SignInScreenState extends State<SignInScreen> {
           body: BlocConsumer<SignInBloc,SignInState>(
             listener: (context,state){
               if(state is SignInFinishedState){
-                Navigator.pushNamed(context,HomeScreen.routeName);
+                Navigator.pushReplacementNamed(context,HomeScreen.routeName);
               }
               else if(state is SignInErrorState){
                 debugPrint('Something went wrong');

@@ -1,4 +1,5 @@
 import 'package:blog_app/presentation/resources/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -23,7 +24,7 @@ class _BlogScreenState extends State<BlogScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.black,),
+          icon: Icon(CupertinoIcons.back,color: Colors.black,),
           onPressed: (){
             Navigator.pop(context);
           },
@@ -53,7 +54,7 @@ class _BlogScreenState extends State<BlogScreen> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -117,7 +118,7 @@ class _BlogScreenState extends State<BlogScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:20.0),
+                  padding: const EdgeInsets.symmetric(horizontal:20.0,vertical:20.0),
                   child: Text('''In the article, I have explained the basic structure of the Dialog Using GetX in a flutter; you can modify this code according to your choice. This was a small introduction to Dialog Using GetX On User Interaction from my side, and it’s working using Flutter.
                     I hope this blog will provide you with sufficient information on Trying up the Dialog Using GetX in your flutter projects. We will show you what the Introduction is?. Make a demo program for working Dialog Using GetX plugins. In this blog, we have examined the Dialog Using GetX of the flutter app. I hope this blog will help you in the comprehension of the Dialog in a better way. So please try it.
                     In the article, I have explained the basic structure of the Dialog Using GetX in a flutter; you can modify this code according to your choice. This was a small introduction to Dialog Using GetX On User Interaction from my side, and it’s working using Flutter.

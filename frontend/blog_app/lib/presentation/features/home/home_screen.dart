@@ -43,23 +43,23 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: Drawer(
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-
-                  },
-                  child: ListTile(
-                    title: Text("Sign Out"),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+        // drawer: Drawer(
+        //   child: SingleChildScrollView(
+        //     physics: AlwaysScrollableScrollPhysics(),
+        //     child: Column(
+        //       children: [
+        //         InkWell(
+        //           onTap: (){
+        //
+        //           },
+        //           child: ListTile(
+        //             title: Text("Sign Out"),
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
         appBar: getAppBar(),
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
@@ -68,10 +68,27 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                child: Text(Globals.S_GOOD_MORNING,style: TextStyle(
-                  color: Colors.black
-                ),),
+                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                child: Text(
+                    'Thursday, May 12th',
+                    style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                      color: Colors.grey,
+                    )
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:17.0),
+                child: Text(Globals.S_GOOD_MORNING,style: Theme.of(context).textTheme.headline5?.copyWith(
+                  color: Colors.black,
+                )
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:20.0),
+                child: Text("Harsh",style: Theme.of(context).textTheme.headline5?.copyWith(
+                  color: Colors.black,
+                )
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
@@ -120,21 +137,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar getAppBar(){
     return AppBar(
-      leading: IconButton(
-        icon:Icon(Icons.menu,color: Colors.black,),
-        onPressed: (){
-          _scaffoldKey.currentState?.openDrawer();
-        },
-      ),
-      title: Text('Home'),
+      // leading: IconButton(
+      //   icon:Icon(Icons.menu,color: Colors.black,),
+      //   onPressed: (){
+      //     _scaffoldKey.currentState?.openDrawer();
+      //   },
+      // ),
+      automaticallyImplyLeading: false,
+      title: Text('Blogger',style: Theme.of(context).textTheme.headline5?.copyWith(
+        fontWeight: FontWeight.bold
+      ),),
+      centerTitle: true,
     );
   }
 
 
   Widget getTabBar(){
     return Container(
-      width: 350.0,
-      height: 50.0,
+      width: 370.0,
+      height: 40.0,
       decoration: BoxDecoration(
         color: AppColors.appGreyColor,
         borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -153,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 400),
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.symmetric(vertical: 2),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: (activePageIndex == 0) ?AppColors.primaryColor:AppColors.appGreyColor,
@@ -178,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 400),
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.symmetric(vertical: 2),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: (activePageIndex == 1) ?AppColors.primaryColor:AppColors.appGreyColor,
@@ -203,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 400),
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.symmetric(vertical: 2),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: (activePageIndex == 2) ?AppColors.primaryColor:AppColors.appGreyColor,
@@ -223,13 +244,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   Widget getListView(){
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: AlwaysScrollableScrollPhysics(),
-      itemCount: 100,
-      itemBuilder: (context,index){
-        return BlogListItem();
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:10.0),
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: AlwaysScrollableScrollPhysics(),
+        itemCount: 100,
+        itemBuilder: (context,index){
+          return BlogListItem();
+        },
+      ),
     );
   }
 

@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, List
 
 from pydantic.class_validators import Any
 from sqlalchemy.orm import Session
@@ -70,6 +70,30 @@ class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
                                                                       name="{} {}".format(author_info.first_name,
                                                                                           author_info.last_name)))
         return blog
+
+    def search_blog(self,db:Session,keyword:str)->Blogs:
+        blog_list=[]
+        title_query=db.query(Blog).filter(Blog.title.contains(keyword)).all()
+        content_query=db.query(Blog).filter(Blog.content.contains(keyword)).all()
+        summary_query=db.query(Blog).filter(Blog.summary.contains(keyword)).all()
+        for i in range(len(title_query)):
+            blog_list.append(self.get_blog(db, title_query[i].id))
+        for j in range(len(content_query)):
+            if not self.blog_exist(blog_list=blog_list, blog_id=title_query[i].id):
+                blog_list.append(self.get_blog(db, title_query[i].id))
+        for k in range(len(summary_query)):
+            if not self.blog_exist(blog_list=blog_list, blog_id=title_query[i].id):
+                blog_list.append(self.get_blog(db, title_query[i].id))
+        # for l in range(len(author_query)):
+        #     blog_list.append(author_query[l])
+        return Blogs(results=blog_list)
+
+
+    def blog_exist(self,blog_list:List,blog_id:int):
+        for i in range(len(blog_list)):
+            if(blog_list[i].id==blog_id):
+                return True
+        return False
 
 
 blog = CRUDBlog(Blog)

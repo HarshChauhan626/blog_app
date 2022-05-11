@@ -14,9 +14,9 @@ class Globals {
 
   static const S_SUBMIT="Submit";
 
-  static const S_GOOD_MORNING="Good Morning";
-  static const S_GOOD_EVENING="Good Evening";
-  static const S_GOOD_NOON="Good Noon";
+  static const S_GOOD_MORNING="Good Morning,";
+  static const S_GOOD_EVENING="Good Evening,";
+  // static const S_GOOD_NOON="Good Noon";
 
   static const String EMPTY = "";
   static const int ZERO = 0;

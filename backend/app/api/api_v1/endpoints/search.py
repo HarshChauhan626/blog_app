@@ -15,10 +15,12 @@ router = APIRouter()
 
 
 @router.get("/blogs/{keyword}", status_code=200, response_model=Blogs)
-def search_blogs():
+def search_blogs(keyword:str,db:Session=Depends(deps.get_db)):
     """
     Search blogs
     """
+    result=crud.blog.search_blog(db=db,keyword=keyword)
+    return result
 
 
 @router.get("/user/{keyword}", status_code=200, response_model=Users)
