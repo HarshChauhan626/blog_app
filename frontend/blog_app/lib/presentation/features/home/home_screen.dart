@@ -2,6 +2,7 @@ import 'package:blog_app/config/utils/constants.dart';
 import 'package:blog_app/presentation/features/home/home_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
+import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -113,15 +114,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-          currentIndex: _selectedIndex, //New
-          onTap: _onItemTapped,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home),label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.search),label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.person),label: "")
-          ],
+        // bottomNavigationBar: BottomNavigationBar(
+        //   landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+        //   currentIndex: _selectedIndex, //New
+        //   onTap: _onItemTapped,
+        //   items: const [
+        //     BottomNavigationBarItem(icon: Icon(Icons.home),label: ""),
+        //     BottomNavigationBarItem(icon: Icon(Icons.search),label: ""),
+        //     BottomNavigationBarItem(icon: Icon(Icons.person),label: "")
+        //   ],
+        // ),
+        bottomNavigationBar: Container(
+          height: 50.0,
+          alignment: Alignment.center,
+          child: Center(child: MyCustomBottomNavigationBar()),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 
 class BlogScreen extends StatefulWidget {
@@ -14,6 +15,30 @@ class _BlogScreenState extends State<BlogScreen> {
 
 
   bool toggle=false;
+
+  bool showBottomBar=true;
+  ScrollController? scrollController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // ScrollDirection? _lastScrollDirection; // <---- Notice the new variable here.
+    scrollController = ScrollController();
+
+    scrollController?.addListener(() {
+      if(scrollController?.position.userScrollDirection==ScrollDirection.reverse){
+        setState(() {
+          showBottomBar=false;
+        });
+      }
+      else{
+        setState(() {
+          showBottomBar=true;
+        });
+      }
+      }
+    );
+  }
 
 
   @override
@@ -31,7 +56,13 @@ class _BlogScreenState extends State<BlogScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.menu,color: Colors.black,),
+            icon: Icon(Icons.share_outlined,color: Colors.black,),
+            onPressed: (){
+
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.more_vert,color: Colors.black,),
             onPressed: (){
 
             },
@@ -39,6 +70,7 @@ class _BlogScreenState extends State<BlogScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        controller: scrollController,
         child: Column(
           children: [
             Column(
@@ -158,6 +190,34 @@ I hope this blog will provide you with sufficient information on Trying up the D
           ],
         ),
       ),
+      bottomNavigationBar: showBottomBar?Container(
+        height: 60.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(Icons.thumb_up_alt_outlined),
+              onPressed: (){
+
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.mode_comment_outlined),
+              onPressed: (){
+
+              },
+            ),
+            IconButton(
+              icon:Icon(Icons.bookmark_border),
+              onPressed: (){},
+            ),
+            IconButton(
+              icon: Icon(Icons.headset),
+              onPressed: (){},
+            )
+          ],
+        ),
+      ):null,
     );
   }
 }

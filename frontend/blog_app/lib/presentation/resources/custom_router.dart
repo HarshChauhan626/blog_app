@@ -1,3 +1,4 @@
+import 'package:blog_app/presentation/features/explore/explore_screen.dart';
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
 import 'package:blog_app/presentation/features/home/home_screen.dart';
 import 'package:blog_app/presentation/features/onboarding/onboarding.dart';
@@ -27,6 +28,8 @@ class CustomRouter {
         return ForgotPasswordScreen.route();
       case HomeScreen.routeName:
         return HomeScreen.route();
+      case ExploreScreen.routeName:
+        return ExploreScreen.route();
       default:
         return _errorRoute();
     }
