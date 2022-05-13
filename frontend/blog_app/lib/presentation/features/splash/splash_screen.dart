@@ -1,4 +1,5 @@
 import 'package:blog_app/presentation/features/home/home_screen.dart';
+import 'package:blog_app/presentation/features/main_%20screen/main_screen.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         print("State coming is $state");
         if(state is Authenticated){
         Future.delayed(Duration(seconds: 2),(){
-          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          Navigator.pushReplacementNamed(context, MainScreen.routeName);
         });
         }
         else{

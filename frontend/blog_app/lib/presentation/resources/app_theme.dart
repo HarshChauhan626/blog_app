@@ -7,6 +7,7 @@ class AppTheme {
         appBarTheme: const AppBarTheme(
           elevation: 0,
           color: Colors.white,
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 24.0, letterSpacing: 0)
         ),
         textTheme: const TextTheme(
           headline4: TextStyle(

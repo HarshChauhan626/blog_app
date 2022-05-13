@@ -7,6 +7,8 @@ class AppColors {
 
   static Color primaryColor = Color(0xff023047);
 
+  // static Color primaryColor=Color(0xff586fdb);
+
   static const int _darkBluePrimaryValue = 0xFF1e2944;
 
   static final greyColor=Colors.grey[400];

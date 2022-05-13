@@ -1,3 +1,5 @@
+import 'package:blog_app/presentation/features/explore/explore_screen.dart';
+import 'package:blog_app/presentation/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -344,6 +346,7 @@ class _MyCustomBottomNavigationBarState
                   _controller5?.reverse();
                   HapticFeedback.lightImpact();
                 });
+                Navigator.pushNamed(context, ExploreScreen.routeName);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -384,6 +387,7 @@ class _MyCustomBottomNavigationBarState
                   _controller5?.reverse();
                   HapticFeedback.lightImpact();
                 });
+                Navigator.pushNamed(context, ProfileScreen.routeName);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,

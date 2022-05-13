@@ -4,6 +4,7 @@ import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:blog_app/presentation/features/authentication/authentication.dart';
 import 'package:blog_app/presentation/features/authentication/authentication_bloc.dart';
 import 'package:blog_app/presentation/features/home/home_screen.dart';
+import 'package:blog_app/presentation/features/main_%20screen/main_screen.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
@@ -59,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
           body: BlocConsumer<SignInBloc,SignInState>(
             listener: (context,state){
               if(state is SignInFinishedState){
-                Navigator.pushReplacementNamed(context,HomeScreen.routeName);
+                Navigator.pushReplacementNamed(context,MainScreen.routeName);
               }
               else if(state is SignInErrorState){
                 debugPrint('Something went wrong');

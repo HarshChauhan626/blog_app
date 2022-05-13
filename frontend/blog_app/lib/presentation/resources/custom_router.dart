@@ -1,7 +1,9 @@
 import 'package:blog_app/presentation/features/explore/explore_screen.dart';
 import 'package:blog_app/presentation/features/forgot_password/forgot_password_screen.dart';
 import 'package:blog_app/presentation/features/home/home_screen.dart';
+import 'package:blog_app/presentation/features/main_%20screen/main_screen.dart';
 import 'package:blog_app/presentation/features/onboarding/onboarding.dart';
+import 'package:blog_app/presentation/features/profile/profile_screen.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
 import 'package:blog_app/presentation/features/splash/splash_screen.dart';
@@ -26,10 +28,14 @@ class CustomRouter {
         return SignupScreen.route();
       case ForgotPasswordScreen.routeName:
         return ForgotPasswordScreen.route();
-      case HomeScreen.routeName:
-        return HomeScreen.route();
-      case ExploreScreen.routeName:
-        return ExploreScreen.route();
+      case MainScreen.routeName:
+        return MainScreen.route();
+      // case HomeScreen.routeName:
+      //   return HomeScreen.route();
+      // case ExploreScreen.routeName:
+      //   return ExploreScreen.route();
+      // case ProfileScreen.routeName:
+      //   return ProfileScreen.route();
       default:
         return _errorRoute();
     }

@@ -31,19 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int _selectedIndex=0;
+  int _selectedIndex = 0;
 
-  double borderRadius=100.0;
+  double borderRadius = 100.0;
 
   PageController? _pageController;
 
-  int activePageIndex=0;
+  int activePageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        key: _scaffoldKey,
+        appBar: getAppBar(),
         // drawer: Drawer(
         //   child: SingleChildScrollView(
         //     physics: AlwaysScrollableScrollPhysics(),
@@ -61,10 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
         //     ),
         //   ),
         // ),
-        appBar: getAppBar(),
+
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
-          child:Column(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -72,36 +72,49 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 17.0),
                 child: Text(
                     'Thursday, May 12th',
-                    style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .subtitle2
+                        ?.copyWith(
                       color: Colors.grey,
                     )
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:17.0),
-                child: Text(Globals.S_GOOD_MORNING,style: Theme.of(context).textTheme.headline5?.copyWith(
+                padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                child: Text(Globals.S_GOOD_MORNING, style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline5
+                    ?.copyWith(
                   color: Colors.black,
                 )
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:20.0),
-                child: Text("Harsh",style: Theme.of(context).textTheme.headline5?.copyWith(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text("Harsh", style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline5
+                    ?.copyWith(
                   color: Colors.black,
                 )
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
-                child: Center(child: getTabBar())
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 4.0),
+                  child: Center(child: getTabBar())
               ),
               Container(
                 height: 560.0,
                 child: PageView(
                   controller: _pageController,
-                  onPageChanged: (int index){
+                  onPageChanged: (int index) {
                     setState(() {
-                      activePageIndex=index;
+                      activePageIndex = index;
                     });
                   },
                   children: [
@@ -124,41 +137,19 @@ class _HomeScreenState extends State<HomeScreen> {
         //     BottomNavigationBarItem(icon: Icon(Icons.person),label: "")
         //   ],
         // ),
-        bottomNavigationBar: Container(
-          height: 50.0,
-          alignment: Alignment.center,
-          child: Center(child: MyCustomBottomNavigationBar()),
-        ),
+
       ),
     );
   }
 
-  void _onItemTapped(int index){
+  void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex=index;
+      _selectedIndex = index;
     });
   }
 
 
-
-  AppBar getAppBar(){
-    return AppBar(
-      // leading: IconButton(
-      //   icon:Icon(Icons.menu,color: Colors.black,),
-      //   onPressed: (){
-      //     _scaffoldKey.currentState?.openDrawer();
-      //   },
-      // ),
-      automaticallyImplyLeading: false,
-      title: Text('Blogger',style: Theme.of(context).textTheme.headline5?.copyWith(
-        fontWeight: FontWeight.bold
-      ),),
-      centerTitle: true,
-    );
-  }
-
-
-  Widget getTabBar(){
+  Widget getTabBar() {
     return Container(
       width: 370.0,
       height: 40.0,
@@ -171,11 +162,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: InkWell(
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-              onTap:(){
+              onTap: () {
                 setState(() {
-                  activePageIndex=0;
+                  activePageIndex = 0;
                   _pageController?.animateToPage(0,
-                      duration: const Duration(milliseconds: 400), curve: Curves.decelerate);
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.decelerate);
                 });
               },
               child: AnimatedContainer(
@@ -183,12 +175,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(vertical: 2),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: (activePageIndex == 0) ?AppColors.primaryColor:AppColors.appGreyColor,
+                  color: (activePageIndex == 0)
+                      ? AppColors.primaryColor
+                      : AppColors.appGreyColor,
                   borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
                 ),
                 child: Text(
                   "For You",
-                  style: (activePageIndex == 0) ? TextStyle(color: Colors.white,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                  style: (activePageIndex == 0)
+                      ? TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)
+                      : TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -196,11 +194,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: InkWell(
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-              onTap: (){
+              onTap: () {
                 setState(() {
-                  activePageIndex=1;
+                  activePageIndex = 1;
                   _pageController?.animateToPage(1,
-                      duration: const Duration(milliseconds: 400), curve: Curves.decelerate);
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.decelerate);
                 });
               },
               child: AnimatedContainer(
@@ -208,12 +207,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(vertical: 2),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: (activePageIndex == 1) ?AppColors.primaryColor:AppColors.appGreyColor,
+                  color: (activePageIndex == 1)
+                      ? AppColors.primaryColor
+                      : AppColors.appGreyColor,
                   borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
                 ),
                 child: Text(
                   "Latest",
-                  style: (activePageIndex == 1) ? TextStyle(color: Colors.white, fontWeight: FontWeight.bold) : TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                  style: (activePageIndex == 1)
+                      ? TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)
+                      : TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -221,11 +226,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: InkWell(
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-              onTap: (){
+              onTap: () {
                 setState(() {
-                  activePageIndex=2;
+                  activePageIndex = 2;
                   _pageController?.animateToPage(2,
-                      duration: const Duration(milliseconds: 400), curve: Curves.decelerate);
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.decelerate);
                 });
               },
               child: AnimatedContainer(
@@ -233,12 +239,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(vertical: 2),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: (activePageIndex == 2) ?AppColors.primaryColor:AppColors.appGreyColor,
+                  color: (activePageIndex == 2)
+                      ? AppColors.primaryColor
+                      : AppColors.appGreyColor,
                   borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
                 ),
                 child: Text(
                   "Following",
-                  style: (activePageIndex == 2) ? TextStyle(color: Colors.white, fontWeight: FontWeight.bold) : TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                  style: (activePageIndex == 2)
+                      ? TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)
+                      : TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -249,27 +261,38 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  Widget getListView(){
+  Widget getListView() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ListView.builder(
         shrinkWrap: true,
         physics: AlwaysScrollableScrollPhysics(),
         itemCount: 100,
-        itemBuilder: (context,index){
+        itemBuilder: (context, index) {
           return BlogListItem();
         },
       ),
     );
   }
 
-
+  AppBar getAppBar() {
+    return AppBar(
+      // leading: IconButton(
+      //   icon:Icon(Icons.menu,color: Colors.black,),
+      //   onPressed: (){
+      //     _scaffoldKey.currentState?.openDrawer();
+      //   },
+      // ),
+      automaticallyImplyLeading: false,
+      title: Text('Blogger', style: Theme
+          .of(context)
+          .textTheme
+          .headline5
+          ?.copyWith(
+          fontWeight: FontWeight.bold
+      ),),
+      centerTitle: true,
+    );
+  }
 
 }
-
-
-
-
-
-
-
