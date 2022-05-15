@@ -31,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: null,
           centerTitle: true,
           title: Text("Account"),
         ),
@@ -41,15 +42,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:8.0),
+                    padding: const EdgeInsets.symmetric(horizontal:20.0),
                     child: Container(
                       alignment: Alignment.center,
-                      child: CircleAvatar(
-                        radius: 60.0,
-                        child: Icon(
-                          Icons.person,
-                          size: 80.0,
-                        ),
+                      child: Stack(
+                        children: const [
+                          CircleAvatar(
+                          radius: 40.0,
+                            // child: Icon(Icons.person_outline),
+                            backgroundImage: AssetImage("assets/robertdowney.jpg"),
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -103,7 +106,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.email),
-                          Text("harshchauhan5180@gmail.com",style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.normal),)
+                          SizedBox(
+                            width: 4.0,
+                          ),
+                          Text("harshchauhan5180@gmail.com",style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.normal,color: Colors.grey),)
                         ],
                       ),
                     )

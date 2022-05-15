@@ -1,3 +1,4 @@
+import 'package:blog_app/config/utils/shared_preferences.dart';
 import 'package:blog_app/data/datasources/local/local_storage_service.dart';
 import 'package:blog_app/data/datasources/remote/remote_data_source.dart';
 import 'package:blog_app/data/network/app_api.dart';
@@ -14,6 +15,8 @@ final instance = GetIt.instance;
 Future<void> initModule() async {
   instance.registerLazySingleton<NetworkInfoImpl>(
       () => NetworkInfoImpl(InternetConnectionChecker()));
+
+  instance.registerLazySingleton<SharedPreference>(() => SharedPreference());
 
   // dio factory
   instance.registerLazySingleton<DioFactory>(() => DioFactory());

@@ -1,4 +1,5 @@
 
+import 'package:blog_app/presentation/features/collection/collection_screen.dart';
 import 'package:blog_app/presentation/features/explore/explore_screen.dart';
 import 'package:blog_app/presentation/features/home/home_screen.dart';
 import 'package:blog_app/presentation/features/main_%20screen/main_screen_cubit.dart';
@@ -11,7 +12,6 @@ class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   static const String routeName = '/main';
-
 
   static Route route() {
     return MaterialPageRoute(
@@ -34,23 +34,48 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: IndexedStack(
-            index:2,
-            children: const [
-              HomeScreen(),
-              ExploreScreen(),
-              ProfileScreen()
-            ],
-          ),
-          bottomNavigationBar: Container(
-            height: 50.0,
+        resizeToAvoidBottomInset: true,
+          body: getBody(),
+          bottomSheet: Container(
+            height: 60.0,
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.white12,
+                  offset: Offset(
+                    10.0,
+                    10.0
+                  )
+                )
+              ]
+            ),
             alignment: Alignment.center,
-            child: Center(child: MyCustomBottomNavigationBar()),
+            child: Center(child: MyCustomBottomNavigationBar(
+              callback: (int index){
+                BlocProvider.of<MainScreenCubit>(context).bottomNavigation(index);
+              },
+            )),
           )
       ),
     );
   }
 
+
+  Widget getBody(){
+    return BlocConsumer<MainScreenCubit, MainScreenState>(builder: (context,state){
+      return IndexedStack(
+        index:state.bottomNavigationIndex,
+        children: const [
+          HomeScreen(),
+          ExploreScreen(),
+          CollectionScreen(),
+          ProfileScreen()
+        ],
+      );
+    }, listener:(context,state){
+      debugPrint(state.bottomNavigationIndex.toString());
+    });
+  }
 
 
 }

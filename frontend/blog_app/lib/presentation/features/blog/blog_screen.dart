@@ -1,3 +1,4 @@
+import 'package:blog_app/presentation/features/collection/collection_sheet.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -209,7 +210,11 @@ I hope this blog will provide you with sufficient information on Trying up the D
             ),
             IconButton(
               icon:Icon(Icons.bookmark_border),
-              onPressed: (){},
+              onPressed: (){
+                showModalBottomSheet(context: context, builder: (context){
+                  return CollectionSheet();
+                });
+              },
             ),
             IconButton(
               icon: Icon(Icons.headset),

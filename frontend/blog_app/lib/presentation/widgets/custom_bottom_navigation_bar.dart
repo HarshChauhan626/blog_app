@@ -1,9 +1,14 @@
 import 'package:blog_app/presentation/features/explore/explore_screen.dart';
+import 'package:blog_app/presentation/features/main_%20screen/main_screen_cubit.dart';
 import 'package:blog_app/presentation/features/profile/profile_screen.dart';
+import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyCustomBottomNavigationBar extends StatefulWidget {
+  Function callback;
+  MyCustomBottomNavigationBar({required this.callback});
   @override
   _MyCustomBottomNavigationBarState createState() =>
       _MyCustomBottomNavigationBarState();
@@ -26,7 +31,6 @@ class _MyCustomBottomNavigationBarState
   Animation<double>? _animation4;
 
   AnimationController? _controller5;
-  Animation<double>? _animation5;
 
   @override
   void initState() {
@@ -306,14 +310,15 @@ class _MyCustomBottomNavigationBarState
       //   ),
       // ),
       body: Padding(
-        padding: const EdgeInsets.all(0.0),
+        padding: const EdgeInsets.only(top:5.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(
               icon: Icon(
                 currentValue == 0?Icons.home:Icons.home_outlined,
-                color: currentValue == 0 ? Colors.orange : Colors.black38,
+                color: currentValue == 0 ? AppColors.primaryColor : Colors.black38,
                 size: _animation?.value,
               ),
               onPressed: () {
@@ -326,6 +331,7 @@ class _MyCustomBottomNavigationBarState
                   _controller5?.reverse();
                   HapticFeedback.lightImpact();
                 });
+                widget.callback(currentValue);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -333,7 +339,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 currentValue == 1 ?Icons.search:Icons.search_outlined,
-                color: currentValue == 1 ? Colors.orange : Colors.black38,
+                color: currentValue == 1 ? AppColors.primaryColor : Colors.black38,
                 size: _animation2?.value,
               ),
               onPressed: () {
@@ -346,7 +352,8 @@ class _MyCustomBottomNavigationBarState
                   _controller5?.reverse();
                   HapticFeedback.lightImpact();
                 });
-                Navigator.pushNamed(context, ExploreScreen.routeName);
+                widget.callback(currentValue);
+                // Navigator.pushNamed(context, ExploreScreen.routeName);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -354,7 +361,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 currentValue==2?Icons.bookmark:Icons.bookmark_border,
-                color: currentValue == 2 ? Colors.orange : Colors.black38,
+                color: currentValue == 2 ? AppColors.primaryColor : Colors.black38,
                 size: _animation3?.value,
               ),
               onPressed: () {
@@ -367,6 +374,7 @@ class _MyCustomBottomNavigationBarState
                   _controller5?.reverse();
                   HapticFeedback.lightImpact();
                 });
+                widget.callback(currentValue);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -374,7 +382,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 currentValue==3?Icons.person:Icons.person_outline,
-                color: currentValue == 3 ? Colors.orange : Colors.black38,
+                color: currentValue == 3 ? AppColors.primaryColor : Colors.black38,
                 size: _animation4?.value,
               ),
               onPressed: () {
@@ -387,7 +395,8 @@ class _MyCustomBottomNavigationBarState
                   _controller5?.reverse();
                   HapticFeedback.lightImpact();
                 });
-                Navigator.pushNamed(context, ProfileScreen.routeName);
+                widget.callback(currentValue);
+                // Navigator.pushNamed(context, ProfileScreen.routeName);
               },
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
