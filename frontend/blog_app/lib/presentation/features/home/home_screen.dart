@@ -61,120 +61,120 @@ class _HomeScreenState extends State<HomeScreen> {
         //     ),
         //   ),
         // ),
-        body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left:20.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Stack(
-                        children: const [
-                          CircleAvatar(
-                            radius: 25.0,
-                            // child: Icon(Icons.person_outline),
-                            backgroundImage: AssetImage("assets/robertdowney.jpg"),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left:20.0,bottom: 3.0,top: 4.0),
-                          child: Text(
-                              "${Globals.S_GOOD_MORNING}",
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .subtitle2
-                                  ?.copyWith(
-                                color: Colors.grey,
-                              )
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left:20.0,bottom:10.0),
-                          child: Text("Harsh Chauhan", style: Theme
-                              .of(context)
-                              .textTheme
-                              .headline5
-                              ?.copyWith(
-                            color: Colors.black,
-                          )
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(right:20.0),
-                    child: Container(
-                      height: 30.0,
-                      width: 30.0,
-                      decoration: BoxDecoration(
-                        color: AppColors.appGreyColor,
-                        borderRadius: BorderRadius.circular(10.0)
-                      ),
-                      child: Icon(Icons.notifications_none),
-                    ),
-                  )
-                ],
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20.0,bottom: 10.0),
-              //   child: Text("Harsh", style: Theme
-              //       .of(context)
-              //       .textTheme
-              //       .headline5
-              //       ?.copyWith(
-              //     color: Colors.black,
-              //   )
-              //   ),
-              // ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 4.0),
-                  child: Center(child: getTabBar())
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top:8.0),
-                child: Container(
-                  height: 560.0,
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (int index) {
-                      setState(() {
-                        activePageIndex = index;
-                      });
-                    },
-                    children: [
-                      getListView(),
-                      getListView(),
-                      getListView()
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+        // body: SingleChildScrollView(
+        //   physics: AlwaysScrollableScrollPhysics(),
+        //   child: Column(
+        //     mainAxisSize: MainAxisSize.min,
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       SizedBox(
+        //         height: 20.0,
+        //       ),
+        //       Row(
+        //         children: [
+        //           Padding(
+        //             padding: const EdgeInsets.only(left:20.0),
+        //             child: Container(
+        //               alignment: Alignment.center,
+        //               child: Stack(
+        //                 children: const [
+        //                   CircleAvatar(
+        //                     radius: 25.0,
+        //                     // child: Icon(Icons.person_outline),
+        //                     backgroundImage: AssetImage("assets/robertdowney.jpg"),
+        //                   )
+        //                 ],
+        //               ),
+        //             ),
+        //           ),
+        //           Container(
+        //             alignment: Alignment.centerLeft,
+        //             child: Column(
+        //               crossAxisAlignment: CrossAxisAlignment.start,
+        //               children: [
+        //                 Padding(
+        //                   padding: const EdgeInsets.only(left:20.0,bottom: 3.0,top: 4.0),
+        //                   child: Text(
+        //                       "${Globals.S_GOOD_MORNING}",
+        //                       style: Theme
+        //                           .of(context)
+        //                           .textTheme
+        //                           .subtitle2
+        //                           ?.copyWith(
+        //                         color: Colors.grey,
+        //                       )
+        //                   ),
+        //                 ),
+        //                 Padding(
+        //                   padding: const EdgeInsets.only(left:20.0,bottom:10.0),
+        //                   child: Text("Harsh Chauhan", style: Theme
+        //                       .of(context)
+        //                       .textTheme
+        //                       .headline5
+        //                       ?.copyWith(
+        //                     color: Colors.black,
+        //                   )
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //           Spacer(),
+        //           Padding(
+        //             padding: const EdgeInsets.only(right:20.0),
+        //             child: Container(
+        //               height: 30.0,
+        //               width: 30.0,
+        //               decoration: BoxDecoration(
+        //                 color: AppColors.appGreyColor,
+        //                 borderRadius: BorderRadius.circular(10.0)
+        //               ),
+        //               child: Icon(Icons.notifications_none),
+        //             ),
+        //           )
+        //         ],
+        //       ),
+        //       // Padding(
+        //       //   padding: const EdgeInsets.only(left: 20.0,bottom: 10.0),
+        //       //   child: Text("Harsh", style: Theme
+        //       //       .of(context)
+        //       //       .textTheme
+        //       //       .headline5
+        //       //       ?.copyWith(
+        //       //     color: Colors.black,
+        //       //   )
+        //       //   ),
+        //       // ),
+        //       SizedBox(
+        //         height: 20.0,
+        //       ),
+        //       Padding(
+        //           padding: const EdgeInsets.symmetric(
+        //               horizontal: 8.0, vertical: 4.0),
+        //           child: Center(child: getTabBar())
+        //       ),
+        //       Padding(
+        //         padding: const EdgeInsets.only(top:8.0),
+        //         child: Container(
+        //           height: 560.0,
+        //           child: PageView(
+        //             controller: _pageController,
+        //             onPageChanged: (int index) {
+        //               setState(() {
+        //                 activePageIndex = index;
+        //               });
+        //             },
+        //             children: [
+        //               getListView(),
+        //               getListView(),
+        //               getListView()
+        //             ],
+        //           ),
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
         // bottomNavigationBar: BottomNavigationBar(
         //   landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
         //   currentIndex: _selectedIndex, //New
@@ -185,6 +185,123 @@ class _HomeScreenState extends State<HomeScreen> {
         //     BottomNavigationBarItem(icon: Icon(Icons.person),label: "")
         //   ],
         // ),
+        body: Padding(
+          padding: const EdgeInsets.only(bottom:50.0),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                expandedHeight: 180.0,
+                backgroundColor: Colors.white,
+                iconTheme: IconThemeData(color: Colors.white),
+                floating: true,
+                pinned: true,
+                bottom: PreferredSize(
+                  preferredSize:  Size.fromHeight(60.0),
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 4.0),
+                      child: Container(
+                          color: Colors.white,
+                          child: Center(child: getTabBar())
+                      )
+                  ),
+                ),
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  centerTitle: true,
+                  background: Column(
+                    children: [
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left:20.0),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Stack(
+                                children: const [
+                                  CircleAvatar(
+                                    radius: 25.0,
+                                    // child: Icon(Icons.person_outline),
+                                    backgroundImage: AssetImage("assets/robertdowney.jpg"),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left:20.0,bottom: 3.0,top: 4.0),
+                                  child: Text(
+                                      "${Globals.S_GOOD_MORNING}",
+                                      style: Theme
+                                          .of(context)
+                                          .textTheme
+                                          .subtitle2
+                                          ?.copyWith(
+                                        color: Colors.grey,
+                                      )
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left:20.0,bottom:10.0),
+                                  child: Text("Harsh Chauhan", style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline5
+                                      ?.copyWith(
+                                    color: Colors.black,
+                                  )
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right:20.0,bottom: 5.0),
+                            child: Container(
+                              height: 40.0,
+                              width: 40.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(
+                                  color: Colors.black26
+                                )
+                              ),
+                              child: Icon(Icons.notifications_none),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                        (context,index){
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal:10.0),
+                        child: BlogListItem(),
+                      );
+                    },
+                  childCount:30,
+                ),
+              ),
+              // SizedBox(
+              //   height: 40.0,
+              // )
+            ],
+          ),
+        ),
 
       ),
     );
@@ -313,16 +430,17 @@ class _HomeScreenState extends State<HomeScreen> {
       //   ],
       // ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          getTabWidget(0,'For you', context),
+          getTabWidget(0,'Daily read', context),
           SizedBox(
             width: 25,
           ),
-          getTabWidget(1, "Recent Search",context),
+          getTabWidget(1, "Following",context),
           SizedBox(
             width: 25,
           ),
-          getTabWidget(1, "Latest",context),
+          getTabWidget(1, "Trending",context),
         ],
       ),
     );
