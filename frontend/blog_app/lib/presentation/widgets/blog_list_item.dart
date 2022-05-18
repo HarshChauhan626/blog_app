@@ -1,6 +1,8 @@
+import 'package:blog_app/config/utils/util_functions.dart';
 import 'package:blog_app/presentation/features/blog/blog_screen.dart';
 import 'package:blog_app/presentation/features/collection/collection_sheet.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 
 class BlogListItem extends StatelessWidget {
@@ -68,7 +70,7 @@ class BlogListItem extends StatelessWidget {
                         Container(
                           width: 260.0,
                           child: Text(
-                            "If you can't motivate yourselfdfasd to accomplish.",
+                            "${Faker().lorem.sentence().toString()}",
                             style: Theme
                                 .of(context)
                                 .textTheme
@@ -145,7 +147,8 @@ class BlogListItem extends StatelessWidget {
                             color: Colors.red,
                             borderRadius: BorderRadius.all(Radius.circular(20.0)),
                             image: DecorationImage(
-                                image: AssetImage("assets/car_pic.jpg"),
+                                // image: AssetImage("assets/car_pic.jpg"),
+                              image: NetworkImage("https://picsum.photos/id/${getRandomImageId()}/200/300"),
                                 fit: BoxFit.cover
                             )
                         ),

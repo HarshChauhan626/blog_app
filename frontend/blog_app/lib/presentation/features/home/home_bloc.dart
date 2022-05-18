@@ -8,7 +8,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialState()) {
     on<HomeEvent>((event, emit) {
       // TODO: implement event handler
-     emit(HomeLoadedState());
+      if(event is HomeTabChanged){
+        emit(HomeLoadedState(activePageIndex:event.tabIndex));
+      }
     });
   }
 }

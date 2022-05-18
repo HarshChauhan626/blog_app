@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
@@ -19,6 +21,19 @@ Future<void> showAlertDialog(context,{required String content}){
       ]
     );
   });
+}
+
+
+int getRandomImageId(){
+  int randomNumber=random(1010, 1080);
+  if(randomNumber.toString()[3]=="0"){
+    return int.parse(randomNumber.toString().substring(0,2));
+  }
+  return randomNumber;
+}
+
+int random(min, max) {
+  return min + Random().nextInt(max - min);
 }
 
 

@@ -3,6 +3,7 @@ import 'package:blog_app/presentation/features/home/home_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
 import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart';
+import 'package:blog_app/presentation/widgets/custom_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -185,8 +186,9 @@ class _HomeScreenState extends State<HomeScreen> {
         //     BottomNavigationBarItem(icon: Icon(Icons.person),label: "")
         //   ],
         // ),
+
         body: Padding(
-          padding: const EdgeInsets.only(bottom:50.0),
+          padding: const EdgeInsets.only(bottom:70.0),
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -195,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 iconTheme: IconThemeData(color: Colors.white),
                 floating: true,
                 pinned: true,
+                automaticallyImplyLeading: false,
                 bottom: PreferredSize(
                   preferredSize:  Size.fromHeight(60.0),
                   child: Padding(
@@ -202,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           horizontal: 8.0, vertical: 4.0),
                       child: Container(
                           color: Colors.white,
-                          child: Center(child: getTabBar())
+                          child: Center(child: CustomTabBar())
                       )
                   ),
                 ),
@@ -225,7 +228,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   CircleAvatar(
                                     radius: 25.0,
                                     // child: Icon(Icons.person_outline),
-                                    backgroundImage: AssetImage("assets/robertdowney.jpg"),
+                                    // backgroundImage: AssetImage("assets/robertdowney.jpg"),
+                                    backgroundImage: NetworkImage(
+                                      "https://picsum.photos/200/300"
+                                    ),
                                   )
                                 ],
                               ),
@@ -314,138 +320,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  Widget getTabBar() {
-    return Container(
-      width: 370.0,
-      height: 40.0,
-      // decoration: BoxDecoration(
-      //   color: AppColors.appGreyColor,
-      //   borderRadius: BorderRadius.all(Radius.circular(100)),
-      // ),
-      // // child: Row(
-      // //   children: <Widget>[
-      // //     Expanded(
-      // //       child: InkWell(
-      // //         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      // //         onTap: () {
-      // //           setState(() {
-      // //             activePageIndex = 0;
-      // //             _pageController?.animateToPage(0,
-      // //                 duration: const Duration(milliseconds: 400),
-      // //                 curve: Curves.decelerate);
-      // //           });
-      // //         },
-      // //         child: AnimatedContainer(
-      // //           duration: Duration(milliseconds: 400),
-      // //           padding: EdgeInsets.symmetric(vertical: 2),
-      // //           alignment: Alignment.center,
-      // //           decoration: BoxDecoration(
-      // //             color: (activePageIndex == 0)
-      // //                 ? AppColors.primaryColor
-      // //                 : AppColors.appGreyColor,
-      // //             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      // //           ),
-      // //           child: Text(
-      // //             "For You",
-      // //             style: (activePageIndex == 0)
-      // //                 ? TextStyle(
-      // //                 color: Colors.white, fontWeight: FontWeight.bold)
-      // //                 : TextStyle(
-      // //                 color: Colors.black, fontWeight: FontWeight.bold),
-      // //           ),
-      // //         ),
-      // //       ),
-      // //     ),
-      // //     Expanded(
-      // //       child: InkWell(
-      // //         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      // //         onTap: () {
-      // //           setState(() {
-      // //             activePageIndex = 1;
-      // //             _pageController?.animateToPage(1,
-      // //                 duration: const Duration(milliseconds: 400),
-      // //                 curve: Curves.decelerate);
-      // //           });
-      // //         },
-      // //         child: AnimatedContainer(
-      // //           duration: Duration(milliseconds: 400),
-      // //           padding: EdgeInsets.symmetric(vertical: 2),
-      // //           alignment: Alignment.center,
-      // //           decoration: BoxDecoration(
-      // //             color: (activePageIndex == 1)
-      // //                 ? AppColors.primaryColor
-      // //                 : AppColors.appGreyColor,
-      // //             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      // //           ),
-      // //           child: Text(
-      // //             "Latest",
-      // //             style: (activePageIndex == 1)
-      // //                 ? TextStyle(
-      // //                 color: Colors.white, fontWeight: FontWeight.bold)
-      // //                 : TextStyle(
-      // //                 color: Colors.black, fontWeight: FontWeight.bold),
-      // //           ),
-      // //         ),
-      // //       ),
-      // //     ),
-      // //     Expanded(
-      // //       child: InkWell(
-      // //         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      // //         onTap: () {
-      // //           setState(() {
-      // //             activePageIndex = 2;
-      // //             _pageController?.animateToPage(2,
-      // //                 duration: const Duration(milliseconds: 400),
-      // //                 curve: Curves.decelerate);
-      // //           });
-      // //         },
-      // //         child: AnimatedContainer(
-      // //           duration: Duration(milliseconds: 400),
-      // //           padding: EdgeInsets.symmetric(vertical: 2),
-      // //           alignment: Alignment.center,
-      // //           decoration: BoxDecoration(
-      // //             color: (activePageIndex == 2)
-      // //                 ? AppColors.primaryColor
-      // //                 : AppColors.appGreyColor,
-      // //             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      // //           ),
-      // //           child: Text(
-      // //             "Following",
-      // //             style: (activePageIndex == 2)
-      // //                 ? TextStyle(
-      // //                 color: Colors.white, fontWeight: FontWeight.bold)
-      // //                 : TextStyle(
-      // //                 color: Colors.black, fontWeight: FontWeight.bold),
-      // //           ),
-      // //         ),
-      // //       ),
-      // //     ),
-      // //   ],
-      // // ),
-      // child: Row(
-      //   children: [
-      //     Container(
-      //
-      //     )
-      //   ],
-      // ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          getTabWidget(0,'Daily read', context),
-          SizedBox(
-            width: 25,
-          ),
-          getTabWidget(1, "Following",context),
-          SizedBox(
-            width: 25,
-          ),
-          getTabWidget(1, "Trending",context),
-        ],
-      ),
-    );
-  }
-
 
   Widget getListView() {
     return Padding(
@@ -483,39 +357,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  Widget getTabWidget(int index,String title, BuildContext context) {
-    return InkWell(
-      onTap: () {
-        print('On tap clicked');
-        // BlocProvider.of<HomeBloc>(context).tabChanged(index);
-      },
-      // child: BlocBuilder<WeatherInfoCubit,WeatherInfoState>(
-      //     builder:(context,state){
-      //       int selectedIndex=state.selectedIndex??0;
-      //       print(state.selectedIndex);
-      //       ;
-      //     }
-      // ),
-      child: Container(
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title,
-            style: Theme.of(context).textTheme.headline6),
-        AnimatedContainer(
-            duration: Duration(milliseconds: 400),
-            height: index == activePageIndex ? 5 : 0,
-            width: index == activePageIndex ? 20 : 0,
-            decoration: BoxDecoration(
-                color: index == activePageIndex
-                    ? AppColors.primaryColor
-                    : Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(10))))
-      ],
-    ),
-    )
-    );
-  }
 
 }
 

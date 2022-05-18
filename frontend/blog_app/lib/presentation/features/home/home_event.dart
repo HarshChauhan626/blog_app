@@ -14,4 +14,12 @@ class HomeLoadEvent extends HomeEvent {
   String toString() => 'Home is Loaded';
 }
 
+@immutable
+class HomeTabChanged extends HomeEvent{
+  int tabIndex;
+  HomeTabChanged(this.tabIndex);
+}
+
+
+
 

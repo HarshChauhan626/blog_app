@@ -19,7 +19,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
           leading: null,
           automaticallyImplyLeading: false,
           title: Text("Collection"),
-          centerTitle: true,
+          centerTitle: false,
+          elevation: 2.0,
         ),
         body: ListView.builder(
           padding: const EdgeInsets.only(bottom:60.0),

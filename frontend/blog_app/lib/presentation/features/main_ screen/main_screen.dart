@@ -1,10 +1,12 @@
 
 import 'package:blog_app/presentation/features/collection/collection_screen.dart';
 import 'package:blog_app/presentation/features/explore/explore_screen.dart';
+import 'package:blog_app/presentation/features/home/home_bloc.dart';
 import 'package:blog_app/presentation/features/home/home_screen.dart';
 import 'package:blog_app/presentation/features/main_%20screen/main_screen_cubit.dart';
 import 'package:blog_app/presentation/features/profile/profile_screen.dart';
 import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart';
+import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,12 +18,16 @@ class MainScreen extends StatefulWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => BlocProvider<MainScreenCubit>(
-        create: (context) => MainScreenCubit(
-
-        ),
-        child: MainScreen(),
-      ),
+      // builder: (_) => BlocProvider<MainScreenCubit>(
+      //   create: (context) => MainScreenCubit(
+      //
+      //   ),
+      //   child: MainScreen(),
+      // ),
+        builder: (_) =>MultiBlocProvider(providers: [
+            BlocProvider(create: (context)=>MainScreenCubit()),
+            BlocProvider(create: (context)=>HomeBloc()),
+        ], child: MainScreen())
     );
   }
 
@@ -37,20 +43,28 @@ class _MainScreenState extends State<MainScreen> {
         resizeToAvoidBottomInset: true,
           body: getBody(),
           bottomSheet: Container(
-            height: 60.0,
+            height: 70.0,
             decoration: BoxDecoration(
+              color: Colors.white,
               boxShadow: const [
                 BoxShadow(
-                  color: Colors.white12,
+                  color: Colors.black,
                   offset: Offset(
                     10.0,
-                    10.0
+                    0.0
                   )
-                )
+                ),
+                BoxShadow(
+                    color: Colors.white12,
+                    offset: Offset(
+                        10.0,
+                        10.0
+                    )
+                ),
               ]
             ),
             alignment: Alignment.center,
-            child: Center(child: MyCustomBottomNavigationBar(
+            child: Center(child: BottomNavbar(
               callback: (int index){
                 BlocProvider.of<MainScreenCubit>(context).bottomNavigation(index);
               },

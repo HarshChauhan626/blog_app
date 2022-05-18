@@ -90,227 +90,344 @@ class _MyCustomBottomNavigationBarState
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      // backgroundColor: Colors.amber,
-      // body: Stack(
-      //   children: [
-      //     // HOME PAGE
-      //     // SizedBox(
-      //     //   height: size.height,
-      //     //   width: size.width,
-      //     //   child: null,
-      //     // ),
-      //
-      //     Positioned(
-      //       bottom: 0,
-      //       right: 0,
-      //       left: 0,
-      //       child: Container(
-      //         height: size.width * .10,
-      //         width: size.width,
-      //         // margin: EdgeInsets.all(size.width * .04),
-      //         decoration: BoxDecoration(
-      //           color: Colors.green,
-      //           borderRadius: BorderRadius.all(
-      //             Radius.circular(30),
-      //           ),
-      //         ),
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //             children: [
-      //               IconButton(
-      //                 icon: Icon(
-      //                   Icons.home,
-      //                   color: currentValue == 0 ? Colors.orange : Colors.black38,
-      //                   size: _animation?.value,
-      //                 ),
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     currentValue = 0;
-      //                     _controller?.forward();
-      //                     _controller2?.reverse();
-      //                     _controller3?.reverse();
-      //                     _controller4?.reverse();
-      //                     _controller5?.reverse();
-      //                     HapticFeedback.lightImpact();
-      //                   });
-      //                 },
-      //                 splashColor: Colors.transparent,
-      //                 highlightColor: Colors.transparent,
-      //               ),
-      //               IconButton(
-      //                 icon: Icon(
-      //                   Icons.person_rounded,
-      //                   color: currentValue == 1 ? Colors.orange : Colors.black38,
-      //                   size: _animation2?.value,
-      //                 ),
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     currentValue = 1;
-      //                     _controller2?.forward();
-      //                     _controller?.reverse();
-      //                     _controller3?.reverse();
-      //                     _controller4?.reverse();
-      //                     _controller5?.reverse();
-      //                     HapticFeedback.lightImpact();
-      //                   });
-      //                 },
-      //                 splashColor: Colors.transparent,
-      //                 highlightColor: Colors.transparent,
-      //               ),
-      //               IconButton(
-      //                 icon: Icon(
-      //                   Icons.add_box_rounded,
-      //                   color: currentValue == 2 ? Colors.orange : Colors.black38,
-      //                   size: _animation3?.value,
-      //                 ),
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     currentValue = 2;
-      //                     _controller3?.forward();
-      //                     _controller?.reverse();
-      //                     _controller2?.reverse();
-      //                     _controller4?.reverse();
-      //                     _controller5?.reverse();
-      //                     HapticFeedback.lightImpact();
-      //                   });
-      //                 },
-      //                 splashColor: Colors.transparent,
-      //                 highlightColor: Colors.transparent,
-      //               ),
-      //               IconButton(
-      //                 icon: Icon(
-      //                   Icons.favorite_rounded,
-      //                   color: currentValue == 3 ? Colors.orange : Colors.black38,
-      //                   size: _animation4?.value,
-      //                 ),
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     currentValue = 3;
-      //                     _controller4?.forward();
-      //                     _controller?.reverse();
-      //                     _controller2?.reverse();
-      //                     _controller3?.reverse();
-      //                     _controller5?.reverse();
-      //                     HapticFeedback.lightImpact();
-      //                   });
-      //                 },
-      //                 splashColor: Colors.transparent,
-      //                 highlightColor: Colors.transparent,
-      //               )
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      // body:Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      //   child: Container(
-      //     height: size.width * .10,
-      //     width: size.width,
-      //     // margin: EdgeInsets.all(size.width * .04),
-      //     decoration: BoxDecoration(
-      //       color: Colors.green,
-      //       borderRadius: BorderRadius.all(
-      //         Radius.circular(30),
-      //       ),
-      //     ),
-      //     child: Padding(
-      //       padding: const EdgeInsets.all(0.0),
-      //       child: Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //         children: [
-      //           IconButton(
-      //             icon: Icon(
-      //               Icons.home,
-      //               color: currentValue == 0 ? Colors.orange : Colors.black38,
-      //               size: _animation?.value,
-      //             ),
-      //             onPressed: () {
-      //               setState(() {
-      //                 currentValue = 0;
-      //                 _controller?.forward();
-      //                 _controller2?.reverse();
-      //                 _controller3?.reverse();
-      //                 _controller4?.reverse();
-      //                 _controller5?.reverse();
-      //                 HapticFeedback.lightImpact();
-      //               });
-      //             },
-      //             splashColor: Colors.transparent,
-      //             highlightColor: Colors.transparent,
-      //           ),
-      //           IconButton(
-      //             icon: Icon(
-      //               Icons.person_rounded,
-      //               color: currentValue == 1 ? Colors.orange : Colors.black38,
-      //               size: _animation2?.value,
-      //             ),
-      //             onPressed: () {
-      //               setState(() {
-      //                 currentValue = 1;
-      //                 _controller2?.forward();
-      //                 _controller?.reverse();
-      //                 _controller3?.reverse();
-      //                 _controller4?.reverse();
-      //                 _controller5?.reverse();
-      //                 HapticFeedback.lightImpact();
-      //               });
-      //             },
-      //             splashColor: Colors.transparent,
-      //             highlightColor: Colors.transparent,
-      //           ),
-      //           IconButton(
-      //             icon: Icon(
-      //               Icons.add_box_rounded,
-      //               color: currentValue == 2 ? Colors.orange : Colors.black38,
-      //               size: _animation3?.value,
-      //             ),
-      //             onPressed: () {
-      //               setState(() {
-      //                 currentValue = 2;
-      //                 _controller3?.forward();
-      //                 _controller?.reverse();
-      //                 _controller2?.reverse();
-      //                 _controller4?.reverse();
-      //                 _controller5?.reverse();
-      //                 HapticFeedback.lightImpact();
-      //               });
-      //             },
-      //             splashColor: Colors.transparent,
-      //             highlightColor: Colors.transparent,
-      //           ),
-      //           IconButton(
-      //             icon: Icon(
-      //               Icons.favorite_rounded,
-      //               color: currentValue == 3 ? Colors.orange : Colors.black38,
-      //               size: _animation4?.value,
-      //             ),
-      //             onPressed: () {
-      //               setState(() {
-      //                 currentValue = 3;
-      //                 _controller4?.forward();
-      //                 _controller?.reverse();
-      //                 _controller2?.reverse();
-      //                 _controller3?.reverse();
-      //                 _controller5?.reverse();
-      //                 HapticFeedback.lightImpact();
-      //               });
-      //             },
-      //             splashColor: Colors.transparent,
-      //             highlightColor: Colors.transparent,
-      //           )
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      body: Padding(
-        padding: const EdgeInsets.only(top:5.0),
+    // return Scaffold(
+    //   // backgroundColor: Colors.amber,
+    //   // body: Stack(
+    //   //   children: [
+    //   //     // HOME PAGE
+    //   //     // SizedBox(
+    //   //     //   height: size.height,
+    //   //     //   width: size.width,
+    //   //     //   child: null,
+    //   //     // ),
+    //   //
+    //   //     Positioned(
+    //   //       bottom: 0,
+    //   //       right: 0,
+    //   //       left: 0,
+    //   //       child: Container(
+    //   //         height: size.width * .10,
+    //   //         width: size.width,
+    //   //         // margin: EdgeInsets.all(size.width * .04),
+    //   //         decoration: BoxDecoration(
+    //   //           color: Colors.green,
+    //   //           borderRadius: BorderRadius.all(
+    //   //             Radius.circular(30),
+    //   //           ),
+    //   //         ),
+    //   //         child: Padding(
+    //   //           padding: const EdgeInsets.all(8.0),
+    //   //           child: Row(
+    //   //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //   //             children: [
+    //   //               IconButton(
+    //   //                 icon: Icon(
+    //   //                   Icons.home,
+    //   //                   color: currentValue == 0 ? Colors.orange : Colors.black38,
+    //   //                   size: _animation?.value,
+    //   //                 ),
+    //   //                 onPressed: () {
+    //   //                   setState(() {
+    //   //                     currentValue = 0;
+    //   //                     _controller?.forward();
+    //   //                     _controller2?.reverse();
+    //   //                     _controller3?.reverse();
+    //   //                     _controller4?.reverse();
+    //   //                     _controller5?.reverse();
+    //   //                     HapticFeedback.lightImpact();
+    //   //                   });
+    //   //                 },
+    //   //                 splashColor: Colors.transparent,
+    //   //                 highlightColor: Colors.transparent,
+    //   //               ),
+    //   //               IconButton(
+    //   //                 icon: Icon(
+    //   //                   Icons.person_rounded,
+    //   //                   color: currentValue == 1 ? Colors.orange : Colors.black38,
+    //   //                   size: _animation2?.value,
+    //   //                 ),
+    //   //                 onPressed: () {
+    //   //                   setState(() {
+    //   //                     currentValue = 1;
+    //   //                     _controller2?.forward();
+    //   //                     _controller?.reverse();
+    //   //                     _controller3?.reverse();
+    //   //                     _controller4?.reverse();
+    //   //                     _controller5?.reverse();
+    //   //                     HapticFeedback.lightImpact();
+    //   //                   });
+    //   //                 },
+    //   //                 splashColor: Colors.transparent,
+    //   //                 highlightColor: Colors.transparent,
+    //   //               ),
+    //   //               IconButton(
+    //   //                 icon: Icon(
+    //   //                   Icons.add_box_rounded,
+    //   //                   color: currentValue == 2 ? Colors.orange : Colors.black38,
+    //   //                   size: _animation3?.value,
+    //   //                 ),
+    //   //                 onPressed: () {
+    //   //                   setState(() {
+    //   //                     currentValue = 2;
+    //   //                     _controller3?.forward();
+    //   //                     _controller?.reverse();
+    //   //                     _controller2?.reverse();
+    //   //                     _controller4?.reverse();
+    //   //                     _controller5?.reverse();
+    //   //                     HapticFeedback.lightImpact();
+    //   //                   });
+    //   //                 },
+    //   //                 splashColor: Colors.transparent,
+    //   //                 highlightColor: Colors.transparent,
+    //   //               ),
+    //   //               IconButton(
+    //   //                 icon: Icon(
+    //   //                   Icons.favorite_rounded,
+    //   //                   color: currentValue == 3 ? Colors.orange : Colors.black38,
+    //   //                   size: _animation4?.value,
+    //   //                 ),
+    //   //                 onPressed: () {
+    //   //                   setState(() {
+    //   //                     currentValue = 3;
+    //   //                     _controller4?.forward();
+    //   //                     _controller?.reverse();
+    //   //                     _controller2?.reverse();
+    //   //                     _controller3?.reverse();
+    //   //                     _controller5?.reverse();
+    //   //                     HapticFeedback.lightImpact();
+    //   //                   });
+    //   //                 },
+    //   //                 splashColor: Colors.transparent,
+    //   //                 highlightColor: Colors.transparent,
+    //   //               )
+    //   //             ],
+    //   //           ),
+    //   //         ),
+    //   //       ),
+    //   //     ),
+    //   //   ],
+    //   // ),
+    //   // body:Padding(
+    //   //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //   //   child: Container(
+    //   //     height: size.width * .10,
+    //   //     width: size.width,
+    //   //     // margin: EdgeInsets.all(size.width * .04),
+    //   //     decoration: BoxDecoration(
+    //   //       color: Colors.green,
+    //   //       borderRadius: BorderRadius.all(
+    //   //         Radius.circular(30),
+    //   //       ),
+    //   //     ),
+    //   //     child: Padding(
+    //   //       padding: const EdgeInsets.all(0.0),
+    //   //       child: Row(
+    //   //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //   //         children: [
+    //   //           IconButton(
+    //   //             icon: Icon(
+    //   //               Icons.home,
+    //   //               color: currentValue == 0 ? Colors.orange : Colors.black38,
+    //   //               size: _animation?.value,
+    //   //             ),
+    //   //             onPressed: () {
+    //   //               setState(() {
+    //   //                 currentValue = 0;
+    //   //                 _controller?.forward();
+    //   //                 _controller2?.reverse();
+    //   //                 _controller3?.reverse();
+    //   //                 _controller4?.reverse();
+    //   //                 _controller5?.reverse();
+    //   //                 HapticFeedback.lightImpact();
+    //   //               });
+    //   //             },
+    //   //             splashColor: Colors.transparent,
+    //   //             highlightColor: Colors.transparent,
+    //   //           ),
+    //   //           IconButton(
+    //   //             icon: Icon(
+    //   //               Icons.person_rounded,
+    //   //               color: currentValue == 1 ? Colors.orange : Colors.black38,
+    //   //               size: _animation2?.value,
+    //   //             ),
+    //   //             onPressed: () {
+    //   //               setState(() {
+    //   //                 currentValue = 1;
+    //   //                 _controller2?.forward();
+    //   //                 _controller?.reverse();
+    //   //                 _controller3?.reverse();
+    //   //                 _controller4?.reverse();
+    //   //                 _controller5?.reverse();
+    //   //                 HapticFeedback.lightImpact();
+    //   //               });
+    //   //             },
+    //   //             splashColor: Colors.transparent,
+    //   //             highlightColor: Colors.transparent,
+    //   //           ),
+    //   //           IconButton(
+    //   //             icon: Icon(
+    //   //               Icons.add_box_rounded,
+    //   //               color: currentValue == 2 ? Colors.orange : Colors.black38,
+    //   //               size: _animation3?.value,
+    //   //             ),
+    //   //             onPressed: () {
+    //   //               setState(() {
+    //   //                 currentValue = 2;
+    //   //                 _controller3?.forward();
+    //   //                 _controller?.reverse();
+    //   //                 _controller2?.reverse();
+    //   //                 _controller4?.reverse();
+    //   //                 _controller5?.reverse();
+    //   //                 HapticFeedback.lightImpact();
+    //   //               });
+    //   //             },
+    //   //             splashColor: Colors.transparent,
+    //   //             highlightColor: Colors.transparent,
+    //   //           ),
+    //   //           IconButton(
+    //   //             icon: Icon(
+    //   //               Icons.favorite_rounded,
+    //   //               color: currentValue == 3 ? Colors.orange : Colors.black38,
+    //   //               size: _animation4?.value,
+    //   //             ),
+    //   //             onPressed: () {
+    //   //               setState(() {
+    //   //                 currentValue = 3;
+    //   //                 _controller4?.forward();
+    //   //                 _controller?.reverse();
+    //   //                 _controller2?.reverse();
+    //   //                 _controller3?.reverse();
+    //   //                 _controller5?.reverse();
+    //   //                 HapticFeedback.lightImpact();
+    //   //               });
+    //   //             },
+    //   //             splashColor: Colors.transparent,
+    //   //             highlightColor: Colors.transparent,
+    //   //           )
+    //   //         ],
+    //   //       ),
+    //   //     ),
+    //   //   ),
+    //   // ),
+    //   // backgroundColor: C,
+    //   body: Padding(
+    //     padding: const EdgeInsets.only(top:5.0),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: [
+    //         IconButton(
+    //           icon: Icon(
+    //             currentValue == 0?Icons.home:Icons.home_outlined,
+    //             color: currentValue == 0 ? AppColors.primaryColor : Colors.black38,
+    //             size: _animation?.value,
+    //           ),
+    //           onPressed: () {
+    //             setState(() {
+    //               currentValue = 0;
+    //               _controller?.forward();
+    //               _controller2?.reverse();
+    //               _controller3?.reverse();
+    //               _controller4?.reverse();
+    //               _controller5?.reverse();
+    //               HapticFeedback.lightImpact();
+    //             });
+    //             widget.callback(currentValue);
+    //           },
+    //           splashColor: Colors.transparent,
+    //           highlightColor: Colors.transparent,
+    //         ),
+    //         IconButton(
+    //           icon: Icon(
+    //             currentValue == 1 ?Icons.search:Icons.search_outlined,
+    //             color: currentValue == 1 ? AppColors.primaryColor : Colors.black38,
+    //             size: _animation2?.value,
+    //           ),
+    //           onPressed: () {
+    //             setState(() {
+    //               currentValue = 1;
+    //               _controller2?.forward();
+    //               _controller?.reverse();
+    //               _controller3?.reverse();
+    //               _controller4?.reverse();
+    //               _controller5?.reverse();
+    //               HapticFeedback.lightImpact();
+    //             });
+    //             widget.callback(currentValue);
+    //             // Navigator.pushNamed(context, ExploreScreen.routeName);
+    //           },
+    //           splashColor: Colors.transparent,
+    //           highlightColor: Colors.transparent,
+    //         ),
+    //         IconButton(
+    //           icon: Icon(
+    //             currentValue==2?Icons.bookmark:Icons.bookmark_border,
+    //             color: currentValue == 2 ? AppColors.primaryColor : Colors.black38,
+    //             size: _animation3?.value,
+    //           ),
+    //           onPressed: () {
+    //             setState(() {
+    //               currentValue = 2;
+    //               _controller3?.forward();
+    //               _controller?.reverse();
+    //               _controller2?.reverse();
+    //               _controller4?.reverse();
+    //               _controller5?.reverse();
+    //               HapticFeedback.lightImpact();
+    //             });
+    //             widget.callback(currentValue);
+    //           },
+    //           splashColor: Colors.transparent,
+    //           highlightColor: Colors.transparent,
+    //         ),
+    //         IconButton(
+    //           icon: Icon(
+    //             currentValue==3?Icons.person:Icons.person_outline,
+    //             color: currentValue == 3 ? AppColors.primaryColor : Colors.black38,
+    //             size: _animation4?.value,
+    //           ),
+    //           onPressed: () {
+    //             setState(() {
+    //               currentValue = 3;
+    //               _controller4?.forward();
+    //               _controller?.reverse();
+    //               _controller2?.reverse();
+    //               _controller3?.reverse();
+    //               _controller5?.reverse();
+    //               HapticFeedback.lightImpact();
+    //             });
+    //             widget.callback(currentValue);
+    //             // Navigator.pushNamed(context, ProfileScreen.routeName);
+    //           },
+    //           splashColor: Colors.transparent,
+    //           highlightColor: Colors.transparent,
+    //         )
+    //       ],
+    //     ),
+    //   ),
+    // );
+    return Padding(
+      padding: const EdgeInsets.only(top:5.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black,
+                offset: Offset(
+                    10.0,
+                    0.0
+                )
+            ),
+            BoxShadow(
+                color: Colors.white12,
+                offset: Offset(
+                    10.0,
+                    10.0
+                )
+            ),
+          ]
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,

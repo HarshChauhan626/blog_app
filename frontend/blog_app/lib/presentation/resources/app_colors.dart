@@ -13,7 +13,13 @@ class AppColors {
 
   static final greyColor=Colors.grey[400];
 
-  static final appGreyColor=Color(0xffd9dde3);
+  // static final appGreyColor=Color(0xffd9dde3);
+
+  static final darkPinkColor=Color(0xff596b98);
+
+  static final lightPinkColor=Color(0xffb4cafe);
+
+  static final appGreyColor=Color(0xfff2f2f2);
 
   static const MaterialColor darkBlue = MaterialColor(
     _darkBluePrimaryValue,
