@@ -1,4 +1,5 @@
 import 'package:blog_app/config/utils/constants.dart';
+import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/presentation/features/home/home_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
@@ -6,6 +7,8 @@ import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart'
 import 'package:blog_app/presentation/widgets/custom_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../di.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -257,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left:20.0,bottom:10.0),
-                                  child: Text("Harsh Chauhan", style: Theme
+                                  child: Text(instance<FakeDataSource>().fakeName, style: Theme
                                       .of(context)
                                       .textTheme
                                       .headline5

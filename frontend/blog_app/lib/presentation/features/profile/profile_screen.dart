@@ -1,7 +1,10 @@
+import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/presentation/features/profile/profile_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../di.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -62,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Container(
                       child: Row(
                         children: [
-                          Text("Harsh Chauhan",style: Theme.of(context).textTheme.headline5,),
+                          Text(instance<FakeDataSource>().fakeName,style: Theme.of(context).textTheme.headline5,),
                           Padding(
                             padding: const EdgeInsets.only(left: 0.0),
                             // child: Container(

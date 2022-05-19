@@ -1,6 +1,7 @@
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 class BottomNavbar extends StatefulWidget {
   final Function callback;
@@ -28,7 +29,10 @@ class BottomNavbarState extends State<BottomNavbar> {
               offset: Offset(0, 10),
             ),
           ],
-          // borderRadius: BorderRadius.circular(50),
+          // borderRadius: BorderRadius.only(
+          //   topLeft: Radius.circular(10.0),
+          //   topRight: Radius.circular(10.0)
+          // ),
         ),
         // child: ListView.builder(
         //   itemCount: 4,

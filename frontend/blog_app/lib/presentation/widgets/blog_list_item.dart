@@ -1,9 +1,12 @@
 import 'package:blog_app/config/utils/util_functions.dart';
+import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/presentation/features/blog/blog_screen.dart';
 import 'package:blog_app/presentation/features/collection/collection_sheet.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+
+import '../../di.dart';
 
 class BlogListItem extends StatelessWidget {
   const BlogListItem({Key? key}) : super(key: key);
@@ -94,11 +97,14 @@ class BlogListItem extends StatelessWidget {
                                         CircleAvatar(
                                           backgroundColor: Colors.green,
                                           radius: 8.0,
+                                          backgroundImage: NetworkImage(
+                                              instance<FakeDataSource>().fakeImage
+                                          ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.fromLTRB(10.0,0,10.0,0.0),
                                           child: Text(
-                                              "Harsh Chauhan",
+                                            instance<FakeDataSource>().fakeName,
                                             style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                               fontSize: 12.0,
                                               color: Colors.black45,

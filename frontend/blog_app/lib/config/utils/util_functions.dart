@@ -36,4 +36,7 @@ int random(min, max) {
   return min + Random().nextInt(max - min);
 }
 
+String getRandomImage()=>"https://picsum.photos/id/${getRandomImageId()}/200/300";
+
+
 

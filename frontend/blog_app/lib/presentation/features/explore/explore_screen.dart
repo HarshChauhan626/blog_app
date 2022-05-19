@@ -1,4 +1,5 @@
 import 'package:blog_app/config/utils/util_functions.dart';
+import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/presentation/features/blog/blog.dart';
 import 'package:blog_app/presentation/features/search/search_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../di.dart';
 import 'explore_bloc.dart';
 
 var faker=Faker();
@@ -58,7 +60,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       children: [
                         Container(
                           alignment: Alignment.centerLeft,
-                            child: Text("Discover",style: Theme.of(context).textTheme.headline5,)),
+                            child: Text("Discover",style: Theme.of(context).textTheme.headline5?.copyWith(
+                              fontWeight: FontWeight.bold
+                            ),)),
                         // Text("Blogs from people all over the world",style: Theme.of(context).textTheme.subtitle2,)
                       ],
                     ),
@@ -123,13 +127,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal:20.0),
+          padding: const EdgeInsets.symmetric(horizontal:20.0,vertical: 3.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Trending',
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline6,
               ),
               InkWell(
                 child: Text('Show all',style: Theme.of(context).textTheme.subtitle2?.copyWith(
@@ -246,7 +250,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                               Padding(
                                                 padding: EdgeInsets.fromLTRB(10.0,0,10.0,0.0),
                                                 child: Text(
-                                                  "Harsh Chauhan",
+                                                  instance<FakeDataSource>().fakeName,
                                                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                                       fontSize: 12.0,
                                                       color: Colors.black45,
@@ -291,7 +295,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             children: [
               Text(
                 'Recommended',
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline6,
               ),
               InkWell(
                 child: Text('Show all',style: Theme.of(context).textTheme.subtitle2?.copyWith(
@@ -307,8 +311,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
             child: BlogListItem(),
           ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal:20.0),
-          child: Text('Who to follow',style: Theme.of(context).textTheme.headline5),
+          padding: const EdgeInsets.symmetric(horizontal:20.0,vertical: 5.0),
+          child: Text('Who to follow',style: Theme.of(context).textTheme.headline6),
         ),
         Container(
           height: 270.0,
