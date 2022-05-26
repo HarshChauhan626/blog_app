@@ -123,7 +123,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: ElevatedButton(
                             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                                 fixedSize:
-                                MaterialStateProperty.all<Size>(Size(500.0,50.0))
+                                MaterialStateProperty.all<Size>(Size(500.0,50.0)),
+
                             ),
                             onPressed: () {
                               BlocProvider.of<SignInBloc>(context).add(SignInPressed(email: emailEditingController?.text??"", password: passwordEditingController?.text??""));

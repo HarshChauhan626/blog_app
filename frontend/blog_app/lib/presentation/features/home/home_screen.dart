@@ -1,6 +1,7 @@
 import 'package:blog_app/config/utils/constants.dart';
 import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/presentation/features/home/home_bloc.dart';
+import 'package:blog_app/presentation/features/notification/notification_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
 import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart';
@@ -275,17 +276,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           Spacer(),
                           Padding(
                             padding: const EdgeInsets.only(right:20.0,bottom: 5.0),
-                            child: Container(
-                              height: 40.0,
-                              width: 40.0,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: Colors.black26
-                                )
+                            child: GestureDetector(
+                              onTap: (){
+                                print("Notification icon tapped");
+                                Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationScreen()));
+                              },
+                              child: Container(
+                                height: 40.0,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                    // color: Colors.red,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: Colors.black26
+                                  )
+                                ),
+                                child: Icon(Icons.notifications_none),
                               ),
-                              child: Icon(Icons.notifications_none),
                             ),
                           )
                         ],

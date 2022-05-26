@@ -5,6 +5,7 @@ import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/slide_fade_transition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -148,6 +149,14 @@ class PageWidget extends StatefulWidget {
 }
 
 class _PageWidgetState extends State<PageWidget> with AutomaticKeepAliveClientMixin{
+
+  List<String> svgList=[
+    "mobile_life.svg",
+    "online_reading.svg",
+    "blog_post.svg"
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -156,7 +165,10 @@ class _PageWidgetState extends State<PageWidget> with AutomaticKeepAliveClientMi
         Container(
             height: 450.0,
             width: MediaQuery.of(context).size.width,
-            color: Colors.red,),
+            color: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: SvgPicture.asset("assets/${svgList[widget.index]}"),
+        ),
         SizedBox(
           height: 10.0,
         ),

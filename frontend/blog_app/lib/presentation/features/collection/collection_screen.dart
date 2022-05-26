@@ -4,6 +4,8 @@ import 'package:blog_app/presentation/features/explore/explore_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'create_collection/create_collection_popup.dart';
+
 class CollectionScreen extends StatefulWidget {
   const CollectionScreen({Key? key}) : super(key: key);
 
@@ -39,7 +41,7 @@ class _CollectionScreenState extends State<CollectionScreen> with SingleTickerPr
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  expandedHeight: 100.0,
+                  expandedHeight: 130.0,
                   // collapsedHeight: 60.0,
                   elevation: 2.0,
                   automaticallyImplyLeading: false,
@@ -67,12 +69,13 @@ class _CollectionScreenState extends State<CollectionScreen> with SingleTickerPr
                   //   ),
                   // ),
                   bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(45.0),
+                    preferredSize: Size.fromHeight(48.0),
                     child: Padding(
                       padding: const EdgeInsets.only(top:10.0,left: 10.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: TabBar(
+                          labelPadding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 10.0),
                           isScrollable: true,
                           unselectedLabelColor: AppColors.appGreyColor,
                           // padding: const EdgeInsets.all(3.0),
@@ -126,6 +129,13 @@ class _CollectionScreenState extends State<CollectionScreen> with SingleTickerPr
                           InkWell(
                             onTap: (){
                               // TODO:- Implement bottom sheet on click of this.
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+                                  context: context, builder: (context){
+                                return CollectionPopup();
+                              });
                             },
                             child: Container(
                               alignment: Alignment.center,

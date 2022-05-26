@@ -1,5 +1,6 @@
 import 'package:blog_app/config/utils/util_functions.dart';
 import 'package:blog_app/data/datasources/local/fake_data_service.dart';
+import 'package:blog_app/presentation/features/author_profile/author_profile_screen.dart';
 import 'package:blog_app/presentation/features/blog/blog.dart';
 import 'package:blog_app/presentation/features/search/search_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
@@ -312,7 +313,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
           ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal:20.0,vertical: 5.0),
-          child: Text('Who to follow',style: Theme.of(context).textTheme.headline6),
+          // child: Text('Who to follow',style: Theme.of(context).textTheme.headline6),
+          child:Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Who to follow',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Spacer()
+            ],
+          )
         ),
         Container(
           height: 270.0,
@@ -335,110 +346,116 @@ class _ExploreScreenState extends State<ExploreScreen> {
   Widget peopleSuggestion(){
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 5.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.shade200,
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(2, 3), // changes position of shadow
-              ),
-              BoxShadow(
-                color: Colors.grey.shade200,
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ]
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 10.0, right: 10.0,top: 0.0),
-              child: Container(
-                height: 100.0,
-                width: 150.0,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                    borderRadius:
-                    BorderRadius.circular(15.0),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        // image: AssetImage(
-                        //     "assets/car_pic.jpg")
-                      image: NetworkImage("https://picsum.photos/id/${getRandomImageId()}/200/300")
-                    )
+      child: GestureDetector(
+        onTap: (){
+          print(1);
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>AuthorProfileScreen()));
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade200,
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: Offset(2, 3), // changes position of shadow
                 ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-              width: 170.0,
-              child: Text(
-                "${faker.person.firstName()+" "+faker.person.lastName()}",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(
-                    fontSize: 18.0
+                BoxShadow(
+                  color: Colors.grey.shade200,
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: Offset(0, 3), // changes position of shadow
                 ),
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-              width: 170.0,
-              height: 75.0,
-              child: Text("22 | Startup Founder | Software Engineer | Blogger | Artist 22 | Startup Founder | Software Engineer | Blogger | Artist 22 | Startup Founder | Software Engineer | Blogger | Artist".substring(0,80),
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(
-                    fontSize: 12.0,
-                  fontWeight: FontWeight.normal
-                ),
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.clip,
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            InkWell(
-              onTap: (){
-                setState(() {
-                  // toggle=!toggle;
-                });
-              },
-              child: AnimatedContainer(
-                width: 150.0,
-                duration: Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                    color: 1==0?AppColors.primaryColor:Colors.white,
-                    border: Border.all(
-                        color: AppColors.primaryColor,
-                        width: 1.0
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(6.0))
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(1==0?'Follow':"Following",style: Theme.of(context).textTheme.button?.copyWith(
-                        color: 1==0?Colors.white:Colors.black
-                    ),),
+              ]
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 10.0,top: 0.0),
+                child: Container(
+                  height: 100.0,
+                  width: 150.0,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                      borderRadius:
+                      BorderRadius.circular(15.0),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          // image: AssetImage(
+                          //     "assets/car_pic.jpg")
+                        image: NetworkImage("https://picsum.photos/id/${getRandomImageId()}/200/300")
+                      )
                   ),
                 ),
               ),
-            )
-          ],
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                width: 170.0,
+                child: Text(
+                  "${faker.person.firstName()+" "+faker.person.lastName()}",
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(
+                      fontSize: 18.0
+                  ),
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                width: 170.0,
+                height: 75.0,
+                child: Text("22 | Startup Founder | Software Engineer | Blogger | Artist 22 | Startup Founder | Software Engineer | Blogger | Artist 22 | Startup Founder | Software Engineer | Blogger | Artist".substring(0,80),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(
+                      fontSize: 12.0,
+                    fontWeight: FontWeight.normal
+                  ),
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.clip,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              InkWell(
+                onTap: (){
+                  setState(() {
+                    // toggle=!toggle;
+                  });
+                },
+                child: AnimatedContainer(
+                  width: 150.0,
+                  duration: Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                      color: 1==0?AppColors.primaryColor:Colors.white,
+                      border: Border.all(
+                          color: AppColors.primaryColor,
+                          width: 1.0
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(6.0))
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(1==0?'Follow':"Following",style: Theme.of(context).textTheme.button?.copyWith(
+                          color: 1==0?Colors.white:Colors.black
+                      ),),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

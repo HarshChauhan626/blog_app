@@ -40,54 +40,85 @@ class BottomNavbarState extends State<BottomNavbar> {
         //   padding: EdgeInsets.symmetric(horizontal: screenWidth * .024),
         //   itemBuilder: (context, index) => ,
         // ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            for(int index=0;index<4;index++)
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    currentIndex = index;
-                    widget.callback(index);
-                    HapticFeedback.lightImpact();
-                  });
-                },
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      width: screenWidth * .2125,
-                      child: Center(
-                        child: AnimatedContainer(
-                          duration: Duration(seconds: 1),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal:20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              for(int index=0;index<4;index++)
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      currentIndex = index;
+                      widget.callback(index);
+                      HapticFeedback.lightImpact();
+                    });
+                  },
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  // child: Stack(
+                  //   children: [
+                  //     SizedBox(
+                  //       width: screenWidth * .2125,
+                  //       child: Center(
+                  //         child: AnimatedContainer(
+                  //           duration: Duration(seconds: 1),
+                  //           curve: Curves.fastLinearToSlowEaseIn,
+                  //           height: index == currentIndex ? screenWidth * .10 : 0,
+                  //           width: index == currentIndex ? screenWidth * .16 : 0,
+                  //           decoration: BoxDecoration(
+                  //             color: index == currentIndex
+                  //                 ? AppColors.lightPinkColor
+                  //                 : Colors.transparent,
+                  //             borderRadius: BorderRadius.circular(18),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       width: screenWidth * .2125,
+                  //       alignment: Alignment.center,
+                  //       child: Icon(
+                  //         listOfIcons[index],
+                  //         size: screenWidth * .07,
+                  //         color: index == currentIndex
+                  //             ? AppColors.primaryColor
+                  //             : Colors.black38,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  child: Container(
+                    width: screenWidth * .2125,
+                    // color: Colors.red,
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnimatedPadding(
                           curve: Curves.fastLinearToSlowEaseIn,
-                          height: index == currentIndex ? screenWidth * .10 : 0,
-                          width: index == currentIndex ? screenWidth * .16 : 0,
-                          decoration: BoxDecoration(
-                            color: index == currentIndex
-                                ? AppColors.lightPinkColor
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(18),
-                          ),
+                          padding:index==currentIndex? const EdgeInsets.only(bottom:4.0):const EdgeInsets.only(bottom:0.0),
+                          duration: Duration(seconds: 1),
+                            child: Icon(
+                                index==currentIndex?listOfSelectedIcons[index]:listOfIcons[index],
+                              size: 30.0,
+                            )
                         ),
-                      ),
+                        if(index==currentIndex)
+                          Container(
+                          height: 6.0,
+                          width: 6.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.0),
+                            color: AppColors.primaryColor
+                          ),
+                        )
+                      ],
                     ),
-                    Container(
-                      width: screenWidth * .2125,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        listOfIcons[index],
-                        size: screenWidth * .07,
-                        color: index == currentIndex
-                            ? AppColors.primaryColor
-                            : Colors.black38,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-          ],
+                  ),
+                )
+            ],
+          ),
         ),
       ),
     );
@@ -99,4 +130,12 @@ class BottomNavbarState extends State<BottomNavbar> {
     Icons.bookmark_border,
     Icons.person_outlined,
   ];
+
+  List<IconData> listOfSelectedIcons=[
+    Icons.home,
+    Icons.search,
+    Icons.bookmark,
+    Icons.person
+  ];
+
 }

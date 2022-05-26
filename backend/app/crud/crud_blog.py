@@ -17,7 +17,8 @@ class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
         db_obj = Blog(**create_obj)
         db.add(db_obj)
         db.commit()
-        return db_obj
+        blog_resp= self.get_blog(db=db, blog_id=db_obj.id)
+        return blog_resp
 
 
 
@@ -62,6 +63,7 @@ class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
 
 
     def get_blog(self, db: Session, blog_id: int):
+        print(blog_id)
         blog_result = db.query(Blog).filter(Blog.id == blog_id).first()
         author_info = db.query(User).filter(blog_result.author_id == User.id).first()
         tag_list = crud.post_tag.get_post_tag(db, blog_id=blog_result.id)

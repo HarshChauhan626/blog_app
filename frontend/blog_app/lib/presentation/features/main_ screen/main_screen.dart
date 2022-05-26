@@ -40,6 +40,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
         resizeToAvoidBottomInset: true,
           body: getBody(),
           bottomSheet: Container(
