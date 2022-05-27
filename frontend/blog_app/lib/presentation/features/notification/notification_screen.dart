@@ -49,7 +49,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       padding: const EdgeInsets.only(top:0.0,left: 0.0,right: 0.0),
       child: InkWell(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthorProfileScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthorProfileScreen(isUserProfile: false,)));
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 10.0),

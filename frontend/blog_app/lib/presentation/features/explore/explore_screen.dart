@@ -349,7 +349,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       child: GestureDetector(
         onTap: (){
           print(1);
-          Navigator.push(context,MaterialPageRoute(builder: (context)=>AuthorProfileScreen()));
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>AuthorProfileScreen(isUserProfile: false,)));
         },
         child: Container(
           decoration: BoxDecoration(

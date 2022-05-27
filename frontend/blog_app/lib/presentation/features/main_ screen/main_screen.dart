@@ -1,4 +1,5 @@
 
+import 'package:blog_app/presentation/features/author_profile/author_profile_screen.dart';
 import 'package:blog_app/presentation/features/collection/collection_screen.dart';
 import 'package:blog_app/presentation/features/explore/explore_screen.dart';
 import 'package:blog_app/presentation/features/home/home_bloc.dart';
@@ -80,11 +81,11 @@ class _MainScreenState extends State<MainScreen> {
     return BlocConsumer<MainScreenCubit, MainScreenState>(builder: (context,state){
       return IndexedStack(
         index:state.bottomNavigationIndex,
-        children: const [
+        children:  [
           HomeScreen(),
           ExploreScreen(),
           CollectionScreen(),
-          ProfileScreen()
+          AuthorProfileScreen(isUserProfile: true)
         ],
       );
     }, listener:(context,state){
