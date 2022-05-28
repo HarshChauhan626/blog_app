@@ -1,6 +1,7 @@
 import 'package:blog_app/config/utils/util_functions.dart';
 import 'package:blog_app/presentation/features/collection/create_collection/create_collection_popup.dart';
 import 'package:blog_app/presentation/features/people/people_screen.dart';
+import 'package:blog_app/presentation/features/settings/settings.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
 import 'package:faker/faker.dart';
@@ -157,17 +158,17 @@ class _AuthorProfileScreenState extends State<AuthorProfileScreen> with SingleTi
                 floating: false,
                 pinned: true,
                 // snap: true,
-                leading: IconButton(
+                leading: !widget.isUserProfile?IconButton(
                   icon: Icon(CupertinoIcons.back,color: Colors.black,),
                   onPressed: (){
                     Navigator.pop(context);
                   },
-                ),
+                ):null,
                 actions: [
                   widget.isUserProfile?IconButton(
                     icon: Icon(Icons.settings,color: Colors.black,),
                     onPressed: (){
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
                     },
                   ):IconButton(
                     icon: Icon(Icons.more_vert,color: Colors.black,),
