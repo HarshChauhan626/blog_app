@@ -9,15 +9,13 @@ abstract class HomeEvent extends Equatable {
 }
 
 @immutable
-class HomeLoadEvent extends HomeEvent {
-  @override
-  String toString() => 'Home is Loaded';
-}
-
-@immutable
 class HomeTabChanged extends HomeEvent{
   int tabIndex;
   HomeTabChanged(this.tabIndex);
+
+  @override
+  List<Object> get props => [tabIndex];
+
 }
 
 

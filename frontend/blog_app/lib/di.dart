@@ -1,3 +1,4 @@
+import 'package:blog_app/config/utils/secure_storage.dart';
 import 'package:blog_app/config/utils/shared_preferences.dart';
 import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/data/datasources/local/local_storage_service.dart';
@@ -9,6 +10,7 @@ import 'package:blog_app/data/repositories/blog_repository_impl.dart';
 import 'package:blog_app/data/repositories/user_repository_impl.dart';
 import 'package:blog_app/domain/repositories/blog_repository.dart';
 import 'package:blog_app/domain/repositories/user_repository.dart';
+import 'package:blog_app/presentation/features/home/home_bloc.dart';
 import 'package:faker/faker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -39,9 +41,13 @@ Future<void> initModule() async {
   instance.registerLazySingleton<LocalDataSource>(
           () => LocalDataSourceImpl());
 
-  instance.registerLazySingleton<BlogRepository>(() => BlogRepositoryImpl());
+  instance.registerLazySingleton<BlogRepository>(() => BlogRepositoryImpl(instance(),instance()));
 
   instance.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(instance(),instance()));
+
+  instance.registerFactory<HomeBloc>(() => HomeBloc(blogRepository: instance()));
+
+  instance.registerLazySingleton<SecureStorage>(() => SecureStorage());
 
 }
 

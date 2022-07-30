@@ -38,6 +38,13 @@ def create_access_token(*, sub: str) -> str:
         sub=sub,
     )
 
+def create_refresh_token(*,sub:str)->str:
+    return _create_token(
+        token_type="refresh_token",
+        lifetime=timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
+        sub=sub,
+    )
+
 
 def _create_token(
     token_type: str,

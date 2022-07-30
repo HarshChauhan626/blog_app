@@ -13,7 +13,7 @@ class AuthenticationResponse{
 
   factory AuthenticationResponse.fromJson(Map<String,dynamic> json){
     return AuthenticationResponse(
-      bearerToken: json["token"],
+      bearerToken: json["access_token"],
       refreshToken: json["refreshToken"]
     );
   }

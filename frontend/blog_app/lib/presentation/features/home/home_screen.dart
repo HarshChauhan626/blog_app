@@ -1,6 +1,8 @@
 import 'package:blog_app/config/utils/constants.dart';
+import 'package:blog_app/config/utils/secure_storage.dart';
 import 'package:blog_app/data/datasources/local/fake_data_service.dart';
 import 'package:blog_app/presentation/features/home/home_bloc.dart';
+import 'package:blog_app/presentation/features/home/home_state.dart';
 import 'package:blog_app/presentation/features/notification/notification_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
@@ -20,9 +22,7 @@ class HomeScreen extends StatefulWidget {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (_) => BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc(
-
-        ),
+        create: (context) => instance<HomeBloc>(),
         child: HomeScreen(),
       ),
     );
@@ -34,15 +34,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  int _selectedIndex = 0;
 
   double borderRadius = 100.0;
 
-  PageController? _pageController;
 
   int activePageIndex = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(left:20.0,bottom: 3.0,top: 4.0),
                                   child: Text(
-                                      "${Globals.S_GOOD_MORNING}",
+                                      Globals.S_GOOD_MORNING,
                                       style: Theme
                                           .of(context)
                                           .textTheme
@@ -278,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.only(right:20.0,bottom: 5.0),
                             child: GestureDetector(
                               onTap: (){
-                                print("Notification icon tapped");
+                                debugPrint("Notification icon tapped");
                                 Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationScreen()));
                               },
                               child: Container(
@@ -301,17 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                        (context,index){
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:10.0),
-                        child: BlogListItem(),
-                      );
-                    },
-                  childCount:30,
-                ),
-              ),
+              getListView()
               // SizedBox(
               //   height: 40.0,
               // )
@@ -323,25 +315,63 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-
-
   Widget getListView() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: AlwaysScrollableScrollPhysics(),
-        itemCount: 100,
-        itemBuilder: (context, index) {
-          return BlogListItem();
-        },
-      ),
+    // return Padding(
+    //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //   child: ListView.builder(
+    //     shrinkWrap: true,
+    //     physics: AlwaysScrollableScrollPhysics(),
+    //     itemCount: 100,
+    //     itemBuilder: (context, index) {
+    //       return BlogListItem();
+    //     },
+    //   ),
+    // );
+    return BlocConsumer<HomeBloc,HomeState>(
+
+      listener: (BuildContext context, state) {
+
+      },
+      builder: (BuildContext context, Object? state) {
+
+        if(state is HomeLoadingState){
+          return SliverFillRemaining(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+        else if(state is HomeLoadedState)
+          {
+            print(state);
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                    (context,index){
+                  print("Length of list coming in bloc is ${state.blogListEntity!.blogEntityList.length}");
+                  print("Blog coming is ${state.blogListEntity!.blogEntityList[index]}");
+
+                  final blog=state.blogListEntity!.blogEntityList[index];
+
+                  print("Blog coming not null ${blog!=null}");
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    child: BlogListItem(blog:blog),
+                  );
+                },
+                childCount:state.blogListEntity!.blogEntityList.length,
+              ),
+            );
+        }
+        else if(state is HomeErrorState){
+          return SliverFillRemaining(
+            child: Center(child: Text("Something went wrong")),
+          );
+        }
+        else{
+          return SliverFillRemaining(
+            child: Center(child: Text("Something went wrong")),
+          );
+        }
+      },
     );
   }
 
@@ -361,16 +391,15 @@ class _HomeScreenState extends State<HomeScreen> {
           .headline5
           ?.copyWith(
           fontWeight: FontWeight.bold
-      ),),
+      ),
+      ),
       centerTitle: true,
     );
   }
 
 
-
 }
 
 
-enum MainTabVal { foryou, latest, recentsearch}
 
 

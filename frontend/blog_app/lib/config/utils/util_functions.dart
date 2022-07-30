@@ -1,6 +1,10 @@
 import 'dart:math';
 
+import 'package:blog_app/config/utils/secure_storage.dart';
+import 'package:blog_app/data/responses/authentication_response.dart';
 import 'package:flutter/material.dart';
+
+import '../../di.dart';
 
 
 
@@ -37,6 +41,10 @@ int getRandomNumber(min, max) {
 }
 
 String getRandomImage()=>"https://picsum.photos/id/${getRandomImageId()}/200/300";
+
+void saveToken(AuthenticationResponse response){
+  instance<SecureStorage>().token=response.bearerToken??"";
+}
 
 
 

@@ -160,6 +160,7 @@ class CustomTabBar extends StatelessWidget {
         // ),
         child: BlocConsumer<HomeBloc,HomeState>(
           builder: (context,state){
+
             return Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

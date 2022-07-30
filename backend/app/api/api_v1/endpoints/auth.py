@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm.session import Session
 
+
 from app import crud
 from app import schemas
 from app.api import deps
@@ -31,6 +32,19 @@ def login(
         "access_token": create_access_token(sub=user.id),
         "token_type": "bearer",
     }
+
+
+
+@router.post('/refresh')
+def refresh():
+    """
+    The jwt_refresh_token_required() function insures a valid refresh
+    token is present in the request before running any code below that function.
+    we can use the get_jwt_subject() function to get the subject of the refresh
+    token, and use the create_access_token() function again to make a new access token
+    """
+
+    # return {"access_token": new_access_token}
 
 
 @router.get("/me", response_model=schemas.User)

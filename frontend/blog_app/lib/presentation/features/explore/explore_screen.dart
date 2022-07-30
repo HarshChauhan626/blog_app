@@ -1,5 +1,6 @@
 import 'package:blog_app/config/utils/util_functions.dart';
 import 'package:blog_app/data/datasources/local/fake_data_service.dart';
+import 'package:blog_app/domain/entities/blog.dart';
 import 'package:blog_app/presentation/features/author_profile/author_profile_screen.dart';
 import 'package:blog_app/presentation/features/blog/blog.dart';
 import 'package:blog_app/presentation/features/search/search_screen.dart';
@@ -309,7 +310,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
         for(int i=0;i<10;i++)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: BlogListItem(),
+            child: BlogListItem(
+              blog: BlogEntity(),
+            ),
           ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal:20.0,vertical: 5.0),

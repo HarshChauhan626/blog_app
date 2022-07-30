@@ -1,4 +1,5 @@
 import 'package:blog_app/config/utils/constants.dart';
+import 'package:blog_app/data/request/request.dart';
 import 'package:blog_app/data/responses/authentication_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
@@ -48,16 +49,11 @@ abstract class AppServiceClient {
 
   @DELETE("/blogs/{blog_id}")
   Future<Response> deleteBlog(
-      @Path("blog_id") int blogId
+      @Path("blog_id") int blogI
       );
 
-  @GET("/blogs/feed")
-  Future<Response> getFeed();
+  @POST("/blogs/list")
+  Future<Response> getBlogs(@Body() BlogListRequest blogListRequest);
 
-  @GET("/blogs/recent")
-  Future<Response> getRecentlyViewed();
-
-  @GET("/blogs/followed")
-  Future<Response> getBlogsFromFollowed();
 
 }

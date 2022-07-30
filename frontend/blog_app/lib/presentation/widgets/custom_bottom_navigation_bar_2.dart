@@ -102,6 +102,7 @@ class BottomNavbarState extends State<BottomNavbar> {
                             child: Icon(
                                 index==currentIndex?listOfSelectedIcons[index]:listOfIcons[index],
                               size: 30.0,
+                              color: index==currentIndex?Colors.black:Color(0xff91a1af),
                             )
                         ),
                         if(index==currentIndex)

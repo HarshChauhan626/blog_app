@@ -149,47 +149,17 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<Response<dynamic>> getFeed() async {
+  Future<Response<dynamic>> getBlogs(blogListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Response<dynamic>>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/blogs/feed',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    // final value = Response<dynamic>.fromJson(_result.data!);
-    return _result;
-  }
+    final _headers = <String, dynamic>{
 
-  @override
-  Future<Response<dynamic>> getRecentlyViewed() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    };
+    final _data = blogListRequest;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Response<dynamic>>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/blogs/recent',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    // final value = Response<dynamic>.fromJson(_result.data!);
-    return _result;
-  }
-
-  @override
-  Future<Response<dynamic>> getBlogsFromFollowed() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Response<dynamic>>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/blogs/followed',
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/blogs/list',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     // final value = Response<dynamic>.fromJson(_result.data!);
@@ -209,4 +179,3 @@ class _AppServiceClient implements AppServiceClient {
     return requestOptions;
   }
 }
-

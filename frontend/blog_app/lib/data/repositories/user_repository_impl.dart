@@ -1,4 +1,5 @@
 import 'package:blog_app/config/utils/exceptions.dart';
+import 'package:blog_app/config/utils/util_functions.dart';
 import 'package:blog_app/data/network/api_result.dart';
 import 'package:blog_app/data/datasources/local/local_storage_service.dart';
 import 'package:blog_app/data/datasources/remote/remote_data_source.dart';
@@ -22,6 +23,8 @@ class UserRepositoryImpl extends UserRepository {
   Future<ApiResult<Authentication>> authenticateUser(LoginRequest loginRequest) async{
     try{
       final response = await _remoteDataSource.login(loginRequest);
+
+      saveToken(response);
       return ApiResult.success(data: response.toDomain());
     }
     on ServerException catch(e){

@@ -1,4 +1,5 @@
 import 'package:blog_app/config/utils/util_functions.dart';
+import 'package:blog_app/domain/entities/blog.dart';
 import 'package:blog_app/presentation/features/collection/create_collection/create_collection_popup.dart';
 import 'package:blog_app/presentation/features/people/people_screen.dart';
 import 'package:blog_app/presentation/features/settings/settings.dart';
@@ -33,7 +34,7 @@ class _AuthorProfileScreenState extends State<AuthorProfileScreen> with SingleTi
     _scrollController=ScrollController();
     _scrollController?.addListener(() {
       if(_scrollController?.position.userScrollDirection==ScrollDirection.reverse){
-        print("REverse");
+        print("Reverse");
         setState(() {
           showTitle=true;
         });
@@ -145,7 +146,7 @@ class _AuthorProfileScreenState extends State<AuthorProfileScreen> with SingleTi
         //   ),
         // ),
         body: Padding(
-          padding: const EdgeInsets.only(bottom:50.0),
+          padding: widget.isUserProfile?const EdgeInsets.only(bottom:50):const EdgeInsets.only(bottom:0.0),
           child: CustomScrollView(
             controller: _scrollController,
             slivers: [
@@ -240,7 +241,7 @@ class _AuthorProfileScreenState extends State<AuthorProfileScreen> with SingleTi
                 //     child: Row(
                 //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //       children: [
-                //         Container(
+                //         Container
                 //             alignment: Alignment.centerLeft,
                 //             child: Text(
                 //               "Collections",
@@ -347,7 +348,12 @@ class _AuthorProfileScreenState extends State<AuthorProfileScreen> with SingleTi
                         print(index);
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                      child: BlogListItem(),
+                      child: BlogListItem(
+                        blog: BlogEntity(
+
+                        ),
+
+                      ),
                     );
                   },
                   childCount: 5,

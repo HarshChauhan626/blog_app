@@ -1,14 +1,14 @@
 from typing import Type, List
 
 from pydantic.class_validators import Any
+from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
 from app import crud
 from app.crud.base import CRUDBase
 from app.models import User
 from app.models.blog import Blog
-from app.schemas.blog import BlogCreate, BlogUpdate, BlogResponse, AuthorDetails, Blogs
-
+from app.schemas.blog import BlogCreate, BlogUpdate, BlogResponse, AuthorDetails, Blogs, BlogListItemResponse
 
 class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
     def create(self, db: Session, *, obj_in: BlogCreate) -> Blog:
@@ -23,21 +23,23 @@ class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
 
 
     def remove(self, db: Session, *, blog_id: int, user_id: int):
-        db_obj = db.query(Blog).where(Blog.id == blog_id and Blog.author_id == user_id)
+        db_obj = db.query(Blog).where(Blog.id == blog_id and Blog.author_id == user_id).first()
+        print(db_obj)
         db.delete(db_obj)
+        db.commit()
 
-    def get_blogs_from_followed(self, db: Session, *, user_id: int):
+    def get_blogs_from_followed(self,blog_cursor:int, db: Session, *, user_id: int):
         lis = [x for x in crud.user_follower.get_followed(db=db, user_id=user_id)]
         # post_tags=[x for x in crud.post_tag.]
         blog_list = []
         for i in range(len(lis)):
-            result = db.query(Blog).filter(Blog.author_id == lis[i].target_id)
+            result = db.query(Blog).filter(and_(Blog.author_id == lis[i].target_id,Blog.id>blog_cursor)).limit(20)
             author_info = db.query(User).filter(User.id == lis[i].target_id).first()
             if len(result.all()) != 0:
                 for j in range(len(result.all())):
                     tag_list = crud.post_tag.get_post_tag(db, blog_id=result[j].id)
                     print(result[j])
-                    blog = BlogResponse.from_orm_obj(blog=result[j], tag_list=tag_list,
+                    blog = BlogListItemResponse.from_orm_obj(blog=result[j], tag_list=tag_list,
                                                      author_details=AuthorDetails(id=author_info.id,
                                                                                   name="{} {}".format(
                                                                                       author_info.first_name,
@@ -62,16 +64,21 @@ class CRUDBlog(CRUDBase[Blog, BlogCreate, BlogUpdate]):
 
 
 
-    def get_blog(self, db: Session, blog_id: int):
+    def get_blog(self, db: Session, blog_id: int,type:int):
         print(blog_id)
         blog_result = db.query(Blog).filter(Blog.id == blog_id).first()
         author_info = db.query(User).filter(blog_result.author_id == User.id).first()
         tag_list = crud.post_tag.get_post_tag(db, blog_id=blog_result.id)
-        blog = BlogResponse.from_orm_obj(blog=blog_result, tag_list=tag_list,
-                                         author_details=AuthorDetails(id=author_info.id,
-                                                                      name="{} {}".format(author_info.first_name,
-                                                                                          author_info.last_name)))
-        return blog
+        if(type==0):
+            return BlogResponse.from_orm_obj(blog=blog_result, tag_list=tag_list,
+                                             author_details=AuthorDetails(id=author_info.id,
+                                                                          name="{} {}".format(author_info.first_name,
+                                                                                              author_info.last_name)))
+        else:
+            return BlogListItemResponse.from_orm_obj(blog=blog_result, tag_list=tag_list,
+                                             author_details=AuthorDetails(id=author_info.id,
+                                                                          name="{} {}".format(author_info.first_name)))
+
 
     def search_blog(self,db:Session,keyword:str)->Blogs:
         blog_list=[]

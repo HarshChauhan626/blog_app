@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:blog_app/config/utils/secure_storage.dart';
+import '../../../di.dart';
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 
@@ -16,35 +17,23 @@ class AuthenticationBloc
           emit(Unauthenticated());
         }
       }
-
-      if (event is LoggedIn) {
-        SecureStorage().token = event.token;
-        await _saveToken(event.token);
-        emit(Authenticated());
-      }
-
-      if (event is LoggedOut) {
-        SecureStorage().token = '';
-        await _deleteToken();
-        emit(Unauthenticated());
-      }
     });
   }
 
   /// delete from keystore/keychain
   Future<void> _deleteToken() async {
-    await SecureStorage().secureStorage.delete(key: 'access_token');
+    await instance<SecureStorage>().secureStorage.delete(key: 'access_token');
   }
 
   /// write to keystore/keychain
   Future<void> _saveToken(String token) async {
-    await SecureStorage()
+    await instance<SecureStorage>()
         .secureStorage
         .write(key: 'access_token', value: token);
   }
 
   /// read to keystore/keychain
   Future<String> _getToken() async {
-    return await SecureStorage().secureStorage.read(key: 'access_token') ?? '';
+    return await instance<SecureStorage>().secureStorage.read(key: 'access_token') ?? '';
   }
 }

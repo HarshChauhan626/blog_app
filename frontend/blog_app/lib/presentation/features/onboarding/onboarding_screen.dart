@@ -289,7 +289,7 @@ class _OnboardingButtonState extends State<OnboardingButton> with SingleTickerPr
             },
             child: AnimatedContainer(
               height:widget.lastIndex?40.0:60.0,
-              width: widget.lastIndex?100:60.0,
+              width: widget.lastIndex?140:60.0,
               decoration: BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(30.0))

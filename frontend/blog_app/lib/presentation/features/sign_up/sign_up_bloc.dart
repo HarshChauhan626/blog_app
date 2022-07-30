@@ -23,7 +23,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         emit(SignUpProcessingState());
         try {
           final token = await userRepository.signUpUser();
-          authenticationBloc.add(LoggedIn(token));
+          authenticationBloc.add(LoggedIn());
           emit(SignUpFinishedState());
         } catch (error) {
           emit(SignUpErrorState(error.toString()));
@@ -69,7 +69,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       yield SignUpProcessingState();
       try {
         final token = await userRepository.signUpUser();
-        authenticationBloc.add(LoggedIn(token));
+        authenticationBloc.add(LoggedIn());
         yield SignUpFinishedState();
       } catch (error) {
         yield SignUpErrorState(error.toString());

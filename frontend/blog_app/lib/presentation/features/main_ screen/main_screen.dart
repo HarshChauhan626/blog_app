@@ -11,6 +11,8 @@ import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar_2.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../di.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -27,7 +29,7 @@ class MainScreen extends StatefulWidget {
       // ),
         builder: (_) =>MultiBlocProvider(providers: [
             BlocProvider(create: (context)=>MainScreenCubit()),
-            BlocProvider(create: (context)=>HomeBloc()),
+            BlocProvider(create: (context)=>instance<HomeBloc>()),
         ], child: MainScreen())
     );
   }

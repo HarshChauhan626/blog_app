@@ -66,5 +66,30 @@ class BlogResponse(BlogInDBBase):
 class BlogInDB(BlogInDBBase):
     pass
 
+class BlogListItemResponse(BaseModel):
+    id:int
+    title: str
+    meta_title: str
+    published: int
+    tag: Optional[List[str]]
+    author_details: AuthorDetails
+    created_at:datetime
+    updated_at:datetime
+
+    @staticmethod
+    def from_orm_obj(blog, tag_list, author_details):
+        return BlogListItemResponse(
+            id=blog.id,
+            tag=tag_list,
+            title=blog.title,
+            created_at=blog.created_at,
+            meta_title=blog.meta_title,
+            published=blog.published,
+            updated_at=blog.updated_at,
+            author_details=author_details,
+        )
+
+
+
 class Blogs(BaseModel):
-    results: Sequence[BlogResponse]
+    results: Sequence[BlogListItemResponse]

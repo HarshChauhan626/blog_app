@@ -12,7 +12,6 @@ abstract class FakeDataSource{
   int get fakeNumber;
 }
 
-
 class FakeDataSourceImpl implements FakeDataSource{
 
   Faker faker;

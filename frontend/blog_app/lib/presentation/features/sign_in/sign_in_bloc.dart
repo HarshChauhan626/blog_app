@@ -24,7 +24,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           );
           result.when(success: (auth){
             emit(SignInFinishedState());
-            authenticationBloc.add(LoggedIn(auth.bearerToken));
+            authenticationBloc.add(LoggedIn());
           }, failure: (ApiFailure apifailure){
             emit(SignInErrorState(apifailure.message.toString()));
           });

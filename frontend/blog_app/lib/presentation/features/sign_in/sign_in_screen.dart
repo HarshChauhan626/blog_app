@@ -128,8 +128,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             onPressed: () {
                               BlocProvider.of<SignInBloc>(context).add(SignInPressed(email: emailEditingController?.text??"", password: passwordEditingController?.text??""));
-                            },
-                            child: Center(
+                            }, child: Center(
                               child: Text("Login"),
                             )),
                       ),
