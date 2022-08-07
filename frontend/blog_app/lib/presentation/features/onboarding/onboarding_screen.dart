@@ -34,6 +34,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   int nextPage = 0;
 
+  int index=0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -47,22 +49,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         // nextPage = 0;
         debugPrint(nextPage.toString());
 
-        _imageController
-            .animateToPage(nextPage,
-            duration: const Duration(seconds: 1), curve: Curves.linear)
-            .then((_) => _animateSlider());
+        if(_imageController.hasClients){
+          _imageController
+              .animateToPage(nextPage,
+              duration: const Duration(seconds: 1), curve: Curves.linear)
+              .then((_) => _animateSlider());
 
-        setState(() {
-          debugPrint(_imageController.page!.round().toString());
-          nextPage = _imageController.page!.round() + 1;
-          debugPrint(nextPage.toString());
-        });
+          if(mounted){
+            setState(() {
+              debugPrint(_imageController.page!.round().toString());
+              nextPage = _imageController.page!.round() + 1;
+              debugPrint(nextPage.toString());
+            });
+          }
+        }
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    print("Build called $index");
+    index++;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -91,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         controller: _imageController,
                         count: 3,
                         axisDirection: Axis.horizontal,
-                        effect: SlideEffect(
+                        effect: const SlideEffect(
                             spacing: 8.0,
                             radius: 10.0,
                             dotWidth: 10.0,
@@ -264,8 +274,7 @@ class _OnboardingButtonState extends State<OnboardingButton>
             duration: const Duration(milliseconds: 300),
             alignment:
             widget.lastIndex ? Alignment.center : Alignment.centerRight,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
+            child: SizedBox(
               width: widget.lastIndex ? 92.w : 40.w,
               child: ElevatedButton(
                 onPressed: () {

@@ -1,9 +1,13 @@
+import 'package:blog_app/config/utils/enums.dart';
 import 'package:blog_app/domain/repositories/user_repository.dart';
 import 'package:blog_app/presentation/features/authentication/authentication_bloc.dart';
 import 'package:blog_app/presentation/features/sign_up/sign_up_bloc.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/features/sign_in/sign_in_screen.dart';
+import 'package:blog_app/presentation/widgets/animated_column_widget.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:blog_app/presentation/widgets/custom_text_field.dart';
+import 'package:blog_app/presentation/widgets/input_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -57,89 +61,143 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: SingleChildScrollView(
-              child: Column(
+    return CustomSafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            // leading: Padding(
+            //   padding: const EdgeInsets.all(6.0),
+            //   child: InkWell(
+            //     onTap: (){
+            //       Navigator.pop(context);
+            //     },
+            //     child: Container(
+            //       decoration: BoxDecoration(
+            //           border: Border.all(
+            //             color: AppColors.blackTextColor,
+            //           ),
+            //           borderRadius: BorderRadius.circular(10.0)
+            //       ),
+            //       child: const Icon(CupertinoIcons.back,color: AppColors.blackTextColor,),
+            //     ),
+            //   ),
+            // )
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: AnimatedColumn(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Container(
-                            height: 250.0, child: SvgPicture.asset("assets/sign_up.svg")),
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
                     child: Text(
-                      'Sign Up',
-                      style: Theme.of(context).textTheme.headline4,
+                      'Create a new account',
+                      style: Theme.of(context).textTheme.headline5?.copyWith(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w900),
                     ),
                   ),
-                  CustomTextField(
-                    hintText: "Email id",
-                    iconData: Icons.mail, textEditingController: emailEditingController!,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Sign up to get started',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          ?.copyWith(color: Colors.black38),
+                    ),
                   ),
-                  CustomTextField(
-                    hintText: "First Name",
-                    iconData: Icons.person,
-                    textEditingController: firstNameEditingController!,
+                  const SizedBox(
+                    height: 30.0,
                   ),
-                  CustomTextField(
-                    hintText: "Middle Name(Optional)",
-                    iconData: Icons.person,
-                    textEditingController: middleNameEditingController!,
+                  InputTextField(
+                      onChangedValue: (value) {},
+                      hintText: "Username",
+                      inputTextType: InputTextType.username),
+                  const SizedBox(
+                    height: 14.0,
                   ),
-                  CustomTextField(
-                    hintText: "Last Name(Optional)",
-                    iconData: Icons.person,
-                    textEditingController: lastNameEditingController!,
+                  InputTextField(
+                      onChangedValue: (value) {},
+                      hintText: "First name",
+                      inputTextType: InputTextType.username),
+                  const SizedBox(
+                    height: 14.0,
                   ),
-                  CustomTextField(
-                    hintText: "Username",
-                    iconData: Icons.person,
-                    textEditingController: userNameEditingController!,
+                  InputTextField(
+                      onChangedValue: (value) {},
+                      hintText: "Last name",
+                      inputTextType: InputTextType.username),
+                  const SizedBox(
+                    height: 14.0,
                   ),
-                  CustomTextField(
-                    hintText: "Mobile number",
-                    iconData: Icons.call,
-                    textEditingController: mobileNumberEditingController!,
+                  InputTextField(
+                      onChangedValue: (value) {},
+                      hintText: "Email",
+                      inputTextType: InputTextType.email),
+                  const SizedBox(
+                    height: 14.0,
                   ),
-                  SizedBox(
-                    height: 10.0,
+                  InputTextField(
+                      onChangedValue: (value) {},
+                      hintText: "Password",
+                      inputTextType: InputTextType.password),
+                  const SizedBox(
+                    height: 40.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical:10.0,horizontal: 20.0),
-                    child: ElevatedButton(
-                        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                            fixedSize:
-                            MaterialStateProperty.all<Size>(Size(500.0,50.0))
-                        ),
-                        onPressed: () {},
-                        child: Center(
-                          child: Text("Continue"),
-                        )),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Sign up'),
                   ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Joined us before?"),
-                        TextButton(
-                          onPressed: (){
-                            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: AppColors.textFieldBackgroundColor,
+                          elevation: 3.0),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              height: 30.0,
+                              child: SvgPicture.asset("assets/icons8-google.svg")),
+                          Text(
+                            "Sign up with Google",
+                            style: Theme.of(context).textTheme.button?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.blackTextColor),
+                          )
+                        ],
+                      )),
+                  const SizedBox(
+                    height: 50.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already a member?",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignInScreen.routeName);
                           },
-                          child: Text("Login")
-                        )
-                      ],
-                    ),
+                          child: const Text('Sign In'))
+                    ],
                   )
                 ],
               ),
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

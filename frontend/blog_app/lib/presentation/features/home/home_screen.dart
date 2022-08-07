@@ -7,6 +7,7 @@ import 'package:blog_app/presentation/features/notification/notification_screen.
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
 import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:blog_app/presentation/widgets/custom_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         // appBar: getAppBar(),
         // drawer: Drawer(
@@ -192,117 +193,11 @@ class _HomeScreenState extends State<HomeScreen> {
         //     BottomNavigationBarItem(icon: Icon(Icons.person),label: "")
         //   ],
         // ),
-
         body: Padding(
           padding: const EdgeInsets.only(bottom:70.0),
           child: CustomScrollView(
             slivers: [
-              SliverAppBar(
-                expandedHeight: 180.0,
-                backgroundColor: Colors.white,
-                iconTheme: IconThemeData(color: Colors.white),
-                floating: true,
-                pinned: true,
-                automaticallyImplyLeading: false,
-                bottom: PreferredSize(
-                  preferredSize:  Size.fromHeight(60.0),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 4.0),
-                      child: Container(
-                          color: Colors.white,
-                          child: Center(child: CustomTabBar())
-                      )
-                  ),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                  centerTitle: true,
-                  background: Column(
-                    children: [
-                      SizedBox(
-                        height: 40.0,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left:20.0),
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Stack(
-                                children: const [
-                                  CircleAvatar(
-                                    radius: 25.0,
-                                    // child: Icon(Icons.person_outline),
-                                    // backgroundImage: AssetImage("assets/robertdowney.jpg"),
-                                    backgroundImage: NetworkImage(
-                                      "https://picsum.photos/200/300"
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left:20.0,bottom: 3.0,top: 4.0),
-                                  child: Text(
-                                      Globals.S_GOOD_MORNING,
-                                      style: Theme
-                                          .of(context)
-                                          .textTheme
-                                          .subtitle2
-                                          ?.copyWith(
-                                        color: Colors.grey,
-                                      )
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left:20.0,bottom:10.0),
-                                  child: Text(instance<FakeDataSource>().fakeName, style: Theme
-                                      .of(context)
-                                      .textTheme
-                                      .headline5
-                                      ?.copyWith(
-                                    color: Colors.black,
-                                  )
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(right:20.0,bottom: 5.0),
-                            child: GestureDetector(
-                              onTap: (){
-                                debugPrint("Notification icon tapped");
-                                Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationScreen()));
-                              },
-                              child: Container(
-                                height: 40.0,
-                                width: 40.0,
-                                decoration: BoxDecoration(
-                                    // color: Colors.red,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  border: Border.all(
-                                    color: Colors.black26
-                                  )
-                                ),
-                                child: Icon(Icons.notifications_none),
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              getAppBar(),
               getListView()
               // SizedBox(
               //   height: 40.0,
@@ -350,6 +245,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   final blog=state.blogListEntity!.blogEntityList[index];
 
+                  print(blog.toJson().toString());
+
                   print("Blog coming not null ${blog!=null}");
 
                   return Padding(
@@ -375,26 +272,133 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar getAppBar() {
-    return AppBar(
-      // leading: IconButton(
-      //   icon:Icon(Icons.menu,color: Colors.black,),
-      //   onPressed: (){
-      //     _scaffoldKey.currentState?.openDrawer();
-      //   },
-      // ),
-      leading: null,
-      automaticallyImplyLeading: false,
-      title: Text('Blogger', style: Theme
-          .of(context)
-          .textTheme
-          .headline5
-          ?.copyWith(
-          fontWeight: FontWeight.bold
-      ),
-      ),
-      centerTitle: true,
-    );
+  Widget getAppBar() {
+    // return AppBar(
+    //   // leading: IconButton(
+    //   //   icon:Icon(Icons.menu,color: Colors.black,),
+    //   //   onPressed: (){
+    //   //     _scaffoldKey.currentState?.openDrawer();
+    //   //   },
+    //   // ),
+    //   leading: null,
+    //   automaticallyImplyLeading: false,
+    //   title: Text('Blogger', style: Theme
+    //       .of(context)
+    //       .textTheme
+    //       .headline5
+    //       ?.copyWith(
+    //       fontWeight: FontWeight.bold
+    //   ),
+    //   ),
+    //   centerTitle: true,
+    // );
+    return
+      SliverAppBar(
+        expandedHeight: 180.0,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.white),
+        floating: true,
+        pinned: true,
+        automaticallyImplyLeading: false,
+        bottom: PreferredSize(
+          preferredSize:  Size.fromHeight(60.0),
+          child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0, vertical: 4.0),
+              child: Container(
+                  color: Colors.white,
+                  child: Center(child: CustomTabBar())
+              )
+          ),
+        ),
+        flexibleSpace: FlexibleSpaceBar(
+          collapseMode: CollapseMode.pin,
+          centerTitle: true,
+          background: Column(
+            children: [
+              SizedBox(
+                height: 40.0,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left:20.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: const [
+                          CircleAvatar(
+                            radius: 25.0,
+                            // child: Icon(Icons.person_outline),
+                            // backgroundImage: AssetImage("assets/robertdowney.jpg"),
+                            backgroundImage: NetworkImage(
+                                "https://picsum.photos/200/300"
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left:20.0,bottom: 3.0,top: 4.0),
+                          child: Text(
+                              Globals.S_GOOD_MORNING,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .subtitle2
+                                  ?.copyWith(
+                                color: Colors.grey,
+                              )
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:20.0,bottom:10.0),
+                          child: Text(instance<FakeDataSource>().fakeName, style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline5
+                              ?.copyWith(
+                            color: Colors.black,
+                          )
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(right:20.0,bottom: 5.0),
+                    child: GestureDetector(
+                      onTap: (){
+                        debugPrint("Notification icon tapped");
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>NotificationScreen()));
+                      },
+                      child: Container(
+                        height: 40.0,
+                        width: 40.0,
+                        decoration: BoxDecoration(
+                          // color: Colors.red,
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                                color: Colors.black26
+                            )
+                        ),
+                        child: Icon(Icons.notifications_none),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      );
   }
 
 

@@ -176,7 +176,7 @@ class CustomTabBar extends StatelessWidget {
                       width: index == state.activePageIndex ? 20 : 0,
                       decoration: BoxDecoration(
                           color: index == state.activePageIndex
-                              ? AppColors.primaryColor
+                              ? Colors.black
                               : Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10))))
                 ],

@@ -6,6 +6,7 @@ import 'package:blog_app/presentation/features/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 import 'di.dart';
 import 'presentation/features/authentication/authentication.dart';
 import 'presentation/resources/custom_router.dart';
@@ -62,12 +63,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      title: "Blog App",
-      onGenerateRoute: CustomRouter.onGenerateRoute,
-      initialRoute: OnboardingScreen.routeName,
+    return Sizer(
+      builder: (BuildContext context, Orientation orientation,
+          DeviceType deviceType){
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          title: "Blog App",
+          onGenerateRoute: CustomRouter.onGenerateRoute,
+          initialRoute: SplashScreen.routeName,
+        );
+      },
     );
   }
 }

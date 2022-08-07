@@ -1,3 +1,4 @@
+import 'package:blog_app/config/utils/extensions.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -52,11 +53,13 @@ class AppTheme {
         inputDecorationTheme: const InputDecorationTheme(),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
+              elevation: 6.0,
+              onSurface: AppColors.primaryColor.darken(),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-                primary: AppColors.primaryColor,
-                minimumSize: const Size(50.0, 30.0),
-                )));
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              primary: AppColors.primaryColor,
+              minimumSize: const Size(double.infinity, 54.0),
+            ))
+    );
   }
 }
