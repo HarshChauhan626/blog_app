@@ -96,24 +96,24 @@ class BottomNavbarState extends State<BottomNavbar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AnimatedPadding(
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          padding:index==currentIndex? const EdgeInsets.only(bottom:4.0):const EdgeInsets.only(bottom:0.0),
-                          duration: Duration(seconds: 1),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            padding:index==currentIndex? const EdgeInsets.only(bottom:4.0):const EdgeInsets.only(bottom:0.0),
+                            duration: Duration(seconds: 1),
                             child: Icon(
-                                index==currentIndex?listOfSelectedIcons[index]:listOfIcons[index],
+                              index==currentIndex?listOfSelectedIcons[index]:listOfIcons[index],
                               size: 30.0,
                               color: index==currentIndex?Colors.black:Color(0xff91a1af),
                             )
                         ),
                         if(index==currentIndex)
                           Container(
-                          height: 6.0,
-                          width: 6.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.0),
-                            color: AppColors.primaryColor
-                          ),
-                        )
+                            height: 6.0,
+                            width: 6.0,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.0),
+                                color: AppColors.primaryColor
+                            ),
+                          )
                       ],
                     ),
                   ),

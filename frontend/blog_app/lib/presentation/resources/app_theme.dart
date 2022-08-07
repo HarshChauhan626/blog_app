@@ -11,7 +11,7 @@ class AppTheme {
         ),
         textTheme: const TextTheme(
           headline4: TextStyle(
-              color: AppColors.darkBlue,
+              color: AppColors.primaryColor,
               fontSize: 34.0,
               fontWeight: FontWeight.normal,
               letterSpacing: 0.25),
@@ -55,7 +55,7 @@ class AppTheme {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))
               ),
-                primary: AppColors.darkBlue,
+                primary: AppColors.primaryColor,
                 minimumSize: const Size(50.0, 30.0),
                 )));
   }

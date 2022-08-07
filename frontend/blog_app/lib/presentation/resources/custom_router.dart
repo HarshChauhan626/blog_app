@@ -13,11 +13,6 @@ class CustomRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     print('Route: ${settings.name}');
     switch (settings.name) {
-      case '/default':
-        return MaterialPageRoute(
-          settings: const RouteSettings(name: '/default'),
-          builder: (_) => const Scaffold(),
-        );
       case SplashScreen.routeName:
         return SplashScreen.route();
       case OnboardingScreen.routeName:

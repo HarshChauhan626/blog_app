@@ -1,8 +1,13 @@
+
+import 'package:blog_app/config/utils/enums.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
-import 'package:blog_app/config/utils/constants.dart';
-import 'package:blog_app/presentation/widgets/custom_text_field.dart';
+import 'package:blog_app/presentation/widgets/custom_route_builder.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
+import 'package:blog_app/presentation/widgets/input_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:sizer/sizer.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -10,101 +15,87 @@ class ForgotPasswordScreen extends StatefulWidget {
   static const String routeName = '/forgot_password';
 
   static Route route() {
-    return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (_) => ForgotPasswordScreen(),
-    );
+    // return MaterialPageRoute(
+    //     settings: const RouteSettings(name: routeName),
+    //     builder: (_) =>const ForgotPasswordScreen()
+    // );
+    return CustomRouteBuilder(page: const ForgotPasswordScreen(),routeName: routeName);
   }
-  
+
   @override
-  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-
-  TextEditingController? emailEditingController;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    emailEditingController=TextEditingController();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(
-                          height: 250.0, child: SvgPicture.asset("assets/forgot_password.svg")),
-                    )),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Forgot',style: Theme.of(context).textTheme.headline2?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40.0,color: AppColors.darkBlue
-                      ),),
-                      Text('Password?',style: Theme.of(context).textTheme.headline2?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40.0,
-                        color: AppColors.darkBlue
-                      ),)
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+        appBar: AppBar(
+            leading: Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                },
                 child: Container(
-                  // color: Colors.red,
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        Globals.S_FORGOT_PASSWORD_MESSAGE_1,
-                        style: Theme.of(context).textTheme.bodyText1),
-                      Text(Globals.S_FORGOT_PASSWORD_MESSAGE_2,style: Theme.of(context).textTheme.bodyText1)
-                    ],
-                  )
-                  ),
-                ),
-                CustomTextField(
-                  textEditingController: emailEditingController!,
-                  hintText: Globals.S_FORGOT_PASSWORD_HINT,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical:50.0,horizontal: 30.0),
-                  child: ElevatedButton(
-                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                          fixedSize:
-                          MaterialStateProperty.all<Size>(Size(500.0,50.0))
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.blackTextColor,
                       ),
-                      onPressed: () {},
-                      child: Center(
-                        child: Text(Globals.S_SUBMIT),
-                      )),
+                      borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  child: const Icon(CupertinoIcons.back,color: AppColors.blackTextColor,),
                 ),
-              ],
-            ),
+              ),
+            )
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 5.h,
+              ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),child: SizedBox(
+                height: 22.h,
+                child: SvgPicture.asset("assets/forgot_password.svg"),
+              ),),
+              Text("Forgot Password?",style: Theme.of(context).textTheme.headline5?.copyWith(
+                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w900
+              ),),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 2.h),
+                child: Text("Don't worry it happens. Please enter the address associated with your account",style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                    color: AppColors.greyColor
+                ),),
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                child: InputTextField(onChangedValue: (value){
+                }, hintText: "Email", inputTextType: InputTextType.email),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                child: ElevatedButton(onPressed: (){
+
+                }, child: const Text("Submit")),
+              )
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+
 
 
 
