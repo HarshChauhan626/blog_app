@@ -1,5 +1,6 @@
 import 'package:blog_app/presentation/features/collection/collection_sheet.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -73,7 +74,7 @@ class _BlogScreenState extends State<BlogScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         appBar: getAppBar(),
         body: getBody(),

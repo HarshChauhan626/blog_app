@@ -13,6 +13,7 @@ import 'package:blog_app/presentation/features/forgot_password/forgot_password_s
 import 'package:blog_app/presentation/features/sign_up/sign_up_screen.dart';
 import 'package:blog_app/presentation/resources/app_strings.dart';
 import 'package:blog_app/presentation/widgets/animated_column_widget.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:blog_app/presentation/widgets/custom_text_field.dart';
 import 'package:blog_app/presentation/widgets/input_text_field.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
           body: BlocConsumer<SignInBloc,SignInState>(
             listener: (context,state){

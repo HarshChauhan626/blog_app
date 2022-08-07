@@ -6,6 +6,7 @@ import 'package:blog_app/presentation/features/blog/blog.dart';
 import 'package:blog_app/presentation/features/search/search_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         // appBar: AppBar(
         //   title: Text("Explore"),

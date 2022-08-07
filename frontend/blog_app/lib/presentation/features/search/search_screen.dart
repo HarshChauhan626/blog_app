@@ -1,4 +1,5 @@
 import 'package:blog_app/presentation/resources/app_colors.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:blog_app/presentation/widgets/custom_tab_bar.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         // body: CustomScrollView(
         //   slivers: [

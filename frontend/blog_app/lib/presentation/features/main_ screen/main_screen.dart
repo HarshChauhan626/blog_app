@@ -8,6 +8,7 @@ import 'package:blog_app/presentation/features/main_%20screen/main_screen_cubit.
 import 'package:blog_app/presentation/features/profile/profile_screen.dart';
 import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar.dart';
 import 'package:blog_app/presentation/widgets/custom_bottom_navigation_bar_2.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +42,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         extendBody: true,
         resizeToAvoidBottomInset: true,

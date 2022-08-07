@@ -1,6 +1,7 @@
 import 'package:blog_app/config/utils/util_functions.dart';
 import 'package:blog_app/presentation/features/author_profile/author_profile_screen.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text("Notifications",style: Theme.of(context).textTheme.headline6?.copyWith(

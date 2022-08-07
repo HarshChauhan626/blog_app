@@ -11,7 +11,7 @@ class CustomSafeArea extends StatelessWidget {
       value: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.white,
           statusBarIconBrightness: Brightness.dark),
-      child: SafeArea(
+      child: CustomSafeArea(
         child: child,
       ),
     );

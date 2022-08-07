@@ -5,6 +5,7 @@ import 'package:blog_app/presentation/features/people/people_screen.dart';
 import 'package:blog_app/presentation/features/settings/settings.dart';
 import 'package:blog_app/presentation/resources/app_colors.dart';
 import 'package:blog_app/presentation/widgets/blog_list_item.dart';
+import 'package:blog_app/presentation/widgets/custom_safe_area.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _AuthorProfileScreenState extends State<AuthorProfileScreen> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return CustomSafeArea(
       child: Scaffold(
         // appBar: AppBar(
         //   // elevation: 2.0,
